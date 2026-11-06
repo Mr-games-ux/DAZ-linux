@@ -4,288 +4,261 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DAZ Linux V5</title>
+<title>DAZ Linux V6</title>
 
 <style>
 :root {
-  --blue: #168cff;
-  --cyan: #00d9ff;
-  --panel: #101b2c;
-  --border: #24476c;
-  --text: #eaf5ff;
+  --blue:#168cff;
+  --cyan:#00d9ff;
+  --panel:#101b2c;
+  --border:#24476c;
+  --text:#eaf5ff;
 }
 
-* { box-sizing: border-box; }
+* { box-sizing:border-box; }
 
 body {
-  margin: 0;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
-  color: var(--text);
-  background: #050a14;
+  margin:0;
+  overflow:hidden;
+  font-family:Arial,sans-serif;
+  color:var(--text);
+  background:#050a14;
 }
 
 #desktop {
-  height: 100vh;
-  width: 100vw;
+  width:100vw;
+  height:100vh;
   background:
-    radial-gradient(ellipse at 70% 35%, #103b69 0%, transparent 48%),
-    radial-gradient(ellipse at 20% 80%, #101e48 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 35%,#103b69 0%,transparent 48%),
+    radial-gradient(ellipse at 20% 80%,#101e48 0%,transparent 55%),
     #050a14;
 }
 
 .topbar {
-  height: 42px;
-  background: #080e1bdc;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 15px;
+  height:42px;
+  background:#080e1bdc;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 15px;
+  font-size:12px;
 }
 
 .logo {
-  color: var(--cyan);
-  font-weight: bold;
-  letter-spacing: 2px;
+  color:var(--cyan);
+  font-weight:bold;
+  letter-spacing:2px;
 }
 
-#clock { color: #a8dfff; }
+#clock { color:#a8dfff; }
 
 .desktop-icons {
-  padding: 22px;
-  display: grid;
-  grid-template-columns: repeat(2, 85px);
-  gap: 20px;
-  width: 200px;
+  padding:22px;
+  display:grid;
+  grid-template-columns:repeat(2,85px);
+  gap:20px;
+  width:200px;
 }
 
 .desktop-icon {
-  cursor: pointer;
-  text-align: center;
-  padding: 8px 3px;
-  border-radius: 10px;
-  user-select: none;
+  cursor:pointer;
+  text-align:center;
+  padding:8px 3px;
+  border-radius:10px;
+  user-select:none;
 }
 
-.desktop-icon:hover {
-  background: #ffffff18;
-}
+.desktop-icon:hover { background:#ffffff18; }
 
 .desktop-icon .emoji {
-  display: block;
-  font-size: 35px;
-  margin-bottom: 7px;
+  display:block;
+  font-size:35px;
+  margin-bottom:7px;
 }
 
-.desktop-icon span:last-child {
-  font-size: 12px;
-}
+.desktop-icon span:last-child { font-size:12px; }
 
 .dock {
-  position: fixed;
-  bottom: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  padding: 10px 14px;
-  border: 1px solid var(--border);
-  border-radius: 17px;
-  background: #081323eF;
-  box-shadow: 0 5px 30px #0009;
-  z-index: 1000;
+  position:fixed;
+  bottom:12px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:10px;
+  padding:10px 14px;
+  border:1px solid var(--border);
+  border-radius:17px;
+  background:#081323ef;
+  box-shadow:0 5px 30px #0009;
+  z-index:1000;
 }
 
 .dock button {
-  border: none;
-  background: transparent;
-  font-size: 25px;
-  cursor: pointer;
-  border-radius: 9px;
-  padding: 4px;
+  border:none;
+  background:transparent;
+  font-size:25px;
+  cursor:pointer;
+  border-radius:9px;
+  padding:4px;
 }
 
-.dock button:hover {
-  background: #168cff44;
-}
+.dock button:hover { background:#168cff44; }
 
 .window {
-  display: none;
-  position: absolute;
-  top: 85px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(760px, 94vw);
-  height: min(510px, 75vh);
-  background: #0b1422;
-  border: 1px solid var(--blue);
-  border-radius: 12px;
-  box-shadow: 0 15px 60px #000b;
-  overflow: hidden;
-  z-index: 100;
+  display:none;
+  position:absolute;
+  top:75px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(800px,94vw);
+  height:min(570px,78vh);
+  background:#0b1422;
+  border:1px solid var(--blue);
+  border-radius:12px;
+  box-shadow:0 15px 60px #000b;
+  overflow:hidden;
+  z-index:100;
 }
 
-.window.active { display: flex; flex-direction: column; }
+.window.active { display:flex; flex-direction:column; }
 
 .titlebar {
-  height: 40px;
-  min-height: 40px;
-  background: #10233d;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 12px;
-  border-bottom: 1px solid var(--border);
-  font-size: 13px;
-  font-weight: bold;
+  height:40px;
+  min-height:40px;
+  background:#10233d;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 12px;
+  border-bottom:1px solid var(--border);
+  font-size:13px;
+  font-weight:bold;
 }
 
 .close {
-  background: #d83e55;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  padding: 5px 10px;
+  background:#d83e55;
+  color:white;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  padding:5px 10px;
 }
 
 .content {
-  padding: 15px;
-  overflow: auto;
-  flex: 1;
+  padding:15px;
+  overflow:auto;
+  flex:1;
 }
 
-button, input, select {
-  font: inherit;
-}
+button,input,select { font:inherit; }
 
 .action {
-  background: #102b4a;
-  color: white;
-  border: 1px solid #2364a0;
-  border-radius: 7px;
-  padding: 9px 12px;
-  cursor: pointer;
+  background:#102b4a;
+  color:white;
+  border:1px solid #2364a0;
+  border-radius:7px;
+  padding:9px 12px;
+  cursor:pointer;
 }
 
-.action:hover {
-  background: #174d7d;
-}
+.action:hover { background:#174d7d; }
 
-input, select {
-  background: #07101d;
-  color: white;
-  border: 1px solid #315b82;
-  border-radius: 6px;
-  padding: 10px;
-  max-width: 100%;
+input,select {
+  background:#07101d;
+  color:white;
+  border:1px solid #315b82;
+  border-radius:6px;
+  padding:10px;
+  max-width:100%;
 }
 
 .terminal {
-  background: #02070d;
-  color: #43f59b;
-  padding: 12px;
-  border-radius: 8px;
-  min-height: 230px;
-  font-family: monospace;
-  overflow: auto;
-  white-space: pre-wrap;
+  background:#02070d;
+  color:#43f59b;
+  padding:12px;
+  border-radius:8px;
+  height:340px;
+  font-family:monospace;
+  overflow:auto;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  font-size:12px;
+  line-height:1.55;
 }
 
 .terminal-line {
-  display: flex;
-  gap: 7px;
-  margin-top: 10px;
+  display:flex;
+  gap:7px;
+  margin-top:10px;
 }
 
 .terminal-line input {
-  flex: 1;
-  font-family: monospace;
+  flex:1;
+  min-width:0;
+  font-family:monospace;
 }
 
 .card {
-  background: #101e30;
-  border: 1px solid #24466a;
-  border-radius: 10px;
-  padding: 13px;
-  margin-bottom: 12px;
+  background:#101e30;
+  border:1px solid #24466a;
+  border-radius:10px;
+  padding:13px;
+  margin-bottom:12px;
 }
 
-.card h3 { margin-top: 0; }
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 12px;
-}
+.card h3 { margin-top:0; }
 
 .small {
-  color: #9bb9d5;
-  font-size: 12px;
-  line-height: 1.5;
+  color:#9bb9d5;
+  font-size:12px;
+  line-height:1.5;
 }
 
 .browser-bar {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 10px;
+  display:flex;
+  gap:8px;
+  margin-bottom:10px;
 }
 
-.browser-bar input { flex: 1; min-width: 0; }
+.browser-bar input { flex:1; min-width:0; }
 
-iframe {
-  width: 100%;
-  height: 100%;
-  min-height: 250px;
-  background: white;
-  border: 0;
-  border-radius: 7px;
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:12px;
 }
 
-.game-frame {
-  flex: 1;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
+.game-card {
+  background:#101e30;
+  border:1px solid #24466a;
+  border-radius:10px;
+  padding:13px;
+  display:flex;
+  flex-direction:column;
+  gap:9px;
 }
 
-.game-frame iframe { flex: 1; }
+.game-card h3 { margin:0; }
 
-.avatar {
-  width: 76px;
-  height: 76px;
-  border-radius: 18px;
-  display: grid;
-  place-items: center;
-  font-size: 45px;
-  background: linear-gradient(145deg, #173b65, #07101c);
-  border: 1px solid #278bdb;
+.game-card p {
+  font-size:12px;
+  color:#9bb9d5;
+  margin:0;
+  flex:1;
 }
 
-.character-card {
-  display: flex;
-  gap: 14px;
-  align-items: center;
-}
+.game-card button { width:100%; }
 
 .status {
-  color: #50e6a0;
-  font-size: 12px;
+  color:#50e6a0;
+  font-size:12px;
 }
 
-#arcadeFrame {
-  display: none;
-}
-
-@media(max-width: 600px) {
-  .window {
-    top: 55px;
-    height: 78vh;
-  }
-
-  .dock { gap: 4px; }
-  .desktop-icons { grid-template-columns: repeat(2, 75px); }
+@media(max-width:600px) {
+  .window { top:55px; height:78vh; }
+  .dock { gap:4px; }
+  .desktop-icons { grid-template-columns:repeat(2,75px); }
 }
 </style>
 </head>
@@ -295,34 +268,38 @@ iframe {
 
   <div class="topbar">
     <div class="logo">DAZ LINUX</div>
-    <div>V5 · ARCADE EDITION</div>
+    <div>V6 · ARCADE LINKS EDITION</div>
     <div id="clock">00:00</div>
   </div>
 
+  <!-- ESCRITORIO -->
   <div class="desktop-icons">
+
     <div class="desktop-icon" onclick="openWindow('files')">
-      <span class="emoji">📁</span><span>Archivos</span>
+      <span class="emoji">📁</span>
+      <span>Archivos</span>
     </div>
 
     <div class="desktop-icon" onclick="openWindow('browser')">
-      <span class="emoji">🌐</span><span>Navegador</span>
+      <span class="emoji">🌐</span>
+      <span>Navegador</span>
     </div>
 
     <div class="desktop-icon" onclick="openWindow('terminal')">
-      <span class="emoji">⌨️</span><span>Terminal</span>
-    </div>
-
-    <div class="desktop-icon" onclick="openWindow('characters')">
-      <span class="emoji">👥</span><span>Personajes</span>
+      <span class="emoji">⌨️</span>
+      <span>Terminal</span>
     </div>
 
     <div class="desktop-icon" onclick="openWindow('arcade')">
-      <span class="emoji">🎮</span><span>DAZ Arcade</span>
+      <span class="emoji">🎮</span>
+      <span>DAZ Arcade</span>
     </div>
 
     <div class="desktop-icon" onclick="openWindow('settings')">
-      <span class="emoji">⚙️</span><span>Ajustes</span>
+      <span class="emoji">⚙️</span>
+      <span>Ajustes</span>
     </div>
+
   </div>
 
   <!-- ARCHIVOS -->
@@ -337,7 +314,7 @@ iframe {
       <div class="card">📁 Downloads</div>
       <div class="card">📁 Pictures</div>
       <div class="card">📁 Games</div>
-      <p class="small">Sistema de archivos simulado. No modifica archivos reales.</p>
+      <p class="small">Explorador simulado.</p>
     </div>
   </div>
 
@@ -349,16 +326,23 @@ iframe {
     </div>
     <div class="content">
       <div class="browser-bar">
-        <input id="browserURL" placeholder="Escribe una dirección o búsqueda">
+        <input id="browserURL" placeholder="Dirección web o búsqueda">
         <button class="action" onclick="goToPage()">Ir</button>
         <button class="action" onclick="searchWeb()">Buscar</button>
       </div>
-      <iframe id="browserFrame" title="Navegador DAZ"></iframe>
+
+      <iframe id="browserFrame"
+        title="Navegador DAZ"
+        style="width:100%;height:300px;background:white;border:0;border-radius:7px">
+      </iframe>
+
       <p class="small">
-        Algunas páginas impiden mostrarse dentro de DAZ Linux.
-        Puedes abrirlas en una pestaña nueva.
+        Algunas páginas impiden mostrarse dentro de esta ventana.
       </p>
-      <button class="action" onclick="openExternal()">Abrir sitio en otra pestaña</button>
+
+      <button class="action" onclick="openExternal()">
+        Abrir en otra pestaña
+      </button>
     </div>
   </div>
 
@@ -368,56 +352,21 @@ iframe {
       DAZ Terminal
       <button class="close" onclick="closeWindow('terminal')">✕</button>
     </div>
+
     <div class="content">
-      <div class="terminal" id="terminalOutput">
-DAZ Linux [Version 5.0]
-Sistema de demostración iniciado.
+      <div class="terminal" id="terminalOutput">DAZ Linux [Version 6.0]
+Terminal virtual iniciada.
 Escribe help para ver los comandos.
 
-      </div>
+</div>
+
       <div class="terminal-line">
         <span>user@daz:~$</span>
-        <input id="terminalInput" placeholder="Escribe un comando"
-        onkeydown="if(event.key==='Enter')runCommand()">
+        <input id="terminalInput"
+          placeholder="Escribe un comando"
+          onkeydown="if(event.key==='Enter')runCommand()">
         <button class="action" onclick="runCommand()">↵</button>
       </div>
-    </div>
-  </div>
-
-  <!-- PERSONAJES -->
-  <div class="window" id="characters">
-    <div class="titlebar">
-      DAZ Character Center
-      <button class="close" onclick="closeWindow('characters')">✕</button>
-    </div>
-    <div class="content">
-      <h2>DAZ Character Center</h2>
-
-      <div class="card character-card">
-        <div class="avatar">🔴</div>
-        <div>
-          <h3>Azuka Solvanski</h3>
-          <p class="small">19 años · Ruso-salvadoreña</p>
-          <p id="azukaMessage">Sistema listo. ¿Qué necesitas?</p>
-        </div>
-      </div>
-
-      <div class="card character-card">
-        <div class="avatar">❄️</div>
-        <div>
-          <h3>Zoravka Velstrani</h3>
-          <p class="small">19–20 años · Serbia-salvadoreña</p>
-          <p id="zoravkaMessage">Todo funciona. Más o menos.</p>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>DUO MODE</h3>
-        <p id="duoMessage">Azuka y Zoravka están disponibles.</p>
-        <button class="action" onclick="activateDuo()">Activar DUO MODE</button>
-      </div>
-
-      <p class="small">Avatares provisionales. Aquí podrás integrar tus ilustraciones PNG más adelante.</p>
     </div>
   </div>
 
@@ -430,13 +379,15 @@ Escribe help para ver los comandos.
 
     <div class="content">
       <h2>DAZ Arcade</h2>
-      <p class="small">Tu centro de videojuegos dentro de DAZ Linux.</p>
+      <p class="small">Catálogo de videojuegos y enlaces externos.</p>
 
       <div class="browser-bar">
-        <input id="gameSearch" placeholder="Buscar un juego..."
+        <input id="gameSearch"
+          placeholder="Buscar un juego..."
           oninput="filterGames()">
+
         <select id="gameCategory" onchange="filterGames()">
-          <option value="all">Todas las categorías</option>
+          <option value="all">Todas</option>
           <option value="daz">DAZ Games</option>
           <option value="external">Externos</option>
         </select>
@@ -444,27 +395,43 @@ Escribe help para ver los comandos.
 
       <div class="grid" id="gameList"></div>
 
-      <div class="card" id="gamePlayer" style="display:none">
-        <h3 id="playingTitle">Juego seleccionado</h3>
-        <div class="game-frame">
-          <iframe id="arcadeFrame" title="Juego externo"></iframe>
-        </div>
-        <p class="small" id="gameNotice"></p>
-        <button class="action" onclick="openGameExternal()">Abrir en otra pestaña</button>
-        <button class="action" onclick="closeGame()">Cerrar juego</button>
+      <div class="card">
+        <h3>➕ Añadir juego</h3>
+
+        <input id="customGameName"
+          placeholder="Nombre del juego"
+          style="width:100%">
+
+        <br><br>
+
+        <input id="customGameURL"
+          placeholder="https://ejemplo.com"
+          style="width:100%">
+
+        <br><br>
+
+        <select id="customGameCategory" style="width:100%">
+          <option value="external">Juego externo</option>
+          <option value="daz">DAZ Games</option>
+        </select>
+
+        <br><br>
+
+        <button class="action" onclick="addGame()">
+          Añadir al catálogo
+        </button>
+
+        <p class="small">
+          Los enlaces se abrirán en una pestaña nueva.
+          Añade páginas y juegos que tengas permitido utilizar.
+        </p>
       </div>
 
       <div class="card">
-        <h3>➕ Añadir un juego externo</h3>
-        <input id="customGameName" placeholder="Nombre del juego">
-        <br><br>
-        <input id="customGameURL" placeholder="URL del juego">
-        <br><br>
-        <button class="action" onclick="addExternalGame()">Añadir juego</button>
+        <h3>Información</h3>
         <p class="small">
-          Añade únicamente juegos de páginas legítimas que permitan
-          su uso e inserción. Algunos sitios no permiten iframe.
-          Los juegos añadidos se guardan en este navegador.
+          DAZ Arcade es un catálogo de enlaces. No aloja,
+          modifica ni desbloquea los juegos externos.
         </p>
       </div>
     </div>
@@ -476,15 +443,18 @@ Escribe help para ver los comandos.
       Ajustes del sistema
       <button class="close" onclick="closeWindow('settings')">✕</button>
     </div>
+
     <div class="content">
       <h2>⚙️ DAZ Settings</h2>
+
       <div class="card">
         <h3>Información del sistema</h3>
         <p>Nombre: DAZ Linux</p>
-        <p>Versión: 5.0 Arcade Edition</p>
+        <p>Versión: 6.0</p>
         <p>Entorno: DAZ Desktop</p>
         <p class="status">● Sistema simulado activo</p>
       </div>
+
       <div class="card">
         <h3>Acerca de</h3>
         <p>Un escritorio Linux simulado creado para DAZ.</p>
@@ -492,23 +462,26 @@ Escribe help para ver los comandos.
     </div>
   </div>
 
+  <!-- DOCK -->
   <div class="dock">
     <button title="Archivos" onclick="openWindow('files')">📁</button>
     <button title="Navegador" onclick="openWindow('browser')">🌐</button>
     <button title="Terminal" onclick="openWindow('terminal')">⌨️</button>
-    <button title="Personajes" onclick="openWindow('characters')">👥</button>
     <button title="Arcade" onclick="openWindow('arcade')">🎮</button>
     <button title="Ajustes" onclick="openWindow('settings')">⚙️</button>
   </div>
+
 </div>
 
 <script>
+
 /* VENTANAS */
 
 function openWindow(id) {
   document.querySelectorAll('.window').forEach(w =>
     w.classList.remove('active')
   );
+
   const win = document.getElementById(id);
   if (win) win.classList.add('active');
 }
@@ -522,23 +495,27 @@ function closeWindow(id) {
 function updateClock() {
   document.getElementById('clock').textContent =
     new Date().toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit'
+      hour:'2-digit',
+      minute:'2-digit'
     });
 }
-updateClock();
-setInterval(updateClock, 1000);
 
-/* NAVEGADOR */
+updateClock();
+setInterval(updateClock,1000);
+
+/* VALIDAR DIRECCIONES */
 
 function validURL(value) {
   try {
     const url = new URL(value);
-    return ['http:', 'https:'].includes(url.protocol) ? url.href : null;
+    if (!['http:','https:'].includes(url.protocol)) return null;
+    return url.href;
   } catch {
     return null;
   }
 }
+
+/* NAVEGADOR */
 
 function goToPage() {
   let value = document.getElementById('browserURL').value.trim();
@@ -549,48 +526,27 @@ function goToPage() {
     value = 'https://' + value;
   }
 
-  const url = validURL(value);
-  if (!url) return alert('Dirección no válida.');
+  const safe = validURL(value);
+  if (!safe) return alert('Dirección no válida.');
 
-  document.getElementById('browserFrame').src = url;
+  document.getElementById('browserFrame').src = safe;
 }
 
 function searchWeb() {
   const query = document.getElementById('browserURL').value.trim();
   if (!query) return;
+
   document.getElementById('browserFrame').src =
     'https://duckduckgo.com/?q=' + encodeURIComponent(query);
 }
 
 function openExternal() {
-  const value = document.getElementById('browserURL').value.trim();
-  let url = value;
+  let value = document.getElementById('browserURL').value.trim();
 
-  if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+  if (!/^https?:\/\//i.test(value)) value = 'https://' + value;
 
-  const safe = validURL(url);
-  if (safe) window.open(safe, '_blank', 'noopener,noreferrer');
-}
-
-/* PERSONAJES */
-
-function characterMessage(character) {
-  openWindow('characters');
-
-  if (character === 'azuka') {
-    document.getElementById('azukaMessage').textContent =
-      'Azuka: Sistema listo. No veo ningún problema... por ahora.';
-  }
-
-  if (character === 'zoravka') {
-    document.getElementById('zoravkaMessage').textContent =
-      'Zoravka: Si algo se rompe, fue una función experimental.';
-  }
-}
-
-function activateDuo() {
-  document.getElementById('duoMessage').textContent =
-    'AZUKA: Todo está bajo control. | ZORAVKA: Eso dicen siempre.';
+  const safe = validURL(value);
+  if (safe) window.open(safe,'_blank','noopener,noreferrer');
 }
 
 /* TERMINAL */
@@ -611,17 +567,35 @@ function runCommand() {
   printLine('user@daz:~$ ' + command);
 
   const commands = {
-    help: 'Comandos: help, whoami, date, pwd, ls, uname, neofetch, matrix, hack-demo, scan-demo, trace-demo, azuka, zoravka, azuka + zoravka, clear.',
-    whoami: 'user',
-    pwd: '/home/user',
-    ls: 'Documents  Downloads  Pictures  Games  DAZ-Arcade',
-    uname: 'DAZ Linux 5.0 (simulated desktop)',
-    date: new Date().toString(),
-    neofetch: 'DAZ Linux 5.0\nDesktop: DAZ Desktop\nTheme: Dark Blue\nTerminal: DAZ Terminal\nStatus: Online',
-    matrix: '010101 101010 001101\n110010 001011 101100\nDAZ SYSTEM ONLINE',
-    'hack-demo': 'DEMO VISUAL: No se está accediendo a ningún sistema.',
-    'scan-demo': 'DEMO: Escaneo ficticio. No se envían paquetes ni se buscan dispositivos.',
-    'trace-demo': 'DEMO: Ruta ficticia. No se rastrea ninguna persona o dispositivo.'
+    help:
+      'Comandos: help, whoami, date, pwd, ls, uname, neofetch, matrix, hack-demo, scan-demo, trace-demo, daz-log, azuka, zoravka, azuka + zoravka, clear.',
+
+    whoami:'user',
+    pwd:'/home/user',
+    ls:'Documents  Downloads  Pictures  Games  DAZ-Arcade',
+    uname:'DAZ Linux 6.0 (simulated desktop)',
+    date:new Date().toString(),
+
+    neofetch:
+      'DAZ Linux 6.0\n' +
+      'Desktop: DAZ Desktop\n' +
+      'Theme: Dark Blue\n' +
+      'Terminal: DAZ Terminal\n' +
+      'Status: Online',
+
+    matrix:
+      '010101 101010 001101\n' +
+      '110010 001011 101100\n' +
+      'DAZ SYSTEM ONLINE',
+
+    'hack-demo':
+      'DEMO VISUAL: No se está accediendo a ningún sistema.',
+
+    'scan-demo':
+      'DEMO: Escaneo ficticio. No se envían paquetes.',
+
+    'trace-demo':
+      'DEMO: Ruta ficticia. No se rastrea ninguna persona ni dispositivo.'
   };
 
   if (command === 'clear') {
@@ -630,21 +604,46 @@ function runCommand() {
   }
 
   if (command === 'azuka') {
-    printLine('Azuka: Sistema listo. ¿Qué necesitas?');
-    characterMessage('azuka');
+    printLine('AZUKA SOLVANSKI: Sistema listo. ¿Qué necesitas?');
     return;
   }
 
   if (command === 'zoravka') {
-    printLine('Zoravka: Todo funciona. Más o menos.');
-    characterMessage('zoravka');
+    printLine('ZORAVKA VELSTRANI: Todo funciona. Más o menos.');
     return;
   }
 
   if (command === 'azuka + zoravka') {
     printLine('DUO MODE ACTIVATED.');
-    activateDuo();
-    openWindow('characters');
+    printLine('AZUKA: Todo está bajo control.');
+    printLine('ZORAVKA: Eso dicen siempre.');
+    return;
+  }
+
+  if (command === 'daz-log') {
+    const logs = [
+      '[DAZ CORE] Initializing system...',
+      '[OK] Kernel simulation loaded',
+      '[OK] Network interface detected',
+      '[OK] Local environment ready',
+      '[INFO] Loading virtual modules...',
+      '[INFO] Checking system configuration...',
+      '[OK] Module DAZ-01 initialized',
+      '[OK] Module DAZ-02 initialized',
+      '[OK] Encryption demo enabled',
+      '[INFO] Generating fictional data...',
+      '[SYSTEM] Access level: DEMO',
+      '[SYSTEM] No external system accessed',
+      '[DAZ] AZUKA: Todo está bajo control.',
+      '[DAZ] ZORAVKA: Eso espero...',
+      '[OK] Process completed.',
+      'DAZ Linux simulation finished.'
+    ];
+
+    for (let i = 0; i < 8; i++) {
+      logs.forEach(line => printLine(line));
+    }
+
     return;
   }
 
@@ -653,58 +652,40 @@ function runCommand() {
 
 /* DAZ ARCADE */
 
-/*
-  Reemplaza los enlaces de ejemplo por las direcciones reales
-  de tus minijuegos cuando las tengas.
-*/
-
-const games = [
+const defaultGames = [
   {
-    name: 'DAZ Game 01',
-    category: 'daz',
-    description: 'Tu primer minijuego propio.',
-    url: '',
-    placeholder: true
+    name:'DAZ Game 01',
+    category:'daz',
+    description:'Primer juego de DAZ.',
+    url:''
   },
   {
-    name: 'DAZ Game 02',
-    category: 'daz',
-    description: 'Minijuego propio número dos.',
-    url: '',
-    placeholder: true
+    name:'DAZ Game 02',
+    category:'daz',
+    description:'Segundo juego de DAZ.',
+    url:''
   },
   {
-    name: 'DAZ Game 03',
-    category: 'daz',
-    description: 'Minijuego propio número tres.',
-    url: '',
-    placeholder: true
+    name:'DAZ Game 03',
+    category:'daz',
+    description:'Tercer juego de DAZ.',
+    url:''
   },
   {
-    name: 'DAZ Game 04',
-    category: 'daz',
-    description: 'Minijuego propio número cuatro.',
-    url: '',
-    placeholder: true
+    name:'DAZ Game 04',
+    category:'daz',
+    description:'Cuarto juego de DAZ.',
+    url:''
   },
   {
-    name: 'DAZ Game 05',
-    category: 'daz',
-    description: 'Minijuego propio número cinco.',
-    url: '',
-    placeholder: true
-  },
-
-  {
-    name: 'Ejemplo externo',
-    category: 'external',
-    description: 'Añade aquí la dirección de un juego externo.',
-    url: '',
-    placeholder: true
+    name:'DAZ Game 05',
+    category:'daz',
+    description:'Quinto juego de DAZ.',
+    url:''
   }
 ];
 
-let currentGameURL = '';
+let games = [...defaultGames];
 
 function renderGames(list = games) {
   const container = document.getElementById('gameList');
@@ -717,139 +698,125 @@ function renderGames(list = games) {
     return;
   }
 
-  list.forEach((game, index) => {
+  list.forEach(game => {
     const card = document.createElement('div');
-    card.className = 'card';
+    card.className = 'game-card';
 
     const title = document.createElement('h3');
     title.textContent = '🎮 ' + game.name;
 
     const description = document.createElement('p');
-    description.className = 'small';
     description.textContent = game.description;
 
-    const category = document.createElement('p');
+    const category = document.createElement('span');
     category.className = 'small';
     category.textContent =
       game.category === 'daz' ? 'DAZ Games' : 'External Arcade';
 
     const button = document.createElement('button');
     button.className = 'action';
-    button.textContent = game.placeholder ? 'Configurar' : 'Jugar';
 
-    button.addEventListener('click', () => {
-      if (game.placeholder) {
-        alert('Este juego todavía no tiene una dirección configurada.');
-        return;
-      }
-      playGame(game);
-    });
+    if (game.url) {
+      button.textContent = 'Abrir juego';
+      button.addEventListener('click', () => {
+        const safe = validURL(game.url);
 
-    card.append(title, description, category, button);
+        if (safe) {
+          window.open(safe,'_blank','noopener,noreferrer');
+        } else {
+          alert('Dirección no válida.');
+        }
+      });
+    } else {
+      button.textContent = 'Configurar URL';
+      button.addEventListener('click', () => {
+        alert('Añade la URL de este juego en el formulario.');
+      });
+    }
+
+    card.append(title,description,category,button);
     container.appendChild(card);
   });
 }
 
 function filterGames() {
-  const query = document.getElementById('gameSearch').value.toLowerCase();
-  const category = document.getElementById('gameCategory').value;
+  const query =
+    document.getElementById('gameSearch').value.toLowerCase();
+
+  const category =
+    document.getElementById('gameCategory').value;
 
   const filtered = games.filter(game => {
     const matchesName = game.name.toLowerCase().includes(query);
     const matchesCategory =
       category === 'all' || game.category === category;
+
     return matchesName && matchesCategory;
   });
 
   renderGames(filtered);
 }
 
-function playGame(game) {
-  const safe = validURL(game.url);
-  if (!safe) {
-    alert('La dirección del juego no es válida.');
+function saveGames() {
+  try {
+    localStorage.setItem(
+      'dazArcadeGames',
+      JSON.stringify(games.filter(g =>
+        !defaultGames.some(d => d.name === g.name)
+      ))
+    );
+  } catch {
+    alert('No se pudieron guardar los juegos en este navegador.');
+  }
+}
+
+function addGame() {
+  const name =
+    document.getElementById('customGameName').value.trim();
+
+  let url =
+    document.getElementById('customGameURL').value.trim();
+
+  const category =
+    document.getElementById('customGameCategory').value;
+
+  if (!name || !url) {
+    alert('Escribe el nombre y la URL.');
     return;
   }
 
-  currentGameURL = safe;
-
-  document.getElementById('playingTitle').textContent = game.name;
-  document.getElementById('gamePlayer').style.display = 'block';
-
-  const frame = document.getElementById('arcadeFrame');
-  frame.src = safe;
-  frame.style.display = 'block';
-
-  document.getElementById('gameNotice').textContent =
-    'Si el juego no aparece, puede que su página no permita la inserción. Usa Abrir en otra pestaña.';
-
-  document.getElementById('gamePlayer').scrollIntoView({
-    behavior: 'smooth'
-  });
-}
-
-function openGameExternal() {
-  if (currentGameURL) {
-    window.open(currentGameURL, '_blank', 'noopener,noreferrer');
+  if (!/^https?:\/\//i.test(url)) {
+    url = 'https://' + url;
   }
-}
-
-function closeGame() {
-  const frame = document.getElementById('arcadeFrame');
-  frame.src = 'about:blank';
-  frame.style.display = 'none';
-  document.getElementById('gamePlayer').style.display = 'none';
-  currentGameURL = '';
-}
-
-function addExternalGame() {
-  const name = document.getElementById('customGameName').value.trim();
-  const rawURL = document.getElementById('customGameURL').value.trim();
-
-  if (!name || !rawURL) {
-    alert('Escribe el nombre y la dirección del juego.');
-    return;
-  }
-
-  let url = rawURL;
-  if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
 
   const safe = validURL(url);
+
   if (!safe) {
-    alert('Solo se aceptan direcciones HTTP o HTTPS válidas.');
+    alert('Solo se permiten URLs HTTP o HTTPS válidas.');
     return;
   }
 
   games.push({
-    name,
-    category: 'external',
-    description: 'Juego externo añadido por el usuario.',
-    url: safe,
-    placeholder: false
+    name:name,
+    category:category,
+    description:'Juego añadido al catálogo.',
+    url:safe
   });
 
-  saveCustomGames();
+  saveGames();
+
   document.getElementById('customGameName').value = '';
   document.getElementById('customGameURL').value = '';
+
   filterGames();
-
-  alert('Juego añadido a DAZ Arcade.');
+  alert('Juego añadido correctamente.');
 }
 
-function saveCustomGames() {
+function loadGames() {
   try {
-    const custom = games.filter(g =>
-      g.category === 'external' && !g.placeholder
+    const saved = JSON.parse(
+      localStorage.getItem('dazArcadeGames') || '[]'
     );
-    localStorage.setItem('dazCustomGames', JSON.stringify(custom));
-  } catch {
-    // El simulador sigue funcionando aunque el almacenamiento esté bloqueado.
-  }
-}
-
-function loadCustomGames() {
-  try {
-    const saved = JSON.parse(localStorage.getItem('dazCustomGames') || '[]');
 
     if (!Array.isArray(saved)) return;
 
@@ -858,24 +825,26 @@ function loadCustomGames() {
         game &&
         typeof game.name === 'string' &&
         typeof game.url === 'string' &&
-        validURL(game.url)
+        validURL(game.url) &&
+        ['daz','external'].includes(game.category) &&
+        !games.some(g => g.name === game.name)
       ) {
         games.push({
-          name: game.name,
-          category: 'external',
-          description: 'Juego externo añadido por el usuario.',
-          url: validURL(game.url),
-          placeholder: false
+          name:game.name,
+          category:game.category,
+          description:'Juego añadido al catálogo.',
+          url:validURL(game.url)
         });
       }
     });
   } catch {
-    // Sin juegos guardados: se muestra el catálogo inicial.
+    // Se conserva el catálogo inicial.
   }
 }
 
-loadCustomGames();
+loadGames();
 renderGames();
+
 </script>
 </body>
 </html>

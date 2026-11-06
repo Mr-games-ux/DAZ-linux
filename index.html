@@ -4,13 +4,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DAZ Linux V6</title>
+<title>DAZ Linux V6.1</title>
 
 <style>
 :root {
   --blue:#168cff;
   --cyan:#00d9ff;
-  --panel:#101b2c;
   --border:#24476c;
   --text:#eaf5ff;
 }
@@ -36,7 +35,7 @@ body {
 
 .topbar {
   height:42px;
-  background:#080e1bdc;
+  background:#080e1b;
   border-bottom:1px solid var(--border);
   display:flex;
   align-items:center;
@@ -50,8 +49,6 @@ body {
   font-weight:bold;
   letter-spacing:2px;
 }
-
-#clock { color:#a8dfff; }
 
 .desktop-icons {
   padding:22px;
@@ -121,7 +118,10 @@ body {
   z-index:100;
 }
 
-.window.active { display:flex; flex-direction:column; }
+.window.active {
+  display:flex;
+  flex-direction:column;
+}
 
 .titlebar {
   height:40px;
@@ -207,8 +207,6 @@ input,select {
   margin-bottom:12px;
 }
 
-.card h3 { margin-top:0; }
-
 .small {
   color:#9bb9d5;
   font-size:12px;
@@ -246,6 +244,7 @@ input,select {
   color:#9bb9d5;
   margin:0;
   flex:1;
+  overflow-wrap:anywhere;
 }
 
 .game-card button { width:100%; }
@@ -268,7 +267,7 @@ input,select {
 
   <div class="topbar">
     <div class="logo">DAZ LINUX</div>
-    <div>V6 · ARCADE LINKS EDITION</div>
+    <div>V6.1 · ARCADE EDITION</div>
     <div id="clock">00:00</div>
   </div>
 
@@ -354,7 +353,7 @@ input,select {
     </div>
 
     <div class="content">
-      <div class="terminal" id="terminalOutput">DAZ Linux [Version 6.0]
+      <div class="terminal" id="terminalOutput">DAZ Linux [Version 6.1]
 Terminal virtual iniciada.
 Escribe help para ver los comandos.
 
@@ -422,16 +421,8 @@ Escribe help para ver los comandos.
         </button>
 
         <p class="small">
-          Los enlaces se abrirán en una pestaña nueva.
-          Añade páginas y juegos que tengas permitido utilizar.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>Información</h3>
-        <p class="small">
-          DAZ Arcade es un catálogo de enlaces. No aloja,
-          modifica ni desbloquea los juegos externos.
+          Añade direcciones de juegos que tengas permiso para utilizar.
+          Se abrirán en una pestaña nueva.
         </p>
       </div>
     </div>
@@ -450,7 +441,7 @@ Escribe help para ver los comandos.
       <div class="card">
         <h3>Información del sistema</h3>
         <p>Nombre: DAZ Linux</p>
-        <p>Versión: 6.0</p>
+        <p>Versión: 6.1</p>
         <p>Entorno: DAZ Desktop</p>
         <p class="status">● Sistema simulado activo</p>
       </div>
@@ -519,7 +510,6 @@ function validURL(value) {
 
 function goToPage() {
   let value = document.getElementById('browserURL').value.trim();
-
   if (!value) return;
 
   if (!/^https?:\/\//i.test(value)) {
@@ -573,11 +563,11 @@ function runCommand() {
     whoami:'user',
     pwd:'/home/user',
     ls:'Documents  Downloads  Pictures  Games  DAZ-Arcade',
-    uname:'DAZ Linux 6.0 (simulated desktop)',
+    uname:'DAZ Linux 6.1 (simulated desktop)',
     date:new Date().toString(),
 
     neofetch:
-      'DAZ Linux 6.0\n' +
+      'DAZ Linux 6.1\n' +
       'Desktop: DAZ Desktop\n' +
       'Theme: Dark Blue\n' +
       'Terminal: DAZ Terminal\n' +
@@ -654,34 +644,28 @@ function runCommand() {
 
 const defaultGames = [
   {
-    name:'DAZ Game 01',
-    category:'daz',
-    description:'Primer juego de DAZ.',
-    url:''
+    name:'Nettleweb',
+    category:'external',
+    description:'Página web añadida al catálogo.',
+    url:'https://nettleweb.pages.dev/'
   },
   {
-    name:'DAZ Game 02',
-    category:'daz',
-    description:'Segundo juego de DAZ.',
-    url:''
+    name:'Chicken Kings Vault',
+    category:'external',
+    description:'Página web añadida al catálogo.',
+    url:'https://wanocapy.github.io/ChickenKingsVault/'
   },
   {
-    name:'DAZ Game 03',
-    category:'daz',
-    description:'Tercer juego de DAZ.',
-    url:''
+    name:'Ballbang Online',
+    category:'external',
+    description:'Página web añadida al catálogo.',
+    url:'https://ballbang-online.github.io/category/action.html'
   },
   {
-    name:'DAZ Game 04',
-    category:'daz',
-    description:'Cuarto juego de DAZ.',
-    url:''
-  },
-  {
-    name:'DAZ Game 05',
-    category:'daz',
-    description:'Quinto juego de DAZ.',
-    url:''
+    name:'StudySync',
+    category:'external',
+    description:'Página web añadida al catálogo.',
+    url:'https://studysync.co.uk/'
   }
 ];
 
@@ -715,24 +699,17 @@ function renderGames(list = games) {
 
     const button = document.createElement('button');
     button.className = 'action';
+    button.textContent = 'Abrir sitio';
 
-    if (game.url) {
-      button.textContent = 'Abrir juego';
-      button.addEventListener('click', () => {
-        const safe = validURL(game.url);
+    button.addEventListener('click', () => {
+      const safe = validURL(game.url);
 
-        if (safe) {
-          window.open(safe,'_blank','noopener,noreferrer');
-        } else {
-          alert('Dirección no válida.');
-        }
-      });
-    } else {
-      button.textContent = 'Configurar URL';
-      button.addEventListener('click', () => {
-        alert('Añade la URL de este juego en el formulario.');
-      });
-    }
+      if (safe) {
+        window.open(safe,'_blank','noopener,noreferrer');
+      } else {
+        alert('Dirección no válida.');
+      }
+    });
 
     card.append(title,description,category,button);
     container.appendChild(card);

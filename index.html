@@ -14,58 +14,58 @@
 }
 
 body {
-  background: #080d18;
-  color: white;
   font-family: Arial, sans-serif;
+  color: white;
   overflow: hidden;
+  background: #050b16;
 }
 
-.desktop {
+#desktop {
   height: 100vh;
-  background:
-    radial-gradient(circle at 70% 40%, #103d70 0%, transparent 35%),
-    linear-gradient(135deg, #050914, #101b30);
+  width: 100%;
   position: relative;
+  background:
+    radial-gradient(circle at 75% 45%, #07518b, transparent 40%),
+    linear-gradient(135deg, #030712, #101b30);
 }
 
 .topbar {
-  height: 38px;
-  background: #080d18dd;
+  height: 40px;
+  background: #050b16ed;
+  border-bottom: 1px solid #1764a5;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   padding: 0 15px;
-  border-bottom: 1px solid #18385e;
   font-size: 13px;
 }
 
-.logo {
+.brand {
   color: #39aaff;
   font-weight: bold;
 }
 
 .icons {
-  padding: 25px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 18px;
   width: 110px;
 }
 
-.desktop-icon {
-  width: 80px;
+.icon {
   text-align: center;
   cursor: pointer;
-  font-size: 13px;
-  padding: 8px;
+  padding: 10px 5px;
   border-radius: 8px;
+  font-size: 12px;
 }
 
-.desktop-icon:hover {
-  background: #267ac044;
+.icon:hover {
+  background: #258be044;
 }
 
-.desktop-icon span {
+.icon span {
   display: block;
   font-size: 35px;
   margin-bottom: 5px;
@@ -76,21 +76,22 @@ body {
   bottom: 12px;
   left: 50%;
   transform: translateX(-50%);
-  background: #101c30eF;
-  border: 1px solid #28649a;
-  border-radius: 15px;
-  padding: 9px 15px;
   display: flex;
-  gap: 17px;
-  box-shadow: 0 0 20px #0077ff33;
+  gap: 15px;
+  padding: 10px 17px;
+  background: #07172def;
+  border: 1px solid #258be0;
+  border-radius: 15px;
+  box-shadow: 0 0 25px #007bff44;
+  z-index: 20;
 }
 
 .dock button {
   background: transparent;
   border: none;
-  font-size: 27px;
-  cursor: pointer;
   color: white;
+  font-size: 26px;
+  cursor: pointer;
 }
 
 .dock button:hover {
@@ -100,76 +101,106 @@ body {
 .window {
   display: none;
   position: absolute;
-  top: 18%;
+  top: 13%;
   left: 50%;
   transform: translateX(-50%);
-  width: min(600px, 90%);
-  height: 350px;
-  background: #101a2b;
+  width: min(650px, 92%);
+  height: 390px;
+  background: #0b1729;
   border: 1px solid #258be0;
   border-radius: 12px;
+  box-shadow: 0 0 35px #007bff44;
   overflow: hidden;
-  box-shadow: 0 0 30px #007bff44;
+  z-index: 10;
 }
 
 .window-header {
-  background: #142944;
-  padding: 12px;
+  height: 43px;
+  background: #102746;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 0 13px;
+  font-size: 14px;
   font-weight: bold;
 }
 
 .close {
-  background: #e04b61;
-  border: none;
+  background: #d83e56;
   color: white;
+  border: none;
   border-radius: 5px;
-  padding: 3px 9px;
+  padding: 5px 10px;
   cursor: pointer;
 }
 
-.window-content {
-  padding: 18px;
+.content {
+  padding: 20px;
+  height: calc(100% - 43px);
+  overflow: auto;
+}
+
+h2 {
+  color: #39aaff;
+  margin-bottom: 15px;
+}
+
+.file {
+  padding: 13px;
+  border-bottom: 1px solid #243b59;
+}
+
+.file:hover {
+  background: #18385a;
 }
 
 .terminal {
-  background: #03070d;
-  height: 285px;
+  background: #02070d;
+  height: calc(100% - 43px);
   padding: 15px;
   overflow-y: auto;
+  color: #55ff9a;
   font-family: monospace;
   font-size: 14px;
-  color: #52ff9b;
 }
 
 .terminal input {
   background: transparent;
   border: none;
-  color: #52ff9b;
   outline: none;
+  color: #55ff9a;
   font-family: monospace;
-  width: 70%;
+  font-size: 14px;
+  width: 65%;
+}
+
+.line {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin-bottom: 8px;
 }
 
 .menu {
   display: none;
   position: absolute;
-  bottom: 65px;
+  bottom: 72px;
   left: 15px;
   width: 230px;
   padding: 15px;
-  background: #101c30;
+  background: #0b1c32;
   border: 1px solid #258be0;
   border-radius: 12px;
+  z-index: 30;
+  box-shadow: 0 0 25px #007bff44;
 }
 
 .menu button {
+  display: block;
   width: 100%;
+  margin-top: 8px;
   padding: 12px;
-  margin-top: 7px;
-  background: #18314e;
   color: white;
+  background: #142e4d;
   border: none;
   border-radius: 7px;
   text-align: left;
@@ -177,109 +208,164 @@ body {
 }
 
 .menu button:hover {
-  background: #1765a5;
+  background: #1768a9;
 }
 
-.files p {
-  padding: 12px;
-  border-bottom: 1px solid #263b55;
+.action {
+  padding: 10px;
+  margin-top: 15px;
+  background: #0879d1;
+  border: none;
+  border-radius: 7px;
+  color: white;
+  cursor: pointer;
 }
-
 </style>
 </head>
 
 <body>
 
-<div class="desktop">
+<div id="desktop">
 
   <div class="topbar">
-    <div class="logo">🐧 DAZ LINUX</div>
-    <div>Workspace 1</div>
+    <div class="brand">🐧 DAZ LINUX</div>
+    <div>DAZ Desktop</div>
     <div id="clock">00:00</div>
   </div>
 
   <div class="icons">
-    <div class="desktop-icon" onclick="openWindow('files')">
-      <span>📁</span>
-      Archivos
+    <div class="icon" onclick="openApp('files')">
+      <span>📁</span>Archivos
     </div>
 
-    <div class="desktop-icon" onclick="openWindow('terminal')">
-      <span>💻</span>
-      Terminal
+    <div class="icon" onclick="openApp('terminal')">
+      <span>💻</span>Terminal
     </div>
 
-    <div class="desktop-icon" onclick="openWindow('about')">
-      <span>🐧</span>
-      Acerca de
+    <div class="icon" onclick="openApp('browser')">
+      <span>🌐</span>Navegador
+    </div>
+
+    <div class="icon" onclick="openApp('settings')">
+      <span>⚙️</span>Ajustes
+    </div>
+
+    <div class="icon" onclick="openApp('about')">
+      <span>🐧</span>Acerca de
     </div>
   </div>
 
+  <!-- ARCHIVOS -->
   <div class="window" id="files">
     <div class="window-header">
-      Explorador de archivos
-      <button class="close" onclick="closeWindow('files')">X</button>
+      📁 Explorador de archivos
+      <button class="close" onclick="closeApp('files')">X</button>
     </div>
-    <div class="window-content files">
-      <p>📁 Documentos</p>
-      <p>📁 Descargas</p>
-      <p>📁 Imágenes</p>
-      <p>📁 Música</p>
-      <p>📄 README.txt</p>
+
+    <div class="content">
+      <h2>/home/user</h2>
+      <div class="file">📁 Documentos</div>
+      <div class="file">📁 Descargas</div>
+      <div class="file">📁 Imágenes</div>
+      <div class="file">📁 Música</div>
+      <div class="file">📁 Vídeos</div>
+      <div class="file">📄 README.txt</div>
     </div>
   </div>
 
+  <!-- TERMINAL -->
   <div class="window" id="terminal">
     <div class="window-header">
-      DAZ Terminal
-      <button class="close" onclick="closeWindow('terminal')">X</button>
+      💻 DAZ Terminal
+      <button class="close" onclick="closeApp('terminal')">X</button>
     </div>
+
     <div class="terminal" id="terminalOutput">
-      DAZ Linux Terminal v1.0<br>
-      Escribe help para ver los comandos.<br><br>
-      <span>user@dazlinux:~$ </span>
-      <input id="command" autocomplete="off" autofocus>
+      <div class="line">DAZ Linux Terminal v1.0</div>
+      <div class="line">Escribe help para ver los comandos.</div>
+      <div class="line">user@dazlinux:~$ <input id="command" autocomplete="off"></div>
     </div>
   </div>
 
+  <!-- NAVEGADOR -->
+  <div class="window" id="browser">
+    <div class="window-header">
+      🌐 DAZ Browser
+      <button class="close" onclick="closeApp('browser')">X</button>
+    </div>
+
+    <div class="content">
+      <h2>DAZ Browser</h2>
+      <p>Bienvenido al navegador de demostración.</p>
+      <p style="margin-top:12px">Esta aplicación todavía no navega por Internet.</p>
+    </div>
+  </div>
+
+  <!-- AJUSTES -->
+  <div class="window" id="settings">
+    <div class="window-header">
+      ⚙️ Configuración
+      <button class="close" onclick="closeApp('settings')">X</button>
+    </div>
+
+    <div class="content">
+      <h2>Configuración</h2>
+      <p>Nombre: DAZ Linux</p>
+      <p style="margin-top:10px">Versión: 1.0</p>
+      <p style="margin-top:10px">Entorno: DAZ Desktop</p>
+      <button class="action" onclick="changeWallpaper()">Cambiar fondo</button>
+    </div>
+  </div>
+
+  <!-- ACERCA DE -->
   <div class="window" id="about">
     <div class="window-header">
-      Acerca de DAZ Linux
-      <button class="close" onclick="closeWindow('about')">X</button>
+      🐧 Acerca de DAZ Linux
+      <button class="close" onclick="closeApp('about')">X</button>
     </div>
-    <div class="window-content">
-      <h2 style="color:#39aaff">🐧 DAZ Linux</h2>
-      <br>
-      <p>Versión: 1.0</p>
-      <p>Entorno: DAZ Desktop</p>
-      <p>Estilo: Neon Blue</p>
-      <br>
-      <p>Un simulador de escritorio Linux creado por DAZ.</p>
+
+    <div class="content">
+      <h2>DAZ Linux</h2>
+      <p>Versión 1.0</p>
+      <p style="margin-top:10px">Un simulador de escritorio Linux creado por DAZ.</p>
+      <p style="margin-top:10px">Sistema: simulación web.</p>
     </div>
   </div>
 
+  <!-- MENU -->
   <div class="menu" id="menu">
-    <h3>🐧 DAZ Linux</h3>
-    <button onclick="openWindow('files')">📁 Archivos</button>
-    <button onclick="openWindow('terminal')">💻 Terminal</button>
-    <button onclick="openWindow('about')">⚙️ Acerca de</button>
+    <h2>🐧 DAZ Linux</h2>
+    <button onclick="openApp('files')">📁 Archivos</button>
+    <button onclick="openApp('terminal')">💻 Terminal</button>
+    <button onclick="openApp('browser')">🌐 Navegador</button>
+    <button onclick="openApp('settings')">⚙️ Configuración</button>
+    <button onclick="openApp('about')">🐧 Acerca de</button>
   </div>
 
+  <!-- DOCK -->
   <div class="dock">
     <button onclick="toggleMenu()">🐧</button>
-    <button onclick="openWindow('files')">📁</button>
-    <button onclick="openWindow('terminal')">💻</button>
-    <button onclick="openWindow('about')">⚙️</button>
+    <button onclick="openApp('files')">📁</button>
+    <button onclick="openApp('terminal')">💻</button>
+    <button onclick="openApp('browser')">🌐</button>
+    <button onclick="openApp('settings')">⚙️</button>
   </div>
 
 </div>
 
 <script>
-function openWindow(id) {
+function openApp(id) {
   document.getElementById(id).style.display = "block";
+  document.getElementById("menu").style.display = "none";
+
+  if (id === "terminal") {
+    setTimeout(function() {
+      document.getElementById("command").focus();
+    }, 100);
+  }
 }
 
-function closeWindow(id) {
+function closeApp(id) {
   document.getElementById(id).style.display = "none";
 }
 
@@ -300,71 +386,114 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-const command = document.getElementById("command");
+function changeWallpaper() {
+  const backgrounds = [
+    ["#030712", "#07518b"],
+    ["#09051c", "#43208a"],
+    ["#061b17", "#08765c"],
+    ["#160a10", "#8a244a"]
+  ];
+
+  const colors = backgrounds[
+    Math.floor(Math.random() * backgrounds.length)
+  ];
+
+  document.getElementById("desktop").style.background =
+    `radial-gradient(circle at 75% 45%, ${colors[1]}, transparent 40%), linear-gradient(135deg, ${colors[0]}, #101b30)`;
+}
+
 const output = document.getElementById("terminalOutput");
 
-command.addEventListener("keydown", function(event) {
-  if (event.key === "Enter") {
-    const value = command.value.trim().toLowerCase();
-
-    output.innerHTML += "<br><span>user@dazlinux:~$ " +
-      escapeHTML(command.value) + "</span><br>";
-
-    let response = "";
-
-    switch(value) {
-      case "help":
-        response = "Comandos: help, neofetch, date, whoami, ls, clear, uname, pwd";
-        break;
-      case "whoami":
-        response = "user";
-        break;
-      case "neofetch":
-        response = "🐧 DAZ Linux<br>OS: DAZ Linux 1.0<br>Desktop: DAZ Desktop<br>Theme: Neon Blue";
-        break;
-      case "date":
-        response = new Date().toString();
-        break;
-      case "ls":
-        response = "Documents Downloads Pictures Music";
-        break;
-      case "uname":
-        response = "DAZ Linux simulated desktop";
-        break;
-      case "pwd":
-        response = "/home/user";
-        break;
-      case "clear":
-        output.innerHTML = "";
-        break;
-      case "":
-        break;
-      default:
-        response = "Comando no encontrado. Escribe help.";
-    }
-
-    if (response) {
-      output.innerHTML += response + "<br>";
-    }
-
-    output.innerHTML += "<br><span>user@dazlinux:~$ </span>";
-    command.value = "";
-    output.scrollTop = output.scrollHeight;
-  }
-});
-
-function escapeHTML(text) {
-  return text.replace(/[&<>"']/g, function(char) {
-    return {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#039;"
-    }[char];
-  });
+function addLine(text) {
+  const line = document.createElement("div");
+  line.className = "line";
+  line.textContent = text;
+  output.appendChild(line);
 }
+
+function addPrompt() {
+  const line = document.createElement("div");
+  line.className = "line";
+  line.append("user@dazlinux:~$ ");
+
+  const input = document.createElement("input");
+  input.id = "command";
+  input.autocomplete = "off";
+
+  line.appendChild(input);
+  output.appendChild(line);
+
+  input.addEventListener("keydown", handleCommand);
+  input.focus();
+
+  output.scrollTop = output.scrollHeight;
+}
+
+function handleCommand(event) {
+  if (event.key !== "Enter") return;
+
+  const input = event.target;
+  const value = input.value.trim().toLowerCase();
+
+  input.disabled = true;
+
+  let response = "";
+
+  switch(value) {
+    case "help":
+      response = "Comandos: help, neofetch, whoami, date, ls, pwd, uname, clear";
+      break;
+
+    case "whoami":
+      response = "user";
+      break;
+
+    case "date":
+      response = new Date().toString();
+      break;
+
+    case "ls":
+      response = "Documentos Descargas Imágenes Música Vídeos";
+      break;
+
+    case "pwd":
+      response = "/home/user";
+      break;
+
+    case "uname":
+      response = "DAZ Linux simulated desktop";
+      break;
+
+    case "neofetch":
+      response =
+        "🐧 DAZ LINUX\n" +
+        "OS: DAZ Linux 1.0\n" +
+        "Desktop: DAZ Desktop\n" +
+        "Theme: Neon Blue\n" +
+        "Architecture: Browser simulation";
+      break;
+
+    case "clear":
+      output.innerHTML = "";
+      addPrompt();
+      return;
+
+    case "":
+      break;
+
+    default:
+      response = "Comando no encontrado. Escribe help.";
+  }
+
+  if (response) addLine(response);
+
+  addPrompt();
+}
+
+document.getElementById("command")
+  .addEventListener("keydown", handleCommand);
 </script>
 
 </body>
 </html>
+

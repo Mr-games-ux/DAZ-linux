@@ -3,736 +3,852 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DAZ Linux V9</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DAZ Linux V10</title>
 <style>
-:root{
- --bg:#171717;--panel:#252525;--red:#a71920;
- --gold:#c5a45b;--text:#eee;--muted:#aaa;
+:root {
+  --red:#a71919;
+  --red2:#d52b2b;
+  --gold:#e0b94f;
+  --bg:#171717;
+  --panel:#242424;
+  --panel2:#303030;
+  --text:#f2f2f2;
+  --muted:#aaa;
+  --wallpaper:linear-gradient(135deg,#171717,#351010,#111);
 }
 *{box-sizing:border-box}
 body{
- margin:0;background:var(--bg);color:var(--text);
- font-family:Arial,sans-serif;overflow:hidden;
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;overflow:hidden
 }
-button,input,select{font:inherit}
+button,input,select,textarea{font:inherit}
 button{
- background:#333;color:white;border:1px solid #666;
- padding:9px 12px;border-radius:4px;cursor:pointer;
+  background:var(--red);color:white;border:1px solid #ffffff22;
+  padding:9px 13px;border-radius:5px;cursor:pointer
 }
-button:hover{background:var(--red)}
-#desktop{
- height:calc(100vh - 44px);padding:20px;
- display:grid;grid-template-columns:repeat(auto-fill,90px);
- grid-auto-rows:100px;gap:8px;align-content:start;
- background:radial-gradient(ellipse,#303030,#141414);
+button:hover{background:var(--red2)}
+input,select,textarea{
+  background:#151515;color:white;border:1px solid #555;
+  padding:10px;border-radius:5px;width:100%
 }
-.dicon{
- display:flex;flex-direction:column;align-items:center;
- justify-content:center;gap:7px;text-align:center;
- font-size:12px;cursor:pointer;border:1px solid transparent;
- border-radius:5px;padding:5px;
-}
-.dicon:hover{background:#ffffff20;border-color:#888}
-.dicon b{font-size:30px}
-#taskbar{
- position:fixed;bottom:0;width:100%;height:44px;
- display:flex;justify-content:space-between;align-items:center;
- padding:5px 10px;background:#202020;
- border-top:2px solid var(--red);z-index:20;
-}
-#taskbar button{background:var(--red);border-color:var(--gold)}
-#taskLeft,#taskRight{display:flex;align-items:center;gap:10px}
-#clock{color:var(--gold);font-size:13px}
-#startMenu{
- display:none;position:fixed;bottom:48px;left:8px;
- width:270px;padding:12px;background:#222;
- border:1px solid var(--gold);border-top:3px solid var(--red);
- z-index:30;
-}
-#startMenu.open{display:block}
-.menuTitle{padding:10px;color:var(--gold);border-bottom:1px solid #555}
-.menuItem{display:block;width:100%;text-align:left;margin-top:6px}
-#window{
- display:none;position:fixed;z-index:10;
- left:50%;top:50%;transform:translate(-50%,-50%);
- width:min(820px,95vw);height:min(620px,82vh);
- background:#222;border:1px solid var(--gold);
- box-shadow:0 10px 35px #000b;flex-direction:column;
-}
-#window.show{display:flex}
-#windowHeader{
- background:var(--red);padding:10px;
- display:flex;justify-content:space-between;align-items:center;
-}
-#windowContent{padding:16px;overflow:auto;flex:1}
-.panel{
- background:#303030;padding:15px;margin-bottom:12px;
- border-left:3px solid var(--red);border-radius:4px;
-}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
-.bigTime{text-align:center;font-size:38px;color:var(--gold);margin:20px}
-.muted{color:var(--muted);font-size:12px}
-#languageScreen{
- position:fixed;inset:0;z-index:100;
- display:flex;align-items:center;justify-content:center;
- background:#111;padding:20px;
-}
-.languageBox{
- width:min(400px,100%);padding:30px;text-align:center;
- background:#242424;border:1px solid var(--gold);
- border-top:5px solid var(--red);
-}
-.languageBox select,.languageBox button{width:100%;margin:10px 0}
+textarea{resize:vertical;min-height:130px}
 .hidden{display:none!important}
-
-/* KIWI CENTER */
-
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
-.toolbar input{flex:1;min-width:150px}
-input,select{
- background:#181818;color:white;border:1px solid #666;
- padding:10px;border-radius:4px;min-width:0;
+.muted{color:var(--muted)}
+.small{font-size:12px}
+h2,h3{margin-top:0}
+a{color:var(--gold)}
+#boot{
+  position:fixed;inset:0;z-index:1000;
+  display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle,#481515,#111 70%)
 }
-.linkCard{
- background:#303030;border:1px solid #444;
- border-left:3px solid var(--red);
- padding:12px;border-radius:5px;
- display:flex;align-items:center;gap:10px;
- margin-bottom:9px;
+.boot-card{
+  width:min(440px,92vw);background:#191919;
+  border:1px solid var(--gold);border-top:5px solid var(--red);
+  padding:28px;border-radius:10px;text-align:center;
+  box-shadow:0 15px 60px #0009
 }
-.linkIcon{font-size:25px}
-.linkInfo{flex:1;min-width:0}
-.linkInfo strong{display:block;margin-bottom:5px}
-.linkInfo small{
- color:var(--muted);display:block;
- overflow-wrap:anywhere;font-size:11px;
+.logo{font-size:38px;font-weight:bold;color:var(--gold);letter-spacing:3px}
+.star{font-size:25px;color:var(--red2)}
+.boot-card>*{margin-bottom:15px}
+#desktop{
+  position:fixed;inset:0 0 44px 0;
+  background:var(--wallpaper);background-size:cover
 }
-.linkActions{display:flex;gap:5px;flex-wrap:wrap}
-.linkActions button{padding:7px}
-.favorite{color:var(--gold)}
-#kiwiForm{
- display:grid;grid-template-columns:1fr 1fr;
- gap:8px;margin-top:10px;
+#desktop::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(120deg,#0003,transparent 60%)
 }
-#kiwiForm button{grid-column:span 2}
-.statusDot{color:#66cc77}
-@media(max-width:500px){
- #desktop{grid-template-columns:repeat(3,1fr);padding:10px}
- .dicon{width:100%}
- #kiwiForm{grid-template-columns:1fr}
- #kiwiForm button{grid-column:auto}
- .linkCard{align-items:flex-start}
+.desktop-title{
+  position:absolute;right:25px;top:22px;text-align:right;
+  color:#ffffffaa;pointer-events:none
+}
+.desktop-title strong{color:var(--gold);font-size:25px}
+#icons{
+  position:absolute;top:18px;left:15px;bottom:15px;
+  display:flex;flex-direction:column;flex-wrap:wrap;
+  align-content:flex-start;gap:12px;z-index:1
+}
+.desktop-icon{
+  width:85px;min-height:75px;text-align:center;padding:8px 3px;
+  cursor:pointer;border:1px solid transparent;border-radius:6px;
+  font-size:12px;text-shadow:1px 1px 3px #000
+}
+.desktop-icon:hover{background:#ffffff20;border-color:#ffffff30}
+.desktop-icon .emoji{font-size:29px;display:block;margin-bottom:5px}
+#taskbar{
+  position:fixed;bottom:0;left:0;right:0;height:44px;
+  display:flex;align-items:center;gap:8px;padding:5px 9px;
+  background:#151515;border-top:2px solid var(--red);z-index:900
+}
+#start-button{font-weight:bold;color:var(--gold);height:33px}
+#task-items{display:flex;gap:5px;flex:1;overflow:auto}
+.task-item{background:#333;white-space:nowrap;padding:7px 12px}
+#clock{font-size:13px;min-width:125px;text-align:center}
+#start-menu{
+  position:fixed;bottom:44px;left:8px;width:260px;
+  background:#1c1c1c;border:1px solid var(--gold);
+  border-top:4px solid var(--red);padding:12px;z-index:950;
+  box-shadow:0 10px 35px #0009;border-radius:7px
+}
+.start-entry{
+  display:block;width:100%;text-align:left;background:transparent;
+  border:0;padding:11px;border-radius:4px
+}
+.start-entry:hover{background:#ffffff18}
+#notification-panel{
+  position:fixed;right:8px;bottom:50px;width:300px;
+  max-height:75vh;overflow:auto;background:#1c1c1c;
+  border:1px solid var(--gold);padding:15px;z-index:950;
+  border-radius:8px
+}
+.window{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(700px,94vw);height:min(520px,82vh);
+  min-width:280px;min-height:220px;background:var(--panel);
+  border:1px solid #777;border-top:4px solid var(--red);
+  box-shadow:0 15px 45px #000a;border-radius:7px;
+  display:flex;flex-direction:column;overflow:hidden
+}
+.window.maximized{
+  left:0!important;top:0!important;transform:none!important;
+  width:100%!important;height:calc(100% - 0px)!important;
+  border-radius:0
+}
+.window-header{
+  background:#171717;padding:9px 10px;display:flex;
+  align-items:center;justify-content:space-between;
+  cursor:move;user-select:none;min-height:39px
+}
+.window-title{font-weight:bold;color:var(--gold)}
+.window-controls{display:flex;gap:5px}
+.window-controls button{padding:3px 9px;background:#333}
+.window-controls .close{background:#941d1d}
+.window-content{padding:15px;overflow:auto;flex:1}
+.panel{
+  background:var(--panel2);border:1px solid #ffffff14;
+  padding:12px;border-radius:6px;margin-bottom:10px
+}
+.grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+  gap:10px
+}
+.tile{
+  background:#303030;border:1px solid #ffffff20;
+  border-radius:6px;padding:13px;cursor:pointer
+}
+.tile:hover{border-color:var(--gold);background:#3b3030}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.row>*{flex:1}
+.link-item{
+  display:flex;gap:8px;align-items:center;
+  padding:10px;background:#303030;margin:7px 0;border-radius:5px
+}
+.link-item .link-info{flex:1;min-width:0}
+.link-item a{overflow-wrap:anywhere}
+.terminal{
+  background:#080d08;color:#76dc76;font-family:monospace;
+  padding:13px;min-height:250px;border-radius:5px;
+  white-space:pre-wrap;overflow:auto
+}
+.terminal-input{display:flex;margin-top:8px;gap:7px}
+.terminal-input input{font-family:monospace}
+.file-row{
+  display:flex;align-items:center;gap:10px;
+  padding:9px;border-bottom:1px solid #ffffff16
+}
+.file-row button{padding:5px 8px}
+.note-area{min-height:250px}
+.stat{font-size:25px;color:var(--gold);font-weight:bold}
+#toast{
+  position:fixed;bottom:58px;left:50%;transform:translateX(-50%);
+  background:#222;border:1px solid var(--gold);padding:10px 18px;
+  border-radius:7px;z-index:2000;display:none
+}
+footer{font-size:11px;color:#999;text-align:center;margin-top:15px}
+@media(max-width:600px){
+  #icons{gap:5px}
+  .desktop-icon{width:70px;font-size:10px}
+  .desktop-icon .emoji{font-size:24px}
+  #clock{min-width:85px;font-size:11px}
+  .window{width:96vw;height:82vh}
 }
 </style>
 </head>
-
 <body>
 
-<!-- LANGUAGE SELECTOR -->
-
-<div id="languageScreen">
- <div class="languageBox">
-  <h1>☭ DAZ LINUX V9</h1>
-  <p id="languageTitle">Selecciona el idioma</p>
-  <select id="languageSelect">
-   <option value="es">Español</option>
-   <option value="en">English</option>
-   <option value="fr">Français</option>
-   <option value="ru">Русский</option>
-  </select>
-  <button onclick="bootSystem()" id="bootButton">Iniciar sistema</button>
-  <p class="muted">SOVIET DESKTOP EDITION</p>
- </div>
+<div id="boot">
+  <div class="boot-card">
+    <div class="star">★ ★ ★</div>
+    <div class="logo">DAZ LINUX</div>
+    <h3>V10 — People's Desktop</h3>
+    <p id="welcomeText">Bienvenido al escritorio DAZ Linux</p>
+    <label id="languageLabel">Selecciona tu idioma</label>
+    <select id="languageSelect">
+      <option value="es">Español</option>
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="ru">Русский</option>
+    </select>
+    <input id="username" maxlength="24" placeholder="Nombre de usuario">
+    <button id="loginButton" onclick="login()" style="width:100%">Iniciar sesión</button>
+    <p class="small muted">DAZ Linux V10 · Community Edition</p>
+  </div>
 </div>
 
-<!-- DESKTOP -->
-
-<div id="desktop">
-
- <div class="dicon" onclick="openKiwi()">
-  <b>🥝</b>Kiwi Center
- </div>
-
- <div class="dicon" onclick="openGameTime()">
-  <b>⏱️</b>Game Time
- </div>
-
- <div class="dicon" onclick="openGaming()">
-  <b>🎮</b>Gaming Mode
- </div>
-
- <div class="dicon" onclick="openVisits()">
-  <b>📊</b>Visit Counter
- </div>
-
- <div class="dicon" onclick="openMonitor()">
-  <b>🖥️</b>System Monitor
- </div>
-
- <div class="dicon" onclick="openSettings()">
-  <b>⚙️</b>Settings
- </div>
-
+<div id="desktop" class="hidden">
+  <div id="icons"></div>
+  <div class="desktop-title">
+    <strong>DAZ LINUX V10</strong><br>
+    <span id="desktopSubtitle">Sistema de escritorio comunitario</span>
+  </div>
 </div>
 
-<!-- START MENU -->
-
-<div id="startMenu">
- <div class="menuTitle">☭ DAZ LINUX V9</div>
- <button class="menuItem" onclick="openKiwi()">🥝 Kiwi Center</button>
- <button class="menuItem" onclick="openGameTime()">⏱️ Game Time</button>
- <button class="menuItem" onclick="openGaming()">🎮 Gaming Mode</button>
- <button class="menuItem" onclick="openVisits()">📊 Visit Counter</button>
- <button class="menuItem" onclick="openMonitor()">🖥️ System Monitor</button>
- <button class="menuItem" onclick="openSettings()">⚙️ Settings</button>
+<div id="taskbar" class="hidden">
+  <button id="start-button" onclick="toggleStart()">★ DAZ</button>
+  <div id="task-items"></div>
+  <button onclick="toggleNotifications()" title="Notificaciones">🔔</button>
+  <div id="clock"></div>
 </div>
 
-<!-- WINDOWS -->
-
-<div id="window">
- <div id="windowHeader">
-  <strong id="windowTitle">DAZ Linux</strong>
-  <button onclick="closeWindow()">✕</button>
- </div>
- <div id="windowContent"></div>
+<div id="start-menu" class="hidden">
+  <h3 style="color:var(--gold)">★ DAZ Linux V10</h3>
+  <div id="startEntries"></div>
+  <hr>
+  <button class="start-entry" onclick="logout()">↪ <span data-t="logout">Cerrar sesión</span></button>
 </div>
 
-<!-- TASKBAR -->
-
-<div id="taskbar">
- <div id="taskLeft">
-  <button onclick="toggleStart()">☭ START</button>
-  <span>DAZ Linux V9</span>
- </div>
- <div id="taskRight">
-  <span id="modeIndicator">NORMAL</span>
-  <span id="clock">00:00</span>
- </div>
+<div id="notification-panel" class="hidden">
+  <h3 data-t="notifications">Notificaciones</h3>
+  <div class="panel">
+    <div class="stat" id="panelClock">--:--</div>
+    <div id="panelDate"></div>
+  </div>
+  <div class="panel">
+    <h3 data-t="calendar">Calendario</h3>
+    <div id="calendar"></div>
+  </div>
+  <button onclick="toast(T().noNotifications)">✓ <span data-t="clearNotifications">Limpiar notificaciones</span></button>
 </div>
+
+<div id="toast"></div>
 
 <script>
-
-// =================================
-// 1. LANGUAGES
-// =================================
-
 const translations={
 es:{
-languageTitle:"Selecciona el idioma del sistema",
-boot:"Iniciar sistema",normal:"NORMAL",gaming:"MODO GAMING",
-search:"Buscar páginas...",all:"Todas",favorites:"Favoritos",
-add:"Agregar enlace",name:"Nombre",url:"URL",
-category:"Categoría",open:"Abrir",remove:"Eliminar",
-noLinks:"No hay resultados.",kiwiDesc:"Centro de páginas y enlaces",
-gameTime:"Tiempo de juego",start:"Iniciar",pause:"Pausar",
-reset:"Reiniciar",gamingDesc:"Modo visual para videojuegos",
-enable:"Activar",disable:"Desactivar",visits:"Visitas locales",
-settings:"Configuración",language:"Idioma",save:"Guardar",
-theme:"Tema",red:"Soviético rojo",dark:"Oscuro",
-monitor:"Monitor del sistema",date:"Fecha",online:"Conexión",
-offline:"Sin conexión",pages:"Páginas registradas",
-addSuccess:"Enlace agregado",confirmDelete:"¿Eliminar este enlace?",
-system:"Sistema"
+welcome:"Bienvenido al escritorio DAZ Linux",language:"Selecciona tu idioma",
+login:"Iniciar sesión",username:"Nombre de usuario",subtitle:"Sistema de escritorio comunitario",
+start:"Inicio",logout:"Cerrar sesión",notifications:"Notificaciones",
+calendar:"Calendario",clearNotifications:"Limpiar notificaciones",
+apps:"Aplicaciones",settings:"Configuración",control:"DAZ Control Center",
+files:"DAZ Files",terminal:"DAZ Terminal",kiwi:"Kiwi Center",
+software:"DAZ Software Center",notes:"Bloc de notas",calculator:"Calculadora",
+visits:"Contador de visitas",about:"Acerca de DAZ Linux",
+search:"Buscar",favorites:"Favoritos",all:"Todos",open:"Abrir",
+add:"Añadir",remove:"Eliminar",name:"Nombre",url:"Dirección URL",
+category:"Categoría",save:"Guardar",cancel:"Cancelar",theme:"Tema",
+wallpaper:"Fondo de escritorio",red:"Rojo soviético",dark:"Oscuro",
+gold:"Dorado",blue:"Azul",green:"Verde",languageName:"Idioma",
+user:"Usuario",createFolder:"Nueva carpeta",createFile:"Nuevo archivo",
+empty:"Esta carpeta está vacía",edit:"Editar",delete:"Eliminar",
+back:"Volver",write:"Escribe aquí...",calculate:"Calcular",
+clear:"Limpiar",system:"Sistema",localVisits:"Visitas en este navegador",
+visitWarning:"Este contador solo funciona en este navegador.",
+terminalHelp:"Comandos: help, about, date, apps, ls, clear, whoami",
+unknown:"Comando desconocido. Escribe help.",
+terminalAbout:"DAZ Linux V10 — escritorio web comunitario.",
+folderName:"Nombre de la carpeta",fileName:"Nombre del archivo",
+created:"Elemento creado.",saved:"Guardado correctamente.",
+deleted:"Eliminado.",notImplemented:"Función simulada del escritorio.",
+noNotifications:"No hay notificaciones nuevas.",welcomeUser:"Bienvenido",
+favoritesOnly:"Solo favoritos",systemInfo:"Información del sistema",
+version:"Versión",platform:"Plataforma",storage:"Almacenamiento local",
+appearance:"Apariencia",personalization:"Personalización",
+quickApps:"Aplicaciones disponibles",notepadSaved:"Nota guardada.",
+visitTitle:"Contador de visitas",openKiwi:"Abrir Kiwi Center",
+categoryStudy:"Educación",categoryOther:"Otros",categoryGames:"Juegos",
+confirmDelete:"¿Eliminar este elemento?",noResults:"No se encontraron resultados.",
+rename:"Renombrar",restore:"Restaurar",recycle:"Papelera",
+emptyRecycle:"La papelera está vacía.",choose:"Seleccionar",
+calculatorHelp:"Calculadora básica. Usa números y operadores.",
+newLink:"Nuevo enlace",linkExists:"Ya existe un enlace con esa dirección.",
+welcomeMessage:"Escritorio iniciado correctamente."
 },
 en:{
-languageTitle:"Select system language",boot:"Start system",
-normal:"NORMAL",gaming:"GAMING MODE",search:"Search pages...",
-all:"All",favorites:"Favorites",add:"Add link",name:"Name",
-url:"URL",category:"Category",open:"Open",remove:"Remove",
-noLinks:"No results.",kiwiDesc:"Pages and links center",
-gameTime:"Game Time",start:"Start",pause:"Pause",reset:"Reset",
-gamingDesc:"Visual gaming mode",enable:"Enable",disable:"Disable",
-visits:"Local visits",settings:"Settings",language:"Language",
-save:"Save",theme:"Theme",red:"Soviet red",dark:"Dark",
-monitor:"System Monitor",date:"Date",online:"Connection",
-offline:"Offline",pages:"Registered pages",addSuccess:"Link added",
-confirmDelete:"Delete this link?",system:"System"
+welcome:"Welcome to the DAZ Linux desktop",language:"Select your language",
+login:"Log in",username:"Username",subtitle:"Community desktop system",
+start:"Start",logout:"Log out",notifications:"Notifications",
+calendar:"Calendar",clearNotifications:"Clear notifications",
+apps:"Applications",settings:"Settings",control:"DAZ Control Center",
+files:"DAZ Files",terminal:"DAZ Terminal",kiwi:"Kiwi Center",
+software:"DAZ Software Center",notes:"Notepad",calculator:"Calculator",
+visits:"Visit Counter",about:"About DAZ Linux",
+search:"Search",favorites:"Favorites",all:"All",open:"Open",
+add:"Add",remove:"Remove",name:"Name",url:"URL address",
+category:"Category",save:"Save",cancel:"Cancel",theme:"Theme",
+wallpaper:"Desktop wallpaper",red:"Soviet red",dark:"Dark",
+gold:"Gold",blue:"Blue",green:"Green",languageName:"Language",
+user:"User",createFolder:"New folder",createFile:"New file",
+empty:"This folder is empty",edit:"Edit",delete:"Delete",
+back:"Back",write:"Write here...",calculate:"Calculate",
+clear:"Clear",system:"System",localVisits:"Visits in this browser",
+visitWarning:"This counter only works in this browser.",
+terminalHelp:"Commands: help, about, date, apps, ls, clear, whoami",
+unknown:"Unknown command. Type help.",
+terminalAbout:"DAZ Linux V10 — community web desktop.",
+folderName:"Folder name",fileName:"File name",created:"Item created.",
+saved:"Saved successfully.",deleted:"Deleted.",notImplemented:"Simulated desktop feature.",
+noNotifications:"No new notifications.",welcomeUser:"Welcome",
+favoritesOnly:"Favorites only",systemInfo:"System information",
+version:"Version",platform:"Platform",storage:"Local storage",
+appearance:"Appearance",personalization:"Personalization",
+quickApps:"Available applications",notepadSaved:"Note saved.",
+visitTitle:"Visit counter",openKiwi:"Open Kiwi Center",
+categoryStudy:"Education",categoryOther:"Other",categoryGames:"Games",
+confirmDelete:"Delete this item?",noResults:"No results found.",
+rename:"Rename",restore:"Restore",recycle:"Recycle bin",
+emptyRecycle:"The recycle bin is empty.",choose:"Select",
+calculatorHelp:"Basic calculator. Use numbers and operators.",
+newLink:"New link",linkExists:"A link with this address already exists.",
+welcomeMessage:"Desktop started successfully."
 },
 fr:{
-languageTitle:"Choisissez la langue",boot:"Démarrer",
-normal:"NORMAL",gaming:"MODE GAMING",search:"Rechercher...",
-all:"Tout",favorites:"Favoris",add:"Ajouter un lien",
-name:"Nom",url:"URL",category:"Catégorie",open:"Ouvrir",
-remove:"Supprimer",noLinks:"Aucun résultat.",
-kiwiDesc:"Centre des pages et liens",gameTime:"Temps de jeu",
-start:"Démarrer",pause:"Pause",reset:"Réinitialiser",
-gamingDesc:"Mode visuel de jeu",enable:"Activer",
-disable:"Désactiver",visits:"Visites locales",
-settings:"Paramètres",language:"Langue",save:"Enregistrer",
-theme:"Thème",red:"Rouge soviétique",dark:"Sombre",
-monitor:"Moniteur système",date:"Date",online:"Connexion",
-offline:"Hors ligne",pages:"Pages enregistrées",
-addSuccess:"Lien ajouté",confirmDelete:"Supprimer ce lien?",
-system:"Système"
+welcome:"Bienvenue sur le bureau DAZ Linux",language:"Choisissez votre langue",
+login:"Connexion",username:"Nom d'utilisateur",subtitle:"Système de bureau communautaire",
+start:"Démarrer",logout:"Déconnexion",notifications:"Notifications",
+calendar:"Calendrier",clearNotifications:"Effacer les notifications",
+apps:"Applications",settings:"Paramètres",control:"Centre de contrôle DAZ",
+files:"DAZ Files",terminal:"DAZ Terminal",kiwi:"Kiwi Center",
+software:"DAZ Software Center",notes:"Bloc-notes",calculator:"Calculatrice",
+visits:"Compteur de visites",about:"À propos de DAZ Linux",
+search:"Rechercher",favorites:"Favoris",all:"Tous",open:"Ouvrir",
+add:"Ajouter",remove:"Supprimer",name:"Nom",url:"Adresse URL",
+category:"Catégorie",save:"Enregistrer",cancel:"Annuler",theme:"Thème",
+wallpaper:"Fond d'écran",red:"Rouge soviétique",dark:"Sombre",
+gold:"Doré",blue:"Bleu",green:"Vert",languageName:"Langue",
+user:"Utilisateur",createFolder:"Nouveau dossier",createFile:"Nouveau fichier",
+empty:"Ce dossier est vide",edit:"Modifier",delete:"Supprimer",
+back:"Retour",write:"Écrivez ici...",calculate:"Calculer",
+clear:"Effacer",system:"Système",localVisits:"Visites sur ce navigateur",
+visitWarning:"Ce compteur fonctionne uniquement dans ce navigateur.",
+terminalHelp:"Commandes : help, about, date, apps, ls, clear, whoami",
+unknown:"Commande inconnue. Tapez help.",
+terminalAbout:"DAZ Linux V10 — bureau web communautaire.",
+folderName:"Nom du dossier",fileName:"Nom du fichier",
+created:"Élément créé.",saved:"Enregistré.",deleted:"Supprimé.",
+notImplemented:"Fonction simulée du bureau.",noNotifications:"Aucune nouvelle notification.",
+welcomeUser:"Bienvenue",favoritesOnly:"Favoris uniquement",
+systemInfo:"Informations système",version:"Version",platform:"Plateforme",
+storage:"Stockage local",appearance:"Apparence",personalization:"Personnalisation",
+quickApps:"Applications disponibles",notepadSaved:"Note enregistrée.",
+visitTitle:"Compteur de visites",openKiwi:"Ouvrir Kiwi Center",
+categoryStudy:"Éducation",categoryOther:"Autres",categoryGames:"Jeux",
+confirmDelete:"Supprimer cet élément?",noResults:"Aucun résultat.",
+rename:"Renommer",restore:"Restaurer",recycle:"Corbeille",
+emptyRecycle:"La corbeille est vide.",choose:"Choisir",
+calculatorHelp:"Calculatrice simple. Utilisez des nombres et des opérateurs.",
+newLink:"Nouveau lien",linkExists:"Cette adresse existe déjà.",
+welcomeMessage:"Bureau démarré correctement."
 },
 ru:{
-languageTitle:"Выберите язык системы",boot:"Запустить",
-normal:"ОБЫЧНЫЙ",gaming:"ИГРОВОЙ РЕЖИМ",
-search:"Поиск страниц...",all:"Все",favorites:"Избранное",
-add:"Добавить ссылку",name:"Название",url:"Адрес",
-category:"Категория",open:"Открыть",remove:"Удалить",
-noLinks:"Ничего не найдено.",kiwiDesc:"Центр страниц и ссылок",
-gameTime:"Игровое время",start:"Старт",pause:"Пауза",
-reset:"Сброс",gamingDesc:"Игровой визуальный режим",
-enable:"Включить",disable:"Выключить",
-visits:"Локальные посещения",settings:"Настройки",
-language:"Язык",save:"Сохранить",theme:"Тема",
-red:"Советская красная",dark:"Тёмная",
-monitor:"Системный монитор",date:"Дата",
-online:"Подключение",offline:"Нет подключения",
-pages:"Сохранённые страницы",addSuccess:"Ссылка добавлена",
-confirmDelete:"Удалить эту ссылку?",system:"Система"
+welcome:"Добро пожаловать в DAZ Linux",language:"Выберите язык",
+login:"Войти",username:"Имя пользователя",subtitle:"Рабочий стол сообщества",
+start:"Пуск",logout:"Выйти",notifications:"Уведомления",
+calendar:"Календарь",clearNotifications:"Очистить уведомления",
+apps:"Приложения",settings:"Настройки",control:"Центр управления DAZ",
+files:"DAZ Files",terminal:"DAZ Terminal",kiwi:"Kiwi Center",
+software:"DAZ Software Center",notes:"Блокнот",calculator:"Калькулятор",
+visits:"Счётчик посещений",about:"О системе DAZ Linux",
+search:"Поиск",favorites:"Избранное",all:"Все",open:"Открыть",
+add:"Добавить",remove:"Удалить",name:"Название",url:"URL-адрес",
+category:"Категория",save:"Сохранить",cancel:"Отмена",theme:"Тема",
+wallpaper:"Обои рабочего стола",red:"Советский красный",dark:"Тёмный",
+gold:"Золотой",blue:"Синий",green:"Зелёный",languageName:"Язык",
+user:"Пользователь",createFolder:"Новая папка",createFile:"Новый файл",
+empty:"Эта папка пуста",edit:"Изменить",delete:"Удалить",
+back:"Назад",write:"Пишите здесь...",calculate:"Вычислить",
+clear:"Очистить",system:"Система",localVisits:"Посещения в этом браузере",
+visitWarning:"Счётчик работает только в этом браузере.",
+terminalHelp:"Команды: help, about, date, apps, ls, clear, whoami",
+unknown:"Неизвестная команда. Введите help.",
+terminalAbout:"DAZ Linux V10 — веб-рабочий стол сообщества.",
+folderName:"Имя папки",fileName:"Имя файла",created:"Элемент создан.",
+saved:"Сохранено.",deleted:"Удалено.",notImplemented:"Имитация функции рабочего стола.",
+noNotifications:"Новых уведомлений нет.",welcomeUser:"Добро пожаловать",
+favoritesOnly:"Только избранное",systemInfo:"Информация о системе",
+version:"Версия",platform:"Платформа",storage:"Локальное хранилище",
+appearance:"Внешний вид",personalization:"Персонализация",
+quickApps:"Доступные приложения",notepadSaved:"Заметка сохранена.",
+visitTitle:"Счётчик посещений",openKiwi:"Открыть Kiwi Center",
+categoryStudy:"Образование",categoryOther:"Другое",categoryGames:"Игры",
+confirmDelete:"Удалить этот элемент?",noResults:"Ничего не найдено.",
+rename:"Переименовать",restore:"Восстановить",recycle:"Корзина",
+emptyRecycle:"Корзина пуста.",choose:"Выбрать",
+calculatorHelp:"Простой калькулятор. Используйте числа и операторы.",
+newLink:"Новая ссылка",linkExists:"Такая ссылка уже существует.",
+welcomeMessage:"Рабочий стол запущен."
 }
 };
 
-let lang="es";
-
-function t(key){
- return translations[lang]?.[key]||key;
-}
-
-// =================================
-// 2. PAGE DATABASE
-// =================================
-
-// All supplied pages are together in Kiwi Center.
-
-const defaultLinks=[
- {id:"p1",name:"StudySync",url:"https://studysync.co.uk/",category:"Study",icon:"📚"},
- {id:"p2",name:"Classwork Cloud",url:"https://classwork.cloud/",category:"Study",icon:"☁️"},
- {id:"p3",name:"Kiwi",url:"https://kiwi.at.it/",category:"Web",icon:"🥝"},
- {id:"p4",name:"Classwork US",url:"https://classwork.us.com/",category:"Study",icon:"📖"},
- {id:"p5",name:"Learning",url:"https://learning.com.de/",category:"Study",icon:"🎓"},
- {id:"p6",name:"Biology",url:"https://biology.us.com/",category:"Study",icon:"🧬"},
- {id:"p7",name:"Nettle Web",url:"https://nettleweb.pages.dev/",category:"Web",icon:"🌐"}
+let lang="es",username="Guest",zIndex=10,windowCount=0;
+let favorites=JSON.parse(localStorage.getItem("dazFavs")||"[]");
+let links=JSON.parse(localStorage.getItem("dazLinks")||"null")||[
+ {name:"StudySync",url:"https://studysync.co.uk/",category:"study"},
+ {name:"Classwork Cloud",url:"https://classwork.cloud/",category:"study"},
+ {name:"Kiwi",url:"https://kiwi.at.it/",category:"other"},
+ {name:"Classwork US",url:"https://classwork.us.com/",category:"study"},
+ {name:"Learning",url:"https://learning.com.de/",category:"study"},
+ {name:"Biology",url:"https://biology.us.com/",category:"study"},
+ {name:"Nettle Web",url:"https://nettleweb.pages.dev/",category:"other"}
 ];
+let files=JSON.parse(localStorage.getItem("dazFiles")||"null")||[
+ {id:1,name:"Documents",type:"folder",parent:0},
+ {id:2,name:"Pictures",type:"folder",parent:0},
+ {id:3,name:"Welcome.txt",type:"file",parent:0,content:"Welcome to DAZ Linux V10!"},
+ {id:4,name:"Readme.txt",type:"file",parent:0,content:"DAZ Linux V10 Community Edition"}
+];
+let nextFileId=Math.max(0,...files.map(f=>f.id))+1;
+let currentFolder=0;
+let recycle=JSON.parse(localStorage.getItem("dazRecycle")||"[]");
+let openWindows={};
+let visitCount=Number(localStorage.getItem("dazVisits")||0)+1;
+localStorage.setItem("dazVisits",visitCount);
+let theme=localStorage.getItem("dazTheme")||"red";
+let wallpaper=localStorage.getItem("dazWallpaper")||"default";
+let noteText=localStorage.getItem("dazNote")||"";
+let toastTimer;
 
-function loadLinks(){
- try{
-  const saved=JSON.parse(localStorage.getItem("dazLinks"));
-  return Array.isArray(saved)?saved:defaultLinks;
- }catch(e){return defaultLinks}
-}
-
-let links=loadLinks();
-let favorites=JSON.parse(localStorage.getItem("dazFavorites")||"[]");
-let currentFilter="all";
-
-function saveLinks(){
+function T(){return translations[lang]||translations.es}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function saveAll(){
+ localStorage.setItem("dazFavs",JSON.stringify(favorites));
  localStorage.setItem("dazLinks",JSON.stringify(links));
+ localStorage.setItem("dazFiles",JSON.stringify(files));
+ localStorage.setItem("dazRecycle",JSON.stringify(recycle));
 }
-
-function saveFavorites(){
- localStorage.setItem("dazFavorites",JSON.stringify(favorites));
+function toast(msg){
+ const el=document.getElementById("toast");
+ el.textContent=msg;el.style.display="block";
+ clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.style.display="none",2600);
 }
-
-// =================================
-// 3. START SYSTEM
-// =================================
-
-function bootSystem(){
+function login(){
  lang=document.getElementById("languageSelect").value;
+ username=document.getElementById("username").value.trim()||"Guest";
  localStorage.setItem("dazLanguage",lang);
- document.getElementById("languageScreen").classList.add("hidden");
- registerVisit();
- updateClock();
- renderMode();
+ localStorage.setItem("dazUsername",username);
+ document.getElementById("boot").classList.add("hidden");
+ document.getElementById("desktop").classList.remove("hidden");
+ document.getElementById("taskbar").classList.remove("hidden");
+ applyTheme();buildDesktop();buildStart();translatePage();
+ toast(T().welcomeMessage);
 }
-
-function initialize(){
- const saved=localStorage.getItem("dazLanguage");
- if(translations[saved])lang=saved;
-
- document.getElementById("languageSelect").value=lang;
- document.getElementById("languageTitle").textContent=t("languageTitle");
- document.getElementById("bootButton").textContent=t("boot");
-
- applyTheme(localStorage.getItem("dazTheme")||"red");
+function logout(){
+ document.getElementById("boot").classList.remove("hidden");
+ document.getElementById("desktop").classList.add("hidden");
+ document.getElementById("taskbar").classList.add("hidden");
+ closeAllWindows();
+ toggleStart(false);
 }
-
-function registerVisit(){
- let count=Number(localStorage.getItem("dazVisits")||0)+1;
- localStorage.setItem("dazVisits",count);
+function translatePage(){
+ document.querySelectorAll("[data-t]").forEach(el=>{
+  const key=el.dataset.t;if(T()[key])el.textContent=T()[key];
+ });
+ document.getElementById("welcomeText").textContent=T().welcome;
+ document.getElementById("languageLabel").textContent=T().language;
+ document.getElementById("loginButton").textContent=T().login;
+ document.getElementById("username").placeholder=T().username;
+ document.getElementById("desktopSubtitle").textContent=T().subtitle;
 }
-
-// =================================
-// 4. DESKTOP
-// =================================
-
+const apps=[
+ {id:"kiwi",icon:"🥝",name:"Kiwi Center",fn:openKiwi},
+ {id:"control",icon:"⚙️",name:"DAZ Control Center",fn:openControl},
+ {id:"files",icon:"📁",name:"DAZ Files",fn:openFiles},
+ {id:"terminal",icon:"⌨️",name:"DAZ Terminal",fn:openTerminal},
+ {id:"notifications",icon:"🔔",name:"Notification Center",fn:toggleNotifications},
+ {id:"software",icon:"🧰",name:"DAZ Software Center",fn:openSoftware},
+ {id:"notes",icon:"📝",name:"Notepad",fn:openNotes},
+ {id:"calculator",icon:"🧮",name:"Calculator",fn:openCalculator},
+ {id:"visits",icon:"📊",name:"Visit Counter",fn:openVisits},
+ {id:"about",icon:"★",name:"About DAZ Linux",fn:openAbout}
+];
+function buildDesktop(){
+ const el=document.getElementById("icons");el.innerHTML="";
+ apps.forEach(a=>{
+  const div=document.createElement("div");div.className="desktop-icon";
+  div.innerHTML=`<span class="emoji">${a.icon}</span>${esc(a.name)}`;
+  div.ondblclick=a.fn;div.onclick=()=>{};
+  el.appendChild(div);
+ });
+}
+function buildStart(){
+ const el=document.getElementById("startEntries");el.innerHTML="";
+ apps.forEach(a=>{
+  const b=document.createElement("button");b.className="start-entry";
+  b.textContent=a.icon+" "+a.name;b.onclick=()=>{toggleStart(false);a.fn()};
+  el.appendChild(b);
+ });
+}
+function toggleStart(force){
+ const el=document.getElementById("start-menu");
+ if(force===false)el.classList.add("hidden");
+ else el.classList.toggle("hidden");
+ document.getElementById("notification-panel").classList.add("hidden");
+}
+function toggleNotifications(){
+ document.getElementById("notification-panel").classList.toggle("hidden");
+ document.getElementById("start-menu").classList.add("hidden");
+ updateCalendar();
+}
+function updateCalendar(){
+ const now=new Date();
+ document.getElementById("panelClock").textContent=now.toLocaleTimeString();
+ document.getElementById("panelDate").textContent=now.toLocaleDateString(lang);
+ const first=new Date(now.getFullYear(),now.getMonth(),1);
+ const days=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
+ let html=`<strong>${now.toLocaleString(lang,{month:"long",year:"numeric"})}</strong><div class="grid" style="grid-template-columns:repeat(7,1fr);gap:3px;margin-top:8px">`;
+ for(let i=0;i<first.getDay();i++)html+="<span></span>";
+ for(let d=1;d<=days;d++)html+=`<span style="padding:5px;text-align:center;background:${d===now.getDate()?"var(--red)":"#333"}">${d}</span>`;
+ document.getElementById("calendar").innerHTML=html+"</div>";
+}
 function updateClock(){
  const now=new Date();
- document.getElementById("clock").textContent=
- now.toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"});
+ document.getElementById("clock").textContent=now.toLocaleDateString(lang,{day:"2-digit",month:"short"})+" · "+now.toLocaleTimeString(lang,{hour:"2-digit",minute:"2-digit"});
+ if(!document.getElementById("notification-panel").classList.contains("hidden"))updateCalendar();
 }
 setInterval(updateClock,1000);
-updateClock();
-
-function toggleStart(){
- document.getElementById("startMenu").classList.toggle("open");
+function applyTheme(){
+ const colors={red:"#a71919",dark:"#555",gold:"#92721d",blue:"#205d91",green:"#277044"};
+ document.documentElement.style.setProperty("--red",colors[theme]||colors.red);
+ const walls={
+ default:"linear-gradient(135deg,#171717,#351010,#111)",
+ red:"linear-gradient(135deg,#290909,#8d1717,#170707)",
+ black:"linear-gradient(135deg,#050505,#252525,#090909)",
+ gold:"linear-gradient(135deg,#18130a,#554016,#090909)",
+ stars:"radial-gradient(circle at 20% 30%,#555 1px,transparent 2px),radial-gradient(circle at 70% 60%,#777 1px,transparent 2px),linear-gradient(130deg,#090909,#301010)"
+ };
+ document.documentElement.style.setProperty("--wallpaper",walls[wallpaper]||walls.default);
 }
-
-function showWindow(title,content){
- document.getElementById("windowTitle").textContent=title;
- document.getElementById("windowContent").innerHTML=content;
- document.getElementById("window").classList.add("show");
- document.getElementById("startMenu").classList.remove("open");
+function createWindow(id,title,content){
+ if(openWindows[id]){
+  const old=document.getElementById(openWindows[id]);
+  if(old){old.classList.remove("hidden");old.style.zIndex=++zIndex;return old}
+ }
+ const wid="win"+(++windowCount);
+ const win=document.createElement("div");
+ win.className="window";win.id=wid;win.style.zIndex=++zIndex;
+ win.innerHTML=`
+ <div class="window-header">
+  <span class="window-title">${esc(title)}</span>
+  <div class="window-controls">
+   <button onclick="minimizeWindow('${wid}')">—</button>
+   <button onclick="maximizeWindow('${wid}')">□</button>
+   <button class="close" onclick="closeWindow('${id}')">×</button>
+  </div>
+ </div>
+ <div class="window-content">${content}</div>`;
+ document.getElementById("desktop").appendChild(win);
+ openWindows[id]=wid;makeDraggable(win);
+ win.addEventListener("mousedown",()=>win.style.zIndex=++zIndex);
+ renderTaskItems();
+ return win;
 }
-
-function closeWindow(){
- document.getElementById("window").classList.remove("show");
+function makeDraggable(win){
+ const bar=win.querySelector(".window-header");let sx=0,sy=0,ox=0,oy=0,moving=false;
+ bar.addEventListener("mousedown",e=>{
+  if(e.target.tagName==="BUTTON"||win.classList.contains("maximized"))return;
+  moving=true;sx=e.clientX;sy=e.clientY;
+  const r=win.getBoundingClientRect();ox=r.left;oy=r.top;
+  win.style.transform="none";win.style.left=ox+"px";win.style.top=oy+"px";
+ });
+ document.addEventListener("mousemove",e=>{
+  if(!moving)return;
+  win.style.left=Math.max(0,ox+e.clientX-sx)+"px";
+  win.style.top=Math.max(0,oy+e.clientY-sy)+"px";
+ });
+ document.addEventListener("mouseup",()=>moving=false);
 }
-
-// =================================
-// 5. KIWI CENTER
-// =================================
-
-function escapeHTML(value){
- return String(value).replace(/[&<>"']/g,char=>({
- "&":"&amp;","<":"&lt;",">":"&gt;",
- '"':"&quot;","'":"&#39;"
- })[char]);
+function minimizeWindow(wid){
+ const el=document.getElementById(wid);if(el)el.classList.add("hidden");
+ renderTaskItems();
 }
-
+function maximizeWindow(wid){
+ const el=document.getElementById(wid);if(el)el.classList.toggle("maximized");
+}
+function closeWindow(id){
+ const wid=openWindows[id];if(wid)document.getElementById(wid)?.remove();
+ delete openWindows[id];renderTaskItems();
+}
+function closeAllWindows(){
+ Object.keys(openWindows).forEach(closeWindow);
+}
+function renderTaskItems(){
+ const el=document.getElementById("task-items");el.innerHTML="";
+ Object.entries(openWindows).forEach(([id,wid])=>{
+  const win=document.getElementById(wid);if(!win)return;
+  const b=document.createElement("button");b.className="task-item";
+  b.textContent=win.querySelector(".window-title").textContent;
+  b.onclick=()=>{win.classList.remove("hidden");win.style.zIndex=++zIndex};
+  el.appendChild(b);
+ });
+}
+function appWindow(id,title,html){return createWindow(id,title,html)}
+function openControl(){
+ const html=`
+ <h2>${T().control}</h2>
+ <div class="panel"><h3>${T().user}</h3>${esc(username)}</div>
+ <div class="panel"><h3>${T().languageName}</h3>
+ <select id="controlLang" onchange="changeLanguage(this.value)">
+ <option value="es">Español</option><option value="en">English</option>
+ <option value="fr">Français</option><option value="ru">Русский</option>
+ </select></div>
+ <div class="panel"><h3>${T().appearance}</h3>
+ <label>${T().theme}</label>
+ <select id="themeSelect" onchange="setTheme(this.value)">
+ <option value="red">${T().red}</option><option value="dark">${T().dark}</option>
+ <option value="gold">${T().gold}</option><option value="blue">${T().blue}</option>
+ <option value="green">${T().green}</option></select>
+ <br><br><label>${T().wallpaper}</label>
+ <select id="wallSelect" onchange="setWallpaper(this.value)">
+ <option value="default">Classic</option><option value="red">Red Revolution</option>
+ <option value="black">Midnight</option><option value="gold">Golden</option>
+ <option value="stars">Stars</option></select></div>
+ <div class="panel"><h3>${T().systemInfo}</h3>
+ ${T().version}: DAZ Linux V10<br>${T().platform}: Web Desktop<br>
+ ${T().storage}: Browser LocalStorage</div>`;
+ const w=appWindow("control",T().control,html);
+ w.querySelector("#controlLang").value=lang;
+ w.querySelector("#themeSelect").value=theme;
+ w.querySelector("#wallSelect").value=wallpaper;
+}
+function changeLanguage(value){
+ lang=value;localStorage.setItem("dazLanguage",lang);
+ translatePage();buildStart();buildDesktop();toast(T().saved);
+ closeWindow("control");openControl();
+}
+function setTheme(value){
+ theme=value;localStorage.setItem("dazTheme",theme);applyTheme();
+}
+function setWallpaper(value){
+ wallpaper=value;localStorage.setItem("dazWallpaper",wallpaper);applyTheme();
+}
 function openKiwi(){
- currentFilter="all";
-
- showWindow("🥝 Kiwi Center",`
-  <div class="panel">
-   <h2>🥝 Kiwi Center</h2>
-   <p>${t("kiwiDesc")}</p>
-   <div class="toolbar">
-    <input id="linkSearch" placeholder="${t("search")}"
-      oninput="renderKiwi()">
-    <button onclick="setFilter('all')">${t("all")}</button>
-    <button onclick="setFilter('favorites')">⭐ ${t("favorites")}</button>
-   </div>
-   <p class="muted">${links.length} ${t("pages")}</p>
-  </div>
-
-  <div id="linkList"></div>
-
-  <div class="panel">
-   <h3>＋ ${t("add")}</h3>
-   <form id="kiwiForm" onsubmit="addLink(event)">
-    <input id="newName" placeholder="${t("name")}" required>
-    <input id="newURL" placeholder="https://example.com" required>
-    <select id="newCategory">
-     <option value="Study">Study</option>
-     <option value="Web">Web</option>
-     <option value="Games">Games</option>
-     <option value="Other">Other</option>
-    </select>
-    <select id="newIcon">
-     <option>🌐</option><option>🎮</option>
-     <option>📚</option><option>🎓</option>
-     <option>🧬</option><option>🥝</option>
-     <option>⭐</option>
-    </select>
-    <button type="submit">${t("add")}</button>
-   </form>
-  </div>
- `);
-
+ const w=appWindow("kiwi",T().kiwi,`
+ <h2>🥝 Kiwi Center</h2>
+ <div class="row">
+ <input id="kiwiSearch" placeholder="${T().search}..." oninput="renderKiwi()">
+ <select id="kiwiFilter" onchange="renderKiwi()">
+ <option value="all">${T().all}</option>
+ <option value="study">${T().categoryStudy}</option>
+ <option value="other">${T().categoryOther}</option>
+ <option value="fav">${T().favorites}</option>
+ </select></div>
+ <div id="kiwiList"></div>
+ <div class="panel"><h3>${T().newLink}</h3>
+ <input id="newLinkName" placeholder="${T().name}">
+ <input id="newLinkUrl" placeholder="https://example.com">
+ <select id="newLinkCategory"><option value="study">${T().categoryStudy}</option><option value="other">${T().categoryOther}</option></select>
+ <button onclick="addLink()">${T().add}</button></div>`);
  renderKiwi();
 }
-
-function setFilter(filter){
- currentFilter=filter;
- renderKiwi();
-}
-
 function renderKiwi(){
- const container=document.getElementById("linkList");
- if(!container)return;
-
- const search=(document.getElementById("linkSearch")?.value||"").toLowerCase();
-
- const filtered=links.filter(link=>{
-  const matches=(link.name+" "+link.url+" "+link.category).toLowerCase().includes(search);
-  const favoriteMatch=currentFilter!=="favorites"||favorites.includes(link.id);
-  return matches&&favoriteMatch;
+ const list=document.getElementById("kiwiList");if(!list)return;
+ const q=(document.getElementById("kiwiSearch")?.value||"").toLowerCase();
+ const filter=document.getElementById("kiwiFilter")?.value||"all";
+ const selected=links.filter(l=>
+  (filter==="all"||l.category===filter||(filter==="fav"&&favorites.includes(l.url)))&&
+  (l.name.toLowerCase().includes(q)||l.url.toLowerCase().includes(q)));
+ list.innerHTML=selected.length?"":"<p class='muted'>"+T().noResults+"</p>";
+ selected.forEach(l=>{
+  const div=document.createElement("div");div.className="link-item";
+  const info=document.createElement("div");info.className="link-info";
+  info.innerHTML=`<strong>${esc(l.name)}</strong><br><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.url)}</a><br><span class="small muted">${l.category==="study"?T().categoryStudy:T().categoryOther}</span>`;
+  const fav=document.createElement("button");fav.textContent=favorites.includes(l.url)?"★":"☆";
+  fav.title=T().favorites;fav.onclick=()=>toggleFavorite(l.url);
+  const open=document.createElement("button");open.textContent=T().open;
+  open.onclick=()=>window.open(l.url,"_blank","noopener");
+  const del=document.createElement("button");del.textContent="×";
+  del.onclick=()=>{if(confirm(T().confirmDelete)){links=links.filter(x=>x!==l);saveAll();renderKiwi()}};
+  div.append(info,fav,open,del);list.appendChild(div);
  });
-
- if(!filtered.length){
-  container.innerHTML=`<div class="panel">${t("noLinks")}</div>`;
-  return;
- }
-
- container.innerHTML=filtered.map(link=>{
-  const index=links.findIndex(x=>x.id===link.id);
-  const favorite=favorites.includes(link.id);
-
-  return `
-   <div class="linkCard">
-    <span class="linkIcon">${escapeHTML(link.icon||"🌐")}</span>
-    <div class="linkInfo">
-     <strong>${escapeHTML(link.name)}</strong>
-     <small>${escapeHTML(link.url)}</small>
-     <small>${escapeHTML(link.category)}</small>
-    </div>
-    <div class="linkActions">
-     <button onclick="openLink(${index})">${t("open")}</button>
-     <button class="${favorite?"favorite":""}"
-       onclick="toggleFavorite('${link.id}')">★</button>
-     <button onclick="deleteLink('${link.id}')">✕</button>
-    </div>
-   </div>
-  `;
- }).join("");
 }
-
-function openLink(index){
- const link=links[index];
- if(!link)return;
-
- try{
-  const url=new URL(link.url);
-  if(url.protocol==="https:"||url.protocol==="http:"){
-   window.open(url.href,"_blank","noopener");
-  }
- }catch(e){
-  alert("URL no válido");
- }
+function toggleFavorite(url){
+ favorites=favorites.includes(url)?favorites.filter(x=>x!==url):[...favorites,url];
+ saveAll();renderKiwi();
 }
-
-function toggleFavorite(id){
- favorites=favorites.includes(id)
-  ?favorites.filter(x=>x!==id)
-  :[...favorites,id];
-
- saveFavorites();
- renderKiwi();
+function addLink(){
+ const name=document.getElementById("newLinkName").value.trim();
+ let url=document.getElementById("newLinkUrl").value.trim();
+ const category=document.getElementById("newLinkCategory").value;
+ if(!name||!url){toast(T().name+" / "+T().url);return}
+ if(!/^https?:\/\//i.test(url))url="https://"+url;
+ try{const parsed=new URL(url);if(!["http:","https:"].includes(parsed.protocol))throw 0}catch(e){toast("Invalid URL");return}
+ if(links.some(l=>l.url===url)){toast(T().linkExists);return}
+ links.push({name,url,category});saveAll();
+ document.getElementById("newLinkName").value="";
+ document.getElementById("newLinkUrl").value="";
+ renderKiwi();toast(T().created);
 }
-
-function deleteLink(id){
- if(!confirm(t("confirmDelete")))return;
-
- links=links.filter(x=>x.id!==id);
- favorites=favorites.filter(x=>x!==id);
- saveLinks();
- saveFavorites();
- renderKiwi();
+function openFiles(){
+ currentFolder=0;renderFiles();
 }
-
-function addLink(event){
- event.preventDefault();
-
- const name=document.getElementById("newName").value.trim();
- let url=document.getElementById("newURL").value.trim();
- const category=document.getElementById("newCategory").value;
- const icon=document.getElementById("newIcon").value;
-
- if(!/^https?:\/\//i.test(url)){
-  alert("Introduce una URL que comience con https:// o http://");
-  return;
- }
-
- try{
-  const parsed=new URL(url);
-  if(!["http:","https:"].includes(parsed.protocol))return;
-  url=parsed.href;
- }catch(e){
-  alert("URL no válida");
-  return;
- }
-
- links.push({
-  id:"custom_"+Date.now(),
-  name,url,category,icon
+function renderFiles(){
+ const items=files.filter(f=>f.parent===currentFolder);
+ const folderName=currentFolder===0?"DAZ Files":files.find(f=>f.id===currentFolder)?.name||"DAZ Files";
+ const html=`
+ <h2>📁 ${esc(folderName)}</h2>
+ <div class="row">
+ <button onclick="createFolder()">${T().createFolder}</button>
+ <button onclick="createFile()">${T().createFile}</button>
+ <button onclick="openRecycle()">${T().recycle}</button>
+ ${currentFolder!==0?`<button onclick="currentFolder=0;renderFiles()">${T().back}</button>`:""}
+ </div><div id="fileList"></div>`;
+ const w=appWindow("files",T().files,html);
+ const list=w.querySelector("#fileList");
+ if(!items.length)list.innerHTML=`<p class="muted">${T().empty}</p>`;
+ items.forEach(f=>{
+  const row=document.createElement("div");row.className="file-row";
+  const name=document.createElement("span");name.style.flex="1";
+  name.textContent=(f.type==="folder"?"📁 ":"📄 ")+f.name;
+  name.ondblclick=()=>f.type==="folder"?(currentFolder=f.id,renderFiles()):editFile(f.id);
+  const open=document.createElement("button");open.textContent=T().open;
+  open.onclick=()=>f.type==="folder"?(currentFolder=f.id,renderFiles()):editFile(f.id);
+  const del=document.createElement("button");del.textContent="×";
+  del.onclick=()=>deleteFile(f.id);
+  row.append(name,open,del);list.appendChild(row);
  });
-
- saveLinks();
- openKiwi();
 }
-
-// =================================
-// 6. GAME TIME
-// =================================
-
-let elapsed=0;
-let timer=null;
-let lastTick=0;
-
-function timeString(value){
- const h=Math.floor(value/3600);
- const m=Math.floor(value%3600/60);
- const s=value%60;
- return [h,m,s].map(x=>String(x).padStart(2,"0")).join(":");
+function createFolder(){
+ const name=prompt(T().folderName);if(!name)return;
+ files.push({id:nextFileId++,name,type:"folder",parent:currentFolder});
+ saveAll();renderFiles();toast(T().created);
 }
-
-function openGameTime(){
- showWindow("⏱️ Game Time",`
-  <div class="panel">
-   <h2>${t("gameTime")}</h2>
-   <div class="bigTime" id="timerDisplay">${timeString(elapsed)}</div>
-   <button onclick="startTimer()">${t("start")}</button>
-   <button onclick="pauseTimer()">${t("pause")}</button>
-   <button onclick="resetTimer()">${t("reset")}</button>
-  </div>
- `);
+function createFile(){
+ const name=prompt(T().fileName);if(!name)return;
+ files.push({id:nextFileId++,name,type:"file",parent:currentFolder,content:""});
+ saveAll();renderFiles();toast(T().created);
 }
-
-function updateTimer(){
- elapsed+=Math.floor((Date.now()-lastTick)/1000);
- lastTick=Date.now();
- const display=document.getElementById("timerDisplay");
- if(display)display.textContent=timeString(elapsed);
+function editFile(id){
+ const f=files.find(x=>x.id===id);if(!f)return;
+ const w=appWindow("fileedit"+id,f.name,`
+ <h3>📄 ${esc(f.name)}</h3>
+ <textarea id="fileContent" class="note-area">${esc(f.content||"")}</textarea>
+ <button onclick="saveFile(${id})">${T().save}</button>`);
 }
-
-function startTimer(){
- if(timer!==null)return;
- lastTick=Date.now();
- timer=setInterval(updateTimer,1000);
+function saveFile(id){
+ const f=files.find(x=>x.id===id);if(!f)return;
+ f.content=document.getElementById("win"+Object.keys(openWindows).map(k=>openWindows[k]).find(id=>document.getElementById(id)?.querySelector("#fileContent")) )?.value||f.content;
+ const el=document.querySelector("#"+openWindows["fileedit"+id]+" #fileContent");
+ if(el)f.content=el.value;
+ saveAll();toast(T().saved);
 }
-
-function pauseTimer(){
- if(timer===null)return;
- updateTimer();
- clearInterval(timer);
- timer=null;
+function deleteFile(id){
+ if(!confirm(T().confirmDelete))return;
+ const f=files.find(x=>x.id===id);if(!f)return;
+ recycle.push(f);
+ files=files.filter(x=>x.id!==id);
+ if(f.type==="folder"){
+  const children=files.filter(x=>x.parent===id);
+  children.forEach(c=>recycle.push(c));
+  files=files.filter(x=>x.parent!==id);
+ }
+ saveAll();renderFiles();toast(T().deleted);
 }
-
-function resetTimer(){
- pauseTimer();
- elapsed=0;
- const display=document.getElementById("timerDisplay");
- if(display)display.textContent=timeString(elapsed);
+function openRecycle(){
+ const w=appWindow("recycle",T().recycle,"<div id='recycleList'></div>");
+ const el=w.querySelector("#recycleList");
+ if(!recycle.length){el.textContent=T().emptyRecycle;return}
+ recycle.forEach(f=>{
+  const row=document.createElement("div");row.className="file-row";
+  const name=document.createElement("span");name.style.flex="1";name.textContent=f.name;
+  const restore=document.createElement("button");restore.textContent=T().restore;
+  restore.onclick=()=>{f.parent=0;files.push(f);recycle=recycle.filter(x=>x!==f);saveAll();openRecycle();toast(T().saved)};
+  row.append(name,restore);el.appendChild(row);
+ });
 }
-
-// =================================
-// 7. GAMING MODE
-// =================================
-
-let gamingEnabled=false;
-
-function openGaming(){
- showWindow("🎮 Gaming Mode",`
-  <div class="panel">
-   <h2>${t("gaming")}</h2>
-   <p>${t("gamingDesc")}</p>
-   <button onclick="toggleGaming()">
-    ${gamingEnabled?t("disable"):t("enable")}
-   </button>
-   <p>${gamingEnabled?t("gaming"):t("normal")}</p>
-  </div>
- `);
+function openTerminal(){
+ const w=appWindow("terminal",T().terminal,`
+ <div id="terminalOutput" class="terminal">DAZ Linux V10 [Community Edition]\nType 'help' to see available commands.\n\n</div>
+ <div class="terminal-input"><input id="terminalCommand" placeholder="daz@desktop:~$" onkeydown="if(event.key==='Enter')runCommand()">
+ <button onclick="runCommand()">↵</button></div>`);
+ w.querySelector("#terminalCommand").focus();
 }
-
-function toggleGaming(){
- gamingEnabled=!gamingEnabled;
- renderMode();
- openGaming();
+function runCommand(){
+ const input=document.getElementById("terminalCommand");
+ const out=document.getElementById("terminalOutput");if(!input||!out)return;
+ const cmd=input.value.trim().toLowerCase();input.value="";
+ if(cmd==="clear"){out.textContent="";return}
+ let result="";
+ if(cmd==="help")result=T().terminalHelp;
+ else if(cmd==="about")result=T().terminalAbout;
+ else if(cmd==="date")result=new Date().toString();
+ else if(cmd==="apps")result=apps.map(a=>a.name).join("\n");
+ else if(cmd==="ls")result=files.filter(f=>f.parent===0).map(f=>f.name).join("\n")||T().empty;
+ else if(cmd==="whoami")result=username;
+ else if(cmd==="")return;
+ else result=T().unknown;
+ out.textContent+="\ndaz@desktop:~$ "+cmd+"\n"+result+"\n";
+ out.scrollTop=out.scrollHeight;
 }
-
-function renderMode(){
- document.getElementById("modeIndicator").textContent=
- gamingEnabled?t("gaming"):t("normal");
-
- document.body.style.setProperty(
-  "--bg",gamingEnabled?"#101010":"#171717"
- );
+function openSoftware(){
+ const html=`<h2>🧰 ${T().software}</h2><p class="muted">${T().quickApps}</p><div class="grid" id="softwareGrid"></div>`;
+ const w=appWindow("software",T().software,html);
+ const grid=w.querySelector("#softwareGrid");
+ apps.filter(a=>!["software","notifications"].includes(a.id)).forEach(a=>{
+  const div=document.createElement("div");div.className="tile";
+  div.innerHTML=`<div style="font-size:28px">${a.icon}</div><strong>${esc(a.name)}</strong><br><span class="small muted">DAZ System App</span>`;
+  div.onclick=a.fn;grid.appendChild(div);
+ });
 }
-
-// =================================
-// 8. VISIT COUNTER
-// =================================
-
+function openNotes(){
+ const w=appWindow("notes",T().notes,`
+ <h2>📝 ${T().notes}</h2>
+ <textarea id="noteArea" class="note-area" placeholder="${T().write}">${esc(noteText)}</textarea>
+ <button onclick="saveNote()">${T().save}</button>`);
+}
+function saveNote(){
+ noteText=document.getElementById("noteArea").value;
+ localStorage.setItem("dazNote",noteText);toast(T().notepadSaved);
+}
+function openCalculator(){
+ const w=appWindow("calculator",T().calculator,`
+ <h2>🧮 ${T().calculator}</h2>
+ <input id="calcDisplay" placeholder="0" readonly style="font-size:24px;text-align:right">
+ <div class="grid" style="grid-template-columns:repeat(4,1fr);margin-top:10px">
+ ${["7","8","9","/","4","5","6","*","1","2","3","-","0",".","(",")","+","C","⌫","="].map(k=>`<button onclick="calcKey('${k}')">${k}</button>`).join("")}
+ </div><p class="small muted">${T().calculatorHelp}</p>`);
+}
+function calcKey(k){
+ const d=document.getElementById("calcDisplay");if(!d)return;
+ if(k==="C"){d.value="";return}
+ if(k==="⌫"){d.value=d.value.slice(0,-1);return}
+ if(k==="="){
+  if(!/^[0-9+\-*/(). ]+$/.test(d.value)){d.value="Error";return}
+  try{
+   const result=Function('"use strict";return ('+d.value+')')();
+   d.value=Number.isFinite(result)?String(result):"Error";
+  }catch(e){d.value="Error"}
+  return;
+ }
+ d.value+=k;
+}
 function openVisits(){
- const count=localStorage.getItem("dazVisits")||0;
-
- showWindow("📊 Visit Counter",`
-  <div class="panel">
-   <h2>${t("visits")}</h2>
-   <div class="bigTime">${count}</div>
-   <p class="muted">Este contador es local a este navegador.</p>
-  </div>
- `);
+ appWindow("visits",T().visitTitle,`
+ <h2>📊 ${T().visitTitle}</h2>
+ <div class="panel"><div class="stat">${visitCount}</div>${T().localVisits}</div>
+ <p class="muted">${T().visitWarning}</p>`);
 }
-
-// =================================
-// 9. SYSTEM MONITOR
-// =================================
-
-function openMonitor(){
- showWindow("🖥️ "+t("monitor"),`
-  <div class="panel">
-   <h2>☭ DAZ System Monitor</h2>
-   <p>${t("system")}: DAZ Linux V9</p>
-   <p>${t("date")}: ${new Date().toLocaleDateString()}</p>
-   <p>${t("online")}: <span class="statusDot" id="connectionStatus"></span></p>
-   <p>${t("pages")}: ${links.length}</p>
-   <p>Gaming: ${gamingEnabled?t("gaming"):t("normal")}</p>
-  </div>
- `);
-
- const status=document.getElementById("connectionStatus");
- status.textContent=navigator.onLine?t("online"):t("offline");
+function openAbout(){
+ appWindow("about",T().about,`
+ <div style="text-align:center;padding:15px">
+ <div class="logo">★ DAZ LINUX</div><h2>Version 10</h2>
+ <p>${T().subtitle}</p>
+ <div class="panel">Community Edition<br>Built for the DAZ community</div>
+ <p class="muted">This is a browser-based desktop simulation.</p>
+ </div>`);
 }
-
-// =================================
-// 10. SETTINGS AND THEMES
-// =================================
-
-function applyTheme(theme){
- const root=document.documentElement;
-
- if(theme==="dark"){
-  root.style.setProperty("--red","#444");
-  root.style.setProperty("--gold","#999");
- }else{
-  root.style.setProperty("--red","#a71920");
-  root.style.setProperty("--gold","#c5a45b");
- }
-
- localStorage.setItem("dazTheme",theme);
-}
-
-function openSettings(){
- showWindow("⚙️ "+t("settings"),`
-  <div class="panel">
-   <h2>${t("settings")}</h2>
-
-   <p>${t("language")}</p>
-   <select id="settingsLanguage">
-    <option value="es">Español</option>
-    <option value="en">English</option>
-    <option value="fr">Français</option>
-    <option value="ru">Русский</option>
-   </select>
-
-   <p>${t("theme")}</p>
-   <select id="settingsTheme">
-    <option value="red">${t("red")}</option>
-    <option value="dark">${t("dark")}</option>
-   </select>
-
-   <br><br>
-   <button onclick="saveSettings()">${t("save")}</button>
-  </div>
- `);
-
- document.getElementById("settingsLanguage").value=lang;
- document.getElementById("settingsTheme").value=
-  localStorage.getItem("dazTheme")||"red";
-}
-
-function saveSettings(){
- lang=document.getElementById("settingsLanguage").value;
- const theme=document.getElementById("settingsTheme").value;
-
- localStorage.setItem("dazLanguage",lang);
- applyTheme(theme);
- closeWindow();
- renderMode();
-}
-
-// =================================
-// 11. START
-// =================================
-
-initialize();
-
+document.getElementById("languageSelect").value=localStorage.getItem("dazLanguage")||"es";
+document.getElementById("username").value=localStorage.getItem("dazUsername")||"";
 </script>
 </body>
 </html>

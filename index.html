@@ -3,450 +3,374 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>DAZ Linux V9</title>
-
 <style>
-:root {
-  --bg:#171717;
-  --panel:#252525;
-  --red:#a71920;
-  --gold:#c5a45b;
-  --text:#eee;
+:root{
+ --bg:#171717;--panel:#252525;--red:#a71920;
+ --gold:#c5a45b;--text:#eee;--muted:#aaa;
 }
 *{box-sizing:border-box}
 body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial,sans-serif;
-  overflow:hidden;
+ margin:0;background:var(--bg);color:var(--text);
+ font-family:Arial,sans-serif;overflow:hidden;
 }
-button,select{
-  padding:10px;
-  background:#333;
-  color:white;
-  border:1px solid #666;
-  cursor:pointer;
-  border-radius:4px;
+button,input,select{font:inherit}
+button{
+ background:#333;color:white;border:1px solid #666;
+ padding:9px 12px;border-radius:4px;cursor:pointer;
 }
 button:hover{background:var(--red)}
 #desktop{
-  height:calc(100vh - 43px);
-  padding:15px;
-  display:grid;
-  grid-template-columns:repeat(auto-fill,90px);
-  grid-auto-rows:100px;
-  gap:8px;
-  align-content:start;
-  background:radial-gradient(ellipse,#303030,#151515);
+ height:calc(100vh - 44px);padding:20px;
+ display:grid;grid-template-columns:repeat(auto-fill,90px);
+ grid-auto-rows:100px;gap:8px;align-content:start;
+ background:radial-gradient(ellipse,#303030,#141414);
 }
-.desktop-icon{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  gap:7px;
-  text-align:center;
-  font-size:12px;
-  cursor:pointer;
-  border:1px solid transparent;
-  border-radius:5px;
-  padding:5px;
+.dicon{
+ display:flex;flex-direction:column;align-items:center;
+ justify-content:center;gap:7px;text-align:center;
+ font-size:12px;cursor:pointer;border:1px solid transparent;
+ border-radius:5px;padding:5px;
 }
-.desktop-icon:hover{
-  background:#ffffff20;
-  border-color:#888;
-}
-.symbol{font-size:30px}
+.dicon:hover{background:#ffffff20;border-color:#888}
+.dicon b{font-size:30px}
 #taskbar{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  height:43px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:5px 10px;
-  background:#202020;
-  border-top:2px solid var(--red);
+ position:fixed;bottom:0;width:100%;height:44px;
+ display:flex;justify-content:space-between;align-items:center;
+ padding:5px 10px;background:#202020;
+ border-top:2px solid var(--red);z-index:20;
 }
-#taskLeft,#taskRight{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-#startButton{
-  background:var(--red);
-  border:1px solid var(--gold);
-  font-weight:bold;
-}
+#taskbar button{background:var(--red);border-color:var(--gold)}
+#taskLeft,#taskRight{display:flex;align-items:center;gap:10px}
 #clock{color:var(--gold);font-size:13px}
 #startMenu{
-  display:none;
-  position:fixed;
-  bottom:48px;
-  left:8px;
-  width:260px;
-  padding:12px;
-  background:#222;
-  border:1px solid var(--gold);
-  border-top:3px solid var(--red);
-  z-index:30;
+ display:none;position:fixed;bottom:48px;left:8px;
+ width:270px;padding:12px;background:#222;
+ border:1px solid var(--gold);border-top:3px solid var(--red);
+ z-index:30;
 }
 #startMenu.open{display:block}
-.menu-title{
-  color:var(--gold);
-  padding:10px;
-  border-bottom:1px solid #555;
-}
-.menu-item{
-  display:block;
-  width:100%;
-  margin-top:5px;
-  text-align:left;
-}
+.menuTitle{padding:10px;color:var(--gold);border-bottom:1px solid #555}
+.menuItem{display:block;width:100%;text-align:left;margin-top:6px}
 #window{
-  display:none;
-  position:fixed;
-  z-index:10;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  width:min(750px,94vw);
-  height:min(540px,78vh);
-  background:#222;
-  border:1px solid var(--gold);
-  box-shadow:0 10px 35px #000b;
-  flex-direction:column;
+ display:none;position:fixed;z-index:10;
+ left:50%;top:50%;transform:translate(-50%,-50%);
+ width:min(820px,95vw);height:min(620px,82vh);
+ background:#222;border:1px solid var(--gold);
+ box-shadow:0 10px 35px #000b;flex-direction:column;
 }
 #window.show{display:flex}
 #windowHeader{
-  background:var(--red);
-  padding:10px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+ background:var(--red);padding:10px;
+ display:flex;justify-content:space-between;align-items:center;
 }
-#windowContent{
-  padding:18px;
-  overflow:auto;
-  flex:1;
-}
+#windowContent{padding:16px;overflow:auto;flex:1}
 .panel{
-  background:#303030;
-  padding:16px;
-  margin-bottom:12px;
-  border-left:3px solid var(--red);
+ background:#303030;padding:15px;margin-bottom:12px;
+ border-left:3px solid var(--red);border-radius:4px;
 }
-.big-time{
-  text-align:center;
-  font-size:38px;
-  color:var(--gold);
-  margin:20px;
-}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:10px;
-}
-.grid button{text-align:left}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.bigTime{text-align:center;font-size:38px;color:var(--gold);margin:20px}
+.muted{color:var(--muted);font-size:12px}
 #languageScreen{
-  position:fixed;
-  inset:0;
-  z-index:100;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:#111;
-  padding:20px;
+ position:fixed;inset:0;z-index:100;
+ display:flex;align-items:center;justify-content:center;
+ background:#111;padding:20px;
 }
-.language-box{
-  width:min(400px,100%);
-  padding:30px;
-  text-align:center;
-  background:#242424;
-  border:1px solid var(--gold);
-  border-top:5px solid var(--red);
+.languageBox{
+ width:min(400px,100%);padding:30px;text-align:center;
+ background:#242424;border:1px solid var(--gold);
+ border-top:5px solid var(--red);
 }
-.language-box select,.language-box button{
-  width:100%;
-  margin:10px 0;
-}
+.languageBox select,.languageBox button{width:100%;margin:10px 0}
 .hidden{display:none!important}
+
+/* KIWI CENTER */
+
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.toolbar input{flex:1;min-width:150px}
+input,select{
+ background:#181818;color:white;border:1px solid #666;
+ padding:10px;border-radius:4px;min-width:0;
+}
+.linkCard{
+ background:#303030;border:1px solid #444;
+ border-left:3px solid var(--red);
+ padding:12px;border-radius:5px;
+ display:flex;align-items:center;gap:10px;
+ margin-bottom:9px;
+}
+.linkIcon{font-size:25px}
+.linkInfo{flex:1;min-width:0}
+.linkInfo strong{display:block;margin-bottom:5px}
+.linkInfo small{
+ color:var(--muted);display:block;
+ overflow-wrap:anywhere;font-size:11px;
+}
+.linkActions{display:flex;gap:5px;flex-wrap:wrap}
+.linkActions button{padding:7px}
+.favorite{color:var(--gold)}
+#kiwiForm{
+ display:grid;grid-template-columns:1fr 1fr;
+ gap:8px;margin-top:10px;
+}
+#kiwiForm button{grid-column:span 2}
+.statusDot{color:#66cc77}
+@media(max-width:500px){
+ #desktop{grid-template-columns:repeat(3,1fr);padding:10px}
+ .dicon{width:100%}
+ #kiwiForm{grid-template-columns:1fr}
+ #kiwiForm button{grid-column:auto}
+ .linkCard{align-items:flex-start}
+}
 </style>
 </head>
 
 <body>
 
-<!-- SELECTOR DE IDIOMA -->
+<!-- LANGUAGE SELECTOR -->
 
 <div id="languageScreen">
-  <div class="language-box">
-    <h1>☭ DAZ LINUX V9</h1>
-    <p id="languageTitle">Selecciona el idioma</p>
-
-    <select id="languageSelect">
-      <option value="es">Español</option>
-      <option value="en">English</option>
-      <option value="fr">Français</option>
-      <option value="ru">Русский</option>
-    </select>
-
-    <button onclick="bootSystem()" id="bootButton">
-      Iniciar sistema
-    </button>
-  </div>
+ <div class="languageBox">
+  <h1>☭ DAZ LINUX V9</h1>
+  <p id="languageTitle">Selecciona el idioma</p>
+  <select id="languageSelect">
+   <option value="es">Español</option>
+   <option value="en">English</option>
+   <option value="fr">Français</option>
+   <option value="ru">Русский</option>
+  </select>
+  <button onclick="bootSystem()" id="bootButton">Iniciar sistema</button>
+  <p class="muted">SOVIET DESKTOP EDITION</p>
+ </div>
 </div>
 
-<!-- ESCRITORIO -->
+<!-- DESKTOP -->
 
 <div id="desktop">
 
-  <div class="desktop-icon" onclick="openPage('StudySync')">
-    <span class="symbol">📚</span>StudySync
-  </div>
+ <div class="dicon" onclick="openKiwi()">
+  <b>🥝</b>Kiwi Center
+ </div>
 
-  <div class="desktop-icon" onclick="openPage('Classwork Cloud')">
-    <span class="symbol">☁️</span>Classwork Cloud
-  </div>
+ <div class="dicon" onclick="openGameTime()">
+  <b>⏱️</b>Game Time
+ </div>
 
-  <div class="desktop-icon" onclick="openKiwi()">
-    <span class="symbol">🥝</span>Kiwi
-  </div>
+ <div class="dicon" onclick="openGaming()">
+  <b>🎮</b>Gaming Mode
+ </div>
 
-  <div class="desktop-icon" onclick="openPage('Classwork US')">
-    <span class="symbol">📖</span>Classwork US
-  </div>
+ <div class="dicon" onclick="openVisits()">
+  <b>📊</b>Visit Counter
+ </div>
 
-  <div class="desktop-icon" onclick="openPage('Learning')">
-    <span class="symbol">🎓</span>Learning
-  </div>
+ <div class="dicon" onclick="openMonitor()">
+  <b>🖥️</b>System Monitor
+ </div>
 
-  <div class="desktop-icon" onclick="openPage('Biology')">
-    <span class="symbol">🧬</span>Biology
-  </div>
-
-  <div class="desktop-icon" onclick="openPage('Nettle Web')">
-    <span class="symbol">🌐</span>Nettle Web
-  </div>
-
-  <div class="desktop-icon" onclick="openGameTime()">
-    <span class="symbol">⏱️</span>Game Time
-  </div>
-
-  <div class="desktop-icon" onclick="openGaming()">
-    <span class="symbol">🎮</span>Gaming Mode
-  </div>
-
-  <div class="desktop-icon" onclick="openVisits()">
-    <span class="symbol">📊</span>Visit Counter
-  </div>
+ <div class="dicon" onclick="openSettings()">
+  <b>⚙️</b>Settings
+ </div>
 
 </div>
 
-<!-- MENU -->
+<!-- START MENU -->
 
 <div id="startMenu">
-  <div class="menu-title">☭ DAZ LINUX V9</div>
-
-  <button class="menu-item" onclick="openGameTime()">⏱️ Game Time</button>
-  <button class="menu-item" onclick="openGaming()">🎮 Gaming Mode</button>
-  <button class="menu-item" onclick="openVisits()">📊 Visit Counter</button>
-  <button class="menu-item" onclick="openKiwi()">🥝 Kiwi</button>
-  <button class="menu-item" onclick="openSettings()">⚙️ Settings</button>
+ <div class="menuTitle">☭ DAZ LINUX V9</div>
+ <button class="menuItem" onclick="openKiwi()">🥝 Kiwi Center</button>
+ <button class="menuItem" onclick="openGameTime()">⏱️ Game Time</button>
+ <button class="menuItem" onclick="openGaming()">🎮 Gaming Mode</button>
+ <button class="menuItem" onclick="openVisits()">📊 Visit Counter</button>
+ <button class="menuItem" onclick="openMonitor()">🖥️ System Monitor</button>
+ <button class="menuItem" onclick="openSettings()">⚙️ Settings</button>
 </div>
 
-<!-- VENTANA -->
+<!-- WINDOWS -->
 
 <div id="window">
-  <div id="windowHeader">
-    <span id="windowTitle">DAZ Linux</span>
-    <button onclick="closeWindow()">✕</button>
-  </div>
-  <div id="windowContent"></div>
+ <div id="windowHeader">
+  <strong id="windowTitle">DAZ Linux</strong>
+  <button onclick="closeWindow()">✕</button>
+ </div>
+ <div id="windowContent"></div>
 </div>
 
-<!-- BARRA -->
+<!-- TASKBAR -->
 
 <div id="taskbar">
-  <div id="taskLeft">
-    <button id="startButton" onclick="toggleStart()">☭ START</button>
-    <span>DAZ Linux V9</span>
-  </div>
-
-  <div id="taskRight">
-    <span id="modeIndicator">NORMAL</span>
-    <span id="clock">00:00</span>
-  </div>
+ <div id="taskLeft">
+  <button onclick="toggleStart()">☭ START</button>
+  <span>DAZ Linux V9</span>
+ </div>
+ <div id="taskRight">
+  <span id="modeIndicator">NORMAL</span>
+  <span id="clock">00:00</span>
+ </div>
 </div>
 
 <script>
 
-// PÁGINAS PRINCIPALES
-
-const pages={
-  "StudySync":"https://studysync.co.uk/",
-  "Classwork Cloud":"https://classwork.cloud/",
-  "Classwork US":"https://classwork.us.com/",
-  "Learning":"https://learning.com.de/",
-  "Biology":"https://biology.us.com/",
-  "Nettle Web":"https://nettleweb.pages.dev/"
-};
-
-// KIWI: ENLACES
-
-// Añade aquí los enlaces originales de Kiwi.
-// No se han inventado direcciones.
-
-const kiwiLinks=[];
-
-// IDIOMAS
+// =================================
+// 1. LANGUAGES
+// =================================
 
 const translations={
 es:{
 languageTitle:"Selecciona el idioma del sistema",
-boot:"Iniciar sistema",
-start:"Inicio",
-normal:"NORMAL",
-gaming:"MODO GAMING",
-gameTime:"Tiempo de juego",
-startTimer:"Iniciar",
-pause:"Pausar",
-reset:"Reiniciar",
-gamingTitle:"Modo Gaming",
-gamingDescription:"Activa o desactiva el modo Gaming.",
-enable:"Activar",
-disable:"Desactivar",
-visits:"Contador de visitas",
-local:"Visitas registradas en este navegador",
-settings:"Configuración",
-language:"Idioma",
-save:"Guardar",
-kiwi:"Kiwi",
-kiwiDescription:"Centro de enlaces de Kiwi",
-emptyKiwi:"Todavía no hay enlaces agregados.",
-pages:"Páginas"
+boot:"Iniciar sistema",normal:"NORMAL",gaming:"MODO GAMING",
+search:"Buscar páginas...",all:"Todas",favorites:"Favoritos",
+add:"Agregar enlace",name:"Nombre",url:"URL",
+category:"Categoría",open:"Abrir",remove:"Eliminar",
+noLinks:"No hay resultados.",kiwiDesc:"Centro de páginas y enlaces",
+gameTime:"Tiempo de juego",start:"Iniciar",pause:"Pausar",
+reset:"Reiniciar",gamingDesc:"Modo visual para videojuegos",
+enable:"Activar",disable:"Desactivar",visits:"Visitas locales",
+settings:"Configuración",language:"Idioma",save:"Guardar",
+theme:"Tema",red:"Soviético rojo",dark:"Oscuro",
+monitor:"Monitor del sistema",date:"Fecha",online:"Conexión",
+offline:"Sin conexión",pages:"Páginas registradas",
+addSuccess:"Enlace agregado",confirmDelete:"¿Eliminar este enlace?",
+system:"Sistema"
 },
 en:{
-languageTitle:"Select your system language",
-boot:"Start system",
-start:"Start",
-normal:"NORMAL",
-gaming:"GAMING MODE",
-gameTime:"Game Time",
-startTimer:"Start",
-pause:"Pause",
-reset:"Reset",
-gamingTitle:"Gaming Mode",
-gamingDescription:"Enable or disable Gaming Mode.",
-enable:"Enable",
-disable:"Disable",
-visits:"Visit Counter",
-local:"Visits recorded in this browser",
-settings:"Settings",
-language:"Language",
-save:"Save",
-kiwi:"Kiwi",
-kiwiDescription:"Kiwi links center",
-emptyKiwi:"No links added yet.",
-pages:"Pages"
+languageTitle:"Select system language",boot:"Start system",
+normal:"NORMAL",gaming:"GAMING MODE",search:"Search pages...",
+all:"All",favorites:"Favorites",add:"Add link",name:"Name",
+url:"URL",category:"Category",open:"Open",remove:"Remove",
+noLinks:"No results.",kiwiDesc:"Pages and links center",
+gameTime:"Game Time",start:"Start",pause:"Pause",reset:"Reset",
+gamingDesc:"Visual gaming mode",enable:"Enable",disable:"Disable",
+visits:"Local visits",settings:"Settings",language:"Language",
+save:"Save",theme:"Theme",red:"Soviet red",dark:"Dark",
+monitor:"System Monitor",date:"Date",online:"Connection",
+offline:"Offline",pages:"Registered pages",addSuccess:"Link added",
+confirmDelete:"Delete this link?",system:"System"
 },
 fr:{
-languageTitle:"Sélectionnez la langue du système",
-boot:"Démarrer le système",
-start:"Accueil",
-normal:"NORMAL",
-gaming:"MODE GAMING",
-gameTime:"Temps de jeu",
-startTimer:"Démarrer",
-pause:"Pause",
-reset:"Réinitialiser",
-gamingTitle:"Mode Gaming",
-gamingDescription:"Activer ou désactiver le mode Gaming.",
-enable:"Activer",
-disable:"Désactiver",
-visits:"Compteur de visites",
-local:"Visites enregistrées dans ce navigateur",
-settings:"Paramètres",
-language:"Langue",
-save:"Enregistrer",
-kiwi:"Kiwi",
-kiwiDescription:"Centre des liens Kiwi",
-emptyKiwi:"Aucun lien ajouté.",
-pages:"Pages"
+languageTitle:"Choisissez la langue",boot:"Démarrer",
+normal:"NORMAL",gaming:"MODE GAMING",search:"Rechercher...",
+all:"Tout",favorites:"Favoris",add:"Ajouter un lien",
+name:"Nom",url:"URL",category:"Catégorie",open:"Ouvrir",
+remove:"Supprimer",noLinks:"Aucun résultat.",
+kiwiDesc:"Centre des pages et liens",gameTime:"Temps de jeu",
+start:"Démarrer",pause:"Pause",reset:"Réinitialiser",
+gamingDesc:"Mode visuel de jeu",enable:"Activer",
+disable:"Désactiver",visits:"Visites locales",
+settings:"Paramètres",language:"Langue",save:"Enregistrer",
+theme:"Thème",red:"Rouge soviétique",dark:"Sombre",
+monitor:"Moniteur système",date:"Date",online:"Connexion",
+offline:"Hors ligne",pages:"Pages enregistrées",
+addSuccess:"Lien ajouté",confirmDelete:"Supprimer ce lien?",
+system:"Système"
 },
 ru:{
-languageTitle:"Выберите язык системы",
-boot:"Запустить систему",
-start:"Пуск",
-normal:"ОБЫЧНЫЙ",
-gaming:"ИГРОВОЙ РЕЖИМ",
-gameTime:"Игровое время",
-startTimer:"Старт",
-pause:"Пауза",
-reset:"Сброс",
-gamingTitle:"Игровой режим",
-gamingDescription:"Включить или выключить игровой режим.",
-enable:"Включить",
-disable:"Выключить",
-visits:"Счётчик посещений",
-local:"Посещения в этом браузере",
-settings:"Настройки",
-language:"Язык",
-save:"Сохранить",
-kiwi:"Киви",
-kiwiDescription:"Центр ссылок Kiwi",
-emptyKiwi:"Ссылок пока нет.",
-pages:"Страницы"
+languageTitle:"Выберите язык системы",boot:"Запустить",
+normal:"ОБЫЧНЫЙ",gaming:"ИГРОВОЙ РЕЖИМ",
+search:"Поиск страниц...",all:"Все",favorites:"Избранное",
+add:"Добавить ссылку",name:"Название",url:"Адрес",
+category:"Категория",open:"Открыть",remove:"Удалить",
+noLinks:"Ничего не найдено.",kiwiDesc:"Центр страниц и ссылок",
+gameTime:"Игровое время",start:"Старт",pause:"Пауза",
+reset:"Сброс",gamingDesc:"Игровой визуальный режим",
+enable:"Включить",disable:"Выключить",
+visits:"Локальные посещения",settings:"Настройки",
+language:"Язык",save:"Сохранить",theme:"Тема",
+red:"Советская красная",dark:"Тёмная",
+monitor:"Системный монитор",date:"Дата",
+online:"Подключение",offline:"Нет подключения",
+pages:"Сохранённые страницы",addSuccess:"Ссылка добавлена",
+confirmDelete:"Удалить эту ссылку?",system:"Система"
 }
 };
 
-let lang=localStorage.getItem("dazLanguage")||"es";
+let lang="es";
 
 function t(key){
- return translations[lang][key]||key;
+ return translations[lang]?.[key]||key;
 }
 
-// INICIO
+// =================================
+// 2. PAGE DATABASE
+// =================================
+
+// All supplied pages are together in Kiwi Center.
+
+const defaultLinks=[
+ {id:"p1",name:"StudySync",url:"https://studysync.co.uk/",category:"Study",icon:"📚"},
+ {id:"p2",name:"Classwork Cloud",url:"https://classwork.cloud/",category:"Study",icon:"☁️"},
+ {id:"p3",name:"Kiwi",url:"https://kiwi.at.it/",category:"Web",icon:"🥝"},
+ {id:"p4",name:"Classwork US",url:"https://classwork.us.com/",category:"Study",icon:"📖"},
+ {id:"p5",name:"Learning",url:"https://learning.com.de/",category:"Study",icon:"🎓"},
+ {id:"p6",name:"Biology",url:"https://biology.us.com/",category:"Study",icon:"🧬"},
+ {id:"p7",name:"Nettle Web",url:"https://nettleweb.pages.dev/",category:"Web",icon:"🌐"}
+];
+
+function loadLinks(){
+ try{
+  const saved=JSON.parse(localStorage.getItem("dazLinks"));
+  return Array.isArray(saved)?saved:defaultLinks;
+ }catch(e){return defaultLinks}
+}
+
+let links=loadLinks();
+let favorites=JSON.parse(localStorage.getItem("dazFavorites")||"[]");
+let currentFilter="all";
+
+function saveLinks(){
+ localStorage.setItem("dazLinks",JSON.stringify(links));
+}
+
+function saveFavorites(){
+ localStorage.setItem("dazFavorites",JSON.stringify(favorites));
+}
+
+// =================================
+// 3. START SYSTEM
+// =================================
 
 function bootSystem(){
  lang=document.getElementById("languageSelect").value;
  localStorage.setItem("dazLanguage",lang);
  document.getElementById("languageScreen").classList.add("hidden");
- updateClock();
  registerVisit();
+ updateClock();
  renderMode();
 }
 
 function initialize(){
- if(!translations[lang])lang="es";
+ const saved=localStorage.getItem("dazLanguage");
+ if(translations[saved])lang=saved;
 
  document.getElementById("languageSelect").value=lang;
  document.getElementById("languageTitle").textContent=t("languageTitle");
  document.getElementById("bootButton").textContent=t("boot");
+
+ applyTheme(localStorage.getItem("dazTheme")||"red");
 }
 
 function registerVisit(){
- let visits=Number(localStorage.getItem("dazVisits")||0)+1;
- localStorage.setItem("dazVisits",visits);
+ let count=Number(localStorage.getItem("dazVisits")||0)+1;
+ localStorage.setItem("dazVisits",count);
 }
 
-// RELOJ
+// =================================
+// 4. DESKTOP
+// =================================
 
 function updateClock(){
+ const now=new Date();
  document.getElementById("clock").textContent=
- new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"});
+ now.toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"});
 }
 setInterval(updateClock,1000);
-
-// MENÚ
+updateClock();
 
 function toggleStart(){
  document.getElementById("startMenu").classList.toggle("open");
 }
-
-// VENTANAS
 
 function showWindow(title,content){
  document.getElementById("windowTitle").textContent=title;
@@ -459,54 +383,172 @@ function closeWindow(){
  document.getElementById("window").classList.remove("show");
 }
 
-function openPage(name){
- if(pages[name]){
-   window.open(pages[name],"_blank","noopener");
- }
-}
+// =================================
+// 5. KIWI CENTER
+// =================================
 
-// KIWI APP
+function escapeHTML(value){
+ return String(value).replace(/[&<>"']/g,char=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",
+ '"':"&quot;","'":"&#39;"
+ })[char]);
+}
 
 function openKiwi(){
- let html=`
- <h2>🥝 Kiwi</h2>
- <p>${t("kiwiDescription")}</p>
- <div class="grid">
- `;
+ currentFilter="all";
 
- if(kiwiLinks.length===0){
-   html+=`
-   <div class="panel">
-     <p>${t("emptyKiwi")}</p>
-     <p>DAZ Linux V9</p>
-   </div>`;
- }
+ showWindow("🥝 Kiwi Center",`
+  <div class="panel">
+   <h2>🥝 Kiwi Center</h2>
+   <p>${t("kiwiDesc")}</p>
+   <div class="toolbar">
+    <input id="linkSearch" placeholder="${t("search")}"
+      oninput="renderKiwi()">
+    <button onclick="setFilter('all')">${t("all")}</button>
+    <button onclick="setFilter('favorites')">⭐ ${t("favorites")}</button>
+   </div>
+   <p class="muted">${links.length} ${t("pages")}</p>
+  </div>
 
- kiwiLinks.forEach((item,index)=>{
-   const safeName=String(item.name).replace(/[&<>"']/g,"");
-   html+=`
-   <button onclick="openKiwiLink(${index})">
-     ${item.icon||"🌐"} ${safeName}
-   </button>`;
+  <div id="linkList"></div>
+
+  <div class="panel">
+   <h3>＋ ${t("add")}</h3>
+   <form id="kiwiForm" onsubmit="addLink(event)">
+    <input id="newName" placeholder="${t("name")}" required>
+    <input id="newURL" placeholder="https://example.com" required>
+    <select id="newCategory">
+     <option value="Study">Study</option>
+     <option value="Web">Web</option>
+     <option value="Games">Games</option>
+     <option value="Other">Other</option>
+    </select>
+    <select id="newIcon">
+     <option>🌐</option><option>🎮</option>
+     <option>📚</option><option>🎓</option>
+     <option>🧬</option><option>🥝</option>
+     <option>⭐</option>
+    </select>
+    <button type="submit">${t("add")}</button>
+   </form>
+  </div>
+ `);
+
+ renderKiwi();
+}
+
+function setFilter(filter){
+ currentFilter=filter;
+ renderKiwi();
+}
+
+function renderKiwi(){
+ const container=document.getElementById("linkList");
+ if(!container)return;
+
+ const search=(document.getElementById("linkSearch")?.value||"").toLowerCase();
+
+ const filtered=links.filter(link=>{
+  const matches=(link.name+" "+link.url+" "+link.category).toLowerCase().includes(search);
+  const favoriteMatch=currentFilter!=="favorites"||favorites.includes(link.id);
+  return matches&&favoriteMatch;
  });
 
- html+="</div>";
- showWindow("🥝 Kiwi",html);
+ if(!filtered.length){
+  container.innerHTML=`<div class="panel">${t("noLinks")}</div>`;
+  return;
+ }
+
+ container.innerHTML=filtered.map(link=>{
+  const index=links.findIndex(x=>x.id===link.id);
+  const favorite=favorites.includes(link.id);
+
+  return `
+   <div class="linkCard">
+    <span class="linkIcon">${escapeHTML(link.icon||"🌐")}</span>
+    <div class="linkInfo">
+     <strong>${escapeHTML(link.name)}</strong>
+     <small>${escapeHTML(link.url)}</small>
+     <small>${escapeHTML(link.category)}</small>
+    </div>
+    <div class="linkActions">
+     <button onclick="openLink(${index})">${t("open")}</button>
+     <button class="${favorite?"favorite":""}"
+       onclick="toggleFavorite('${link.id}')">★</button>
+     <button onclick="deleteLink('${link.id}')">✕</button>
+    </div>
+   </div>
+  `;
+ }).join("");
 }
 
-function openKiwiLink(index){
- const item=kiwiLinks[index];
- if(!item)return;
+function openLink(index){
+ const link=links[index];
+ if(!link)return;
 
  try{
-   const url=new URL(item.url);
-   if(url.protocol==="https:"||url.protocol==="http:"){
-     window.open(url.href,"_blank","noopener");
-   }
- }catch(e){}
+  const url=new URL(link.url);
+  if(url.protocol==="https:"||url.protocol==="http:"){
+   window.open(url.href,"_blank","noopener");
+  }
+ }catch(e){
+  alert("URL no válido");
+ }
 }
 
-// GAME TIME
+function toggleFavorite(id){
+ favorites=favorites.includes(id)
+  ?favorites.filter(x=>x!==id)
+  :[...favorites,id];
+
+ saveFavorites();
+ renderKiwi();
+}
+
+function deleteLink(id){
+ if(!confirm(t("confirmDelete")))return;
+
+ links=links.filter(x=>x.id!==id);
+ favorites=favorites.filter(x=>x!==id);
+ saveLinks();
+ saveFavorites();
+ renderKiwi();
+}
+
+function addLink(event){
+ event.preventDefault();
+
+ const name=document.getElementById("newName").value.trim();
+ let url=document.getElementById("newURL").value.trim();
+ const category=document.getElementById("newCategory").value;
+ const icon=document.getElementById("newIcon").value;
+
+ if(!/^https?:\/\//i.test(url)){
+  alert("Introduce una URL que comience con https:// o http://");
+  return;
+ }
+
+ try{
+  const parsed=new URL(url);
+  if(!["http:","https:"].includes(parsed.protocol))return;
+  url=parsed.href;
+ }catch(e){
+  alert("URL no válida");
+  return;
+ }
+
+ links.push({
+  id:"custom_"+Date.now(),
+  name,url,category,icon
+ });
+
+ saveLinks();
+ openKiwi();
+}
+
+// =================================
+// 6. GAME TIME
+// =================================
 
 let elapsed=0;
 let timer=null;
@@ -516,25 +558,24 @@ function timeString(value){
  const h=Math.floor(value/3600);
  const m=Math.floor(value%3600/60);
  const s=value%60;
-
  return [h,m,s].map(x=>String(x).padStart(2,"0")).join(":");
 }
 
 function openGameTime(){
- showWindow("Game Time",`
- <div class="panel">
- <h2>⏱️ ${t("gameTime")}</h2>
- <div class="big-time" id="timerDisplay">${timeString(elapsed)}</div>
- <button onclick="startTimer()">${t("startTimer")}</button>
- <button onclick="pauseTimer()">${t("pause")}</button>
- <button onclick="resetTimer()">${t("reset")}</button>
- </div>`);
+ showWindow("⏱️ Game Time",`
+  <div class="panel">
+   <h2>${t("gameTime")}</h2>
+   <div class="bigTime" id="timerDisplay">${timeString(elapsed)}</div>
+   <button onclick="startTimer()">${t("start")}</button>
+   <button onclick="pauseTimer()">${t("pause")}</button>
+   <button onclick="resetTimer()">${t("reset")}</button>
+  </div>
+ `);
 }
 
 function updateTimer(){
  elapsed+=Math.floor((Date.now()-lastTick)/1000);
  lastTick=Date.now();
-
  const display=document.getElementById("timerDisplay");
  if(display)display.textContent=timeString(elapsed);
 }
@@ -559,20 +600,23 @@ function resetTimer(){
  if(display)display.textContent=timeString(elapsed);
 }
 
-// GAMING MODE
+// =================================
+// 7. GAMING MODE
+// =================================
 
 let gamingEnabled=false;
 
 function openGaming(){
- showWindow(t("gamingTitle"),`
- <div class="panel">
- <h2>🎮 ${t("gamingTitle")}</h2>
- <p>${t("gamingDescription")}</p>
- <button onclick="toggleGaming()">
- ${gamingEnabled?t("disable"):t("enable")}
- </button>
- <p>${gamingEnabled?t("gaming"):t("normal")}</p>
- </div>`);
+ showWindow("🎮 Gaming Mode",`
+  <div class="panel">
+   <h2>${t("gaming")}</h2>
+   <p>${t("gamingDesc")}</p>
+   <button onclick="toggleGaming()">
+    ${gamingEnabled?t("disable"):t("enable")}
+   </button>
+   <p>${gamingEnabled?t("gaming"):t("normal")}</p>
+  </div>
+ `);
 }
 
 function toggleGaming(){
@@ -584,50 +628,108 @@ function toggleGaming(){
 function renderMode(){
  document.getElementById("modeIndicator").textContent=
  gamingEnabled?t("gaming"):t("normal");
- document.body.style.background=
- gamingEnabled?"#101010":"var(--bg)";
+
+ document.body.style.setProperty(
+  "--bg",gamingEnabled?"#101010":"#171717"
+ );
 }
 
-// VISITAS
+// =================================
+// 8. VISIT COUNTER
+// =================================
 
 function openVisits(){
- const visits=localStorage.getItem("dazVisits")||0;
+ const count=localStorage.getItem("dazVisits")||0;
 
- showWindow(t("visits"),`
- <div class="panel">
- <h2>📊 ${t("visits")}</h2>
- <div class="big-time">${visits}</div>
- <p>${t("local")}</p>
- </div>`);
+ showWindow("📊 Visit Counter",`
+  <div class="panel">
+   <h2>${t("visits")}</h2>
+   <div class="bigTime">${count}</div>
+   <p class="muted">Este contador es local a este navegador.</p>
+  </div>
+ `);
 }
 
-// CONFIGURACIÓN
+// =================================
+// 9. SYSTEM MONITOR
+// =================================
+
+function openMonitor(){
+ showWindow("🖥️ "+t("monitor"),`
+  <div class="panel">
+   <h2>☭ DAZ System Monitor</h2>
+   <p>${t("system")}: DAZ Linux V9</p>
+   <p>${t("date")}: ${new Date().toLocaleDateString()}</p>
+   <p>${t("online")}: <span class="statusDot" id="connectionStatus"></span></p>
+   <p>${t("pages")}: ${links.length}</p>
+   <p>Gaming: ${gamingEnabled?t("gaming"):t("normal")}</p>
+  </div>
+ `);
+
+ const status=document.getElementById("connectionStatus");
+ status.textContent=navigator.onLine?t("online"):t("offline");
+}
+
+// =================================
+// 10. SETTINGS AND THEMES
+// =================================
+
+function applyTheme(theme){
+ const root=document.documentElement;
+
+ if(theme==="dark"){
+  root.style.setProperty("--red","#444");
+  root.style.setProperty("--gold","#999");
+ }else{
+  root.style.setProperty("--red","#a71920");
+  root.style.setProperty("--gold","#c5a45b");
+ }
+
+ localStorage.setItem("dazTheme",theme);
+}
 
 function openSettings(){
- showWindow(t("settings"),`
- <div class="panel">
- <h2>⚙️ ${t("settings")}</h2>
- <p>${t("language")}</p>
- <select id="settingsLanguage">
- <option value="es">Español</option>
- <option value="en">English</option>
- <option value="fr">Français</option>
- <option value="ru">Русский</option>
- </select>
- <button onclick="changeLanguage()">${t("save")}</button>
- </div>`);
+ showWindow("⚙️ "+t("settings"),`
+  <div class="panel">
+   <h2>${t("settings")}</h2>
+
+   <p>${t("language")}</p>
+   <select id="settingsLanguage">
+    <option value="es">Español</option>
+    <option value="en">English</option>
+    <option value="fr">Français</option>
+    <option value="ru">Русский</option>
+   </select>
+
+   <p>${t("theme")}</p>
+   <select id="settingsTheme">
+    <option value="red">${t("red")}</option>
+    <option value="dark">${t("dark")}</option>
+   </select>
+
+   <br><br>
+   <button onclick="saveSettings()">${t("save")}</button>
+  </div>
+ `);
 
  document.getElementById("settingsLanguage").value=lang;
+ document.getElementById("settingsTheme").value=
+  localStorage.getItem("dazTheme")||"red";
 }
 
-function changeLanguage(){
+function saveSettings(){
  lang=document.getElementById("settingsLanguage").value;
+ const theme=document.getElementById("settingsTheme").value;
+
  localStorage.setItem("dazLanguage",lang);
+ applyTheme(theme);
  closeWindow();
  renderMode();
 }
 
-// INICIAR
+// =================================
+// 11. START
+// =================================
 
 initialize();
 

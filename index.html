@@ -4,31 +4,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DAZ Linux V11</title>
+<title>DAZ Linux V11.1</title>
 <style>
-:root{--red:#d52b2b;--gold:#e0b94f;--bg:#171717;--panel:#242424;--text:#f4f4f4}
+:root{--red:#c92828;--gold:#d9b34a;--bg:#171717;--panel:#242424;--text:#f4f4f4}
 *{box-sizing:border-box}
 body{margin:0;background:#111;color:var(--text);font-family:Segoe UI,Arial,sans-serif;overflow:hidden}
 button,input,textarea,select{font:inherit}
-button{cursor:pointer;color:inherit}
-#boot,#setup{position:fixed;inset:0;z-index:1000;background:#171717;display:flex;align-items:center;justify-content:center}
-.bootbox{text-align:center;width:90%;max-width:420px}
-.logo{width:90px;height:90px;margin:0 auto 18px;background:linear-gradient(145deg,#ef3939,#851010);clip-path:polygon(50% 0,61% 34%,98% 35%,69% 57%,80% 94%,50% 72%,20% 94%,31% 57%,2% 35%,39% 34%);filter:drop-shadow(0 0 20px #d52b2b)}
-.brand{font-size:30px;font-weight:900;letter-spacing:5px}
+button{color:inherit;cursor:pointer}
+button:hover{filter:brightness(1.18)}
+#setup{display:none;position:fixed;inset:0;z-index:900;background:#171717;align-items:center;justify-content:center;padding:20px}
+.setupbox{width:100%;max-width:430px;padding:30px;background:#242424;border:1px solid #444;border-radius:16px}
+.logo{width:55px;height:55px;background:var(--red);clip-path:polygon(50% 0,61% 34%,98% 35%,69% 57%,80% 94%,50% 72%,20% 94%,31% 57%,2% 35%,39% 34%);display:inline-block;vertical-align:middle;margin-right:10px}
+.brand{font-size:26px;font-weight:900;letter-spacing:3px}
 .brand span{color:var(--red)}
-.bootline{font:13px monospace;color:#aaa;margin:22px}
-.progress{height:4px;background:#444;border-radius:8px;overflow:hidden}
-.progress i{display:block;height:100%;background:var(--red);animation:load 2.5s forwards}
-@keyframes load{to{width:100%}}
-#setup{display:none;z-index:900;padding:20px}
-.setupbox{background:#242424;border:1px solid #444;border-radius:16px;padding:30px;width:100%;max-width:430px}
 .setupbox input,.setupbox select{width:100%;padding:12px;background:#151515;color:white;border:1px solid #555;border-radius:8px;margin:8px 0 16px}
 .primary{background:var(--red);border:0;padding:11px 17px;border-radius:8px;font-weight:bold}
-.primary:hover{background:#f04444}
 #desktop{display:none;position:fixed;inset:0;background:radial-gradient(ellipse at 70% 15%,#492020,#241919 35%,#171717 75%)}
 .watermark{position:absolute;right:8%;top:20%;font-size:clamp(90px,17vw,210px);font-weight:900;color:#ffffff08;pointer-events:none}
 #icons{position:absolute;top:15px;left:12px;display:grid;gap:8px}
-.dicon{width:85px;height:78px;background:transparent;border:1px solid transparent;border-radius:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;font-size:12px;text-shadow:0 2px 4px black}
+.dicon{width:88px;height:78px;background:transparent;border:1px solid transparent;border-radius:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;font-size:12px;text-shadow:0 2px 4px black}
 .dicon:hover{background:#ffffff17;border-color:#ffffff25}
 .dicon b{font-size:27px;font-weight:normal}
 #taskbar{position:absolute;bottom:0;left:0;right:0;height:57px;background:#151515ed;border-top:1px solid #ffffff22;display:flex;align-items:center;gap:8px;padding:0 12px;z-index:500;backdrop-filter:blur(15px)}
@@ -67,10 +61,10 @@ button{cursor:pointer;color:inherit}
 .card button,.soft{background:#ffffff12;border:1px solid #ffffff25;border-radius:7px;padding:8px 11px}
 .card button{background:var(--red);border:0}
 .rowitem{display:flex;align-items:center;gap:12px;padding:12px;background:#ffffff09;border:1px solid #ffffff15;border-radius:9px;margin:8px 0}
-.rowitem .grow{flex:1}
+.rowitem .grow{flex:1;min-width:0}
 .rowitem small{display:block;color:#aaa;margin-top:3px}
 textarea{width:100%;height:300px;background:#151515;color:white;border:1px solid #555;border-radius:9px;padding:12px;resize:vertical}
-.terminal{background:#080b08;border:1px solid #285b31;border-radius:9px;padding:14px;font:13px/1.6 monospace;color:#a6e7a6;min-height:260px;white-space:pre-wrap}
+.terminal{background:#080b08;border:1px solid #285b31;border-radius:9px;padding:14px;font:13px/1.6 monospace;color:#a6e7a6;min-height:260px;white-space:pre-wrap;overflow:auto}
 .terminal input{background:transparent;border:0;outline:0;color:white;font:inherit;width:70%}
 .calc{max-width:320px;margin:auto}
 .calcdisplay{width:100%;padding:17px;background:#111;color:white;border:1px solid #555;border-radius:9px;text-align:right;font-size:25px;margin-bottom:9px}
@@ -85,25 +79,17 @@ textarea{width:100%;height:300px;background:#151515;color:white;border:1px solid
 </head>
 <body>
 
-<div id="boot">
- <div class="bootbox">
-  <div class="logo"></div>
-  <div class="brand"><span>DAZ</span> LINUX</div>
-  <div class="bootline" id="bootline">Initializing DAZ Linux V11...</div>
-  <div class="progress"><i></i></div>
-  <p class="muted">MODERN SOVIET EDITION · V11.0</p>
- </div>
-</div>
-
 <div id="setup">
  <div class="setupbox">
-  <div class="brand"><span>DAZ</span> LINUX</div>
+  <div><span class="logo"></span><span class="brand"><span>DAZ</span> LINUX</span></div>
   <h2 id="welcome">Bienvenido</h2>
   <p class="muted" id="welcomeText">Configura tu sesión para iniciar.</p>
   <label>Idioma / Language</label>
   <select id="language" onchange="changeSetupLanguage(this.value)">
-   <option value="es">Español</option><option value="en">English</option>
-   <option value="fr">Français</option><option value="ru">Русский</option>
+   <option value="es">Español</option>
+   <option value="en">English</option>
+   <option value="fr">Français</option>
+   <option value="ru">Русский</option>
   </select>
   <label id="userLabel">Nombre de usuario</label>
   <input id="username" maxlength="24" placeholder="Usuario">
@@ -119,7 +105,7 @@ textarea{width:100%;height:300px;background:#151515;color:white;border:1px solid
   <div class="searchbar">⌕ <input id="globalSearch" placeholder="Buscar..." oninput="searchApps(this.value)"></div>
   <div id="searchResults"></div>
   <div id="pinnedArea"><div class="section" id="pinnedTitle">Aplicaciones fijadas</div><div class="appgrid" id="appgrid"></div></div>
-  <div class="startfoot"><button onclick="openApp('settings')">⚙ Configuración</button><button onclick="restartSession()">↻ Reiniciar</button></div>
+  <div class="startfoot"><button onclick="openApp('settings')">⚙ Configuración</button><button onclick="restartSession()">↻ Reiniciar sesión</button></div>
  </div>
  <div id="taskbar">
   <button id="startbtn" onclick="toggleStart()">✦</button>
@@ -149,7 +135,7 @@ const APPS=[
  ["control","DAZ Command Center","☭","Panel principal del sistema"],
  ["files","DAZ Files","📁","Explorador virtual"],
  ["terminal","DAZ Terminal","⌨️","Terminal de demostración"],
- ["software","Software Center","▦","Catálogo de aplicaciones"],
+ ["software","DAZ Software Center","▦","Catálogo de aplicaciones"],
  ["notes","DAZ Notes","📝","Notas con guardado automático"],
  ["calculator","Calculadora","🧮","Operaciones matemáticas"],
  ["visits","Contador de visitas","◷","Visitas de este navegador"],
@@ -160,27 +146,22 @@ const APPS=[
 ];
 
 const T={
-es:{welcome:"Bienvenido",welcomeText:"Configura tu sesión para iniciar.",user:"Nombre de usuario",enter:"Iniciar DAZ Linux",start:"Inicio",pinned:"Aplicaciones fijadas",search:"Buscar aplicaciones y herramientas...",open:"Abrir",close:"Cerrar",saved:"Guardado automáticamente",note:"Escribe tus notas aquí...",visits:"Visitas en este navegador",notGlobal:"Este contador se guarda solamente en este navegador.",updated:"DAZ Linux está actualizado",updateDesc:"Esta es una pantalla informativa. No instala actualizaciones reales.",check:"Buscar actualizaciones",none:"No hay actualizaciones disponibles.",language:"Idioma",wallpaper:"Fondo de escritorio",red:"Rojo",gold:"Dorado",dark:"Oscuro",noResults:"No se encontraron resultados.",restart:"Reiniciar sesión"},
-en:{welcome:"Welcome",welcomeText:"Set up your session to begin.",user:"Username",enter:"Start DAZ Linux",start:"Start",pinned:"Pinned apps",search:"Search apps and tools...",open:"Open",close:"Close",saved:"Autosaved",note:"Write your notes here...",visits:"Visits in this browser",notGlobal:"This counter is stored only in this browser.",updated:"DAZ Linux is up to date",updateDesc:"This is an informational screen. It does not install real updates.",check:"Check for updates",none:"No updates available.",language:"Language",wallpaper:"Desktop wallpaper",red:"Red",gold:"Gold",dark:"Dark",noResults:"No results found.",restart:"Restart session"},
-fr:{welcome:"Bienvenue",welcomeText:"Configurez votre session pour commencer.",user:"Nom d'utilisateur",enter:"Démarrer DAZ Linux",start:"Démarrer",pinned:"Applications épinglées",search:"Rechercher des applications...",open:"Ouvrir",close:"Fermer",saved:"Enregistrement automatique",note:"Écrivez vos notes ici...",visits:"Visites sur ce navigateur",notGlobal:"Ce compteur est stocké uniquement dans ce navigateur.",updated:"DAZ Linux est à jour",updateDesc:"Écran informatif. Il n'installe pas de vraies mises à jour.",check:"Rechercher des mises à jour",none:"Aucune mise à jour disponible.",language:"Langue",wallpaper:"Fond d'écran",red:"Rouge",gold:"Or",dark:"Sombre",noResults:"Aucun résultat.",restart:"Redémarrer la session"},
-ru:{welcome:"Добро пожаловать",welcomeText:"Настройте сеанс для начала работы.",user:"Имя пользователя",enter:"Запустить DAZ Linux",start:"Пуск",pinned:"Закреплённые приложения",search:"Поиск приложений...",open:"Открыть",close:"Закрыть",saved:"Автосохранение",note:"Введите заметку здесь...",visits:"Посещения в браузере",notGlobal:"Счётчик хранится только в этом браузере.",updated:"DAZ Linux обновлён",updateDesc:"Информационный экран. Реальные обновления не устанавливаются.",check:"Проверить обновления",none:"Обновлений нет.",language:"Язык",wallpaper:"Обои",red:"Красный",gold:"Золотой",dark:"Тёмный",noResults:"Ничего не найдено.",restart:"Перезапустить сеанс"}
+es:{welcome:"Bienvenido",welcomeText:"Configura tu sesión para iniciar.",user:"Nombre de usuario",enter:"Iniciar DAZ Linux",start:"Inicio",pinned:"Aplicaciones fijadas",search:"Buscar aplicaciones y herramientas...",open:"Abrir",saved:"Guardado automáticamente",note:"Escribe tus notas aquí...",visits:"Visitas en este navegador",notGlobal:"Este contador se guarda solamente en este navegador.",updated:"DAZ Linux está actualizado",updateDesc:"Esta pantalla es informativa. No instala actualizaciones reales.",check:"Buscar actualizaciones",none:"No hay actualizaciones disponibles.",language:"Idioma",wallpaper:"Fondo de escritorio",red:"Rojo",gold:"Dorado",dark:"Oscuro",noResults:"No se encontraron resultados."},
+en:{welcome:"Welcome",welcomeText:"Set up your session to begin.",user:"Username",enter:"Start DAZ Linux",start:"Start",pinned:"Pinned apps",search:"Search apps and tools...",open:"Open",saved:"Autosaved",note:"Write your notes here...",visits:"Visits in this browser",notGlobal:"This counter is stored only in this browser.",updated:"DAZ Linux is up to date",updateDesc:"This is an informational screen. It does not install real updates.",check:"Check for updates",none:"No updates available.",language:"Language",wallpaper:"Desktop wallpaper",red:"Red",gold:"Gold",dark:"Dark",noResults:"No results found."},
+fr:{welcome:"Bienvenue",welcomeText:"Configurez votre session pour commencer.",user:"Nom d'utilisateur",enter:"Démarrer DAZ Linux",start:"Démarrer",pinned:"Applications épinglées",search:"Rechercher des applications...",open:"Ouvrir",saved:"Enregistrement automatique",note:"Écrivez vos notes ici...",visits:"Visites sur ce navigateur",notGlobal:"Ce compteur est stocké uniquement dans ce navigateur.",updated:"DAZ Linux est à jour",updateDesc:"Écran informatif. Il n'installe pas de vraies mises à jour.",check:"Rechercher des mises à jour",none:"Aucune mise à jour disponible.",language:"Langue",wallpaper:"Fond d'écran",red:"Rouge",gold:"Or",dark:"Sombre",noResults:"Aucun résultat."},
+ru:{welcome:"Добро пожаловать",welcomeText:"Настройте сеанс для начала работы.",user:"Имя пользователя",enter:"Запустить DAZ Linux",start:"Пуск",pinned:"Закреплённые приложения",search:"Поиск приложений...",open:"Открыть",saved:"Автосохранение",note:"Введите заметку здесь...",visits:"Посещения в браузере",notGlobal:"Счётчик хранится только в этом браузере.",updated:"DAZ Linux обновлён",updateDesc:"Информационный экран. Реальные обновления не устанавливаются.",check:"Проверить обновления",none:"Обновлений нет.",language:"Язык",wallpaper:"Обои",red:"Красный",gold:"Золотой",dark:"Тёмный",noResults:"Ничего не найдено."}
 };
 
 let lang=localStorage.getItem("daz_lang")||"es";
 let username=localStorage.getItem("daz_user")||"";
 let zindex=30;
+let clockTimer=null;
 const tr=k=>T[lang]?.[k]||T.es[k]||k;
 const app=id=>APPS.find(a=>a[0]===id);
 
-function boot(){
- const lines=["Initializing DAZ interface...","Loading desktop services...","Starting DAZ environment...","Добро пожаловать / Bienvenido"];
- let i=0;
- const timer=setInterval(()=>document.getElementById("bootline").textContent=lines[i++%lines.length],550);
- setTimeout(()=>{
-  clearInterval(timer);
-  document.getElementById("boot").style.display="none";
-  username?showDesktop():showSetup();
- },2700);
+function startSystem(){
+ if(username)showDesktop();
+ else showSetup();
 }
 function showSetup(){
  document.getElementById("setup").style.display="flex";
@@ -202,6 +183,7 @@ function enterSystem(){
  showDesktop();
 }
 function showDesktop(){
+ document.getElementById("setup").style.display="none";
  document.getElementById("desktop").style.display="block";
  renderDesktop();
  document.getElementById("startTitle").textContent=tr("start");
@@ -212,12 +194,15 @@ function showDesktop(){
  localStorage.setItem("daz_visits",visits);
  const wallpaper=localStorage.getItem("daz_wallpaper");
  if(wallpaper)setWallpaper(wallpaper,false);
- updateClock();setInterval(updateClock,1000);
+ updateClock();
+ if(clockTimer)clearInterval(clockTimer);
+ clockTimer=setInterval(updateClock,1000);
 }
 function renderDesktop(){
  const shortcuts=["kiwi","files","control","search"];
  document.getElementById("icons").innerHTML=shortcuts.map(id=>{
-  const a=app(id);return `<button class="dicon" onclick="openApp('${id}')"><b>${a[2]}</b>${a[1]}</button>`;
+  const a=app(id);
+  return `<button class="dicon" onclick="openApp('${id}')"><b>${a[2]}</b>${a[1]}</button>`;
  }).join("");
  document.getElementById("appgrid").innerHTML=APPS.map(a=>
   `<button class="tile" onclick="openApp('${a[0]}');toggleStart(false)"><b>${a[2]}</b>${a[1]}</button>`
@@ -232,11 +217,14 @@ function toggleStart(force){
  m.style.display=(force===undefined?m.style.display!=="block":force)?"block":"none";
 }
 function toast(msg){
- const t=document.getElementById("toast");t.textContent=msg;t.style.display="block";
- clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display="none",2500);
+ const t=document.getElementById("toast");
+ t.textContent=msg;t.style.display="block";
+ clearTimeout(window.toastTimer);
+ window.toastTimer=setTimeout(()=>t.style.display="none",2500);
 }
 function searchApps(q){
- const area=document.getElementById("searchResults"),pin=document.getElementById("pinnedArea");
+ const area=document.getElementById("searchResults");
+ const pin=document.getElementById("pinnedArea");
  if(!q.trim()){area.innerHTML="";pin.style.display="block";return}
  pin.style.display="none";
  const found=APPS.filter(a=>(a[1]+" "+a[3]).toLowerCase().includes(q.toLowerCase()));
@@ -251,32 +239,36 @@ function openApp(id){
  w.innerHTML=`<div class="winbar" onmousedown="dragWindow(event,'${id}')"><span>${a[2]}</span><strong>${a[1]}</strong><div class="spacer"></div><button onclick="minApp('${id}')">—</button><button onclick="maxApp('${id}')">□</button><button class="close" onclick="closeApp('${id}')">×</button></div><div class="winbody">${content(id)}</div>`;
  document.getElementById("desktop").appendChild(w);
  w.addEventListener("mousedown",()=>w.style.zIndex=++zindex);
+ if(id==="notes")document.getElementById("noteText").value=localStorage.getItem("daz_note")||"";
+ if(id==="terminal")document.getElementById("termcmd").focus();
 }
 function closeApp(id){document.getElementById("win-"+id)?.remove()}
 function minApp(id){document.getElementById("win-"+id).style.display="none"}
 function maxApp(id){document.getElementById("win-"+id).classList.toggle("max")}
 function dragWindow(e,id){
  if(e.target.tagName==="BUTTON")return;
- const w=document.getElementById("win-"+id);if(w.classList.contains("max"))return;
+ const w=document.getElementById("win-"+id);
+ if(w.classList.contains("max"))return;
  const sx=e.clientX,sy=e.clientY,r=w.getBoundingClientRect();
  const ox=r.left+r.width/2,oy=r.top+r.height/2;
  function move(ev){w.style.left=ox+ev.clientX-sx+"px";w.style.top=oy+ev.clientY-sy+"px"}
  function stop(){document.removeEventListener("mousemove",move);document.removeEventListener("mouseup",stop)}
- document.addEventListener("mousemove",move);document.addEventListener("mouseup",stop);
+ document.addEventListener("mousemove",move);
+ document.addEventListener("mouseup",stop);
 }
 function content(id){
  if(id==="kiwi")return `<h2>🥝 Kiwi Center</h2><p class="muted">Todos tus portales en una sola aplicación.</p><div class="cardgrid">${LINKS.map(l=>`<div class="card"><div style="font-size:25px">${l[2]}</div><h3>${l[0]}</h3><p>${l[1]}</p><button onclick="window.open('${l[1]}','_blank','noopener')">${tr("open")} ↗</button></div>`).join("")}</div>`;
- if(id==="control")return `<h2>☭ DAZ Command Center</h2><p class="muted">Panel central de DAZ Linux V11.</p><div class="cardgrid"><div class="card"><h3>Sistema</h3><p>DAZ Linux V11.0</p></div><div class="card"><h3>Usuario</h3><p>${esc(username)}</p></div><div class="card"><h3>Interfaz</h3><p>Modern Soviet Edition</p></div><div class="card"><h3>Kiwi Center</h3><p>7 portales disponibles</p></div></div>`;
+ if(id==="control")return `<h2>☭ DAZ Command Center</h2><p class="muted">Panel central de DAZ Linux V11.1.</p><div class="cardgrid"><div class="card"><h3>Sistema</h3><p>DAZ Linux V11.1</p></div><div class="card"><h3>Usuario</h3><p>${esc(username)}</p></div><div class="card"><h3>Interfaz</h3><p>Modern Soviet Edition</p></div><div class="card"><h3>Kiwi Center</h3><p>7 portales disponibles</p></div></div>`;
  if(id==="files")return `<h2>📁 DAZ Files</h2><p class="muted">Explorador virtual. No accede a los archivos reales de tu computadora.</p>${["Desktop","Documents","Downloads","Pictures","Music","System"].map((x,i)=>`<div class="rowitem"><span>${["🖥️","📄","⬇️","🖼️","🎵","⚙️"][i]}</span><div class="grow"><b>${x}</b><small>Carpeta virtual</small></div><button class="soft" onclick="toast('Carpeta virtual: ${x}')">${tr("open")}</button></div>`).join("")}`;
- if(id==="terminal")return `<h2>⌨️ DAZ Terminal</h2><p class="muted">Terminal de demostración: no ejecuta comandos del sistema operativo.</p><div class="terminal" id="termout">DAZ Linux V11 Terminal [DEMO]\nEscribe help para ver los comandos.\n<span>user@daz:~$ </span><input id="termcmd" onkeydown="if(event.key==='Enter')runCommand()"></div>`;
+ if(id==="terminal")return `<h2>⌨️ DAZ Terminal</h2><p class="muted">Terminal de demostración: no ejecuta comandos del sistema operativo.</p><div class="terminal" id="termout">DAZ Linux V11.1 Terminal [DEMO]\nEscribe help para ver los comandos.\n<span>user@daz:~$ </span><input id="termcmd" onkeydown="if(event.key==='Enter')runCommand()"></div>`;
  if(id==="software")return `<h2>▦ DAZ Software Center</h2><p class="muted">Aplicaciones incluidas en esta versión.</p>${APPS.map(a=>`<div class="rowitem"><span>${a[2]}</span><div class="grow"><b>${a[1]}</b><small>${a[3]}</small></div><button class="soft" onclick="openApp('${a[0]}')">${tr("open")}</button></div>`).join("")}`;
  if(id==="notes")return `<h2>📝 DAZ Notes</h2><p class="muted" id="noteStatus">${tr("saved")}</p><textarea id="noteText" placeholder="${tr("note")}" oninput="saveNote(this.value)"></textarea>`;
  if(id==="calculator")return `<h2>🧮 Calculadora</h2><div class="calc"><input class="calcdisplay" id="calcDisplay" value="0" readonly><div class="calcgrid">${["7","8","9","÷","4","5","6","×","1","2","3","−","0",".","C","+","(",")","⌫","="].map(k=>`<button class="${["÷","×","−","+"].includes(k)?"op":""}" onclick="calcKey('${k}')">${k}</button>`).join("")}</div></div>`;
  if(id==="visits")return `<h2>◷ ${tr("visits")}</h2><div class="updatehero"><strong style="font-size:42px">${localStorage.getItem("daz_visits")||1}</strong><p>${tr("notGlobal")}</p></div>`;
  if(id==="search")return `<h2>⌕ DAZ Search</h2><p class="muted">Busca aplicaciones y herramientas instaladas.</p><div class="searchbar">⌕ <input id="insideSearch" placeholder="${tr("search")}" oninput="insideSearch(this.value)"></div><div id="insideResults"></div>`;
- if(id==="updates")return `<h2>⟳ Update Center</h2><div class="updatehero"><strong>${tr("updated")}</strong><p>${tr("updateDesc")}</p><span class="tag">V11.0 · DEMO BUILD</span></div><div class="rowitem"><div class="grow"><b>DAZ Linux V11.0</b><small>Versión instalada</small></div><button class="soft" onclick="toast('${tr("none")}')">${tr("check")}</button></div><p class="muted">Para actualizar esta maqueta, reemplaza los archivos del proyecto en GitHub.</p>`;
+ if(id==="updates")return `<h2>⟳ Update Center</h2><div class="updatehero"><strong>${tr("updated")}</strong><p>${tr("updateDesc")}</p><span class="tag">V11.1 · DEMO BUILD</span></div><div class="rowitem"><div class="grow"><b>DAZ Linux V11.1</b><small>Versión instalada</small></div><button class="soft" onclick="toast('${tr("none")}')">${tr("check")}</button></div><p class="muted">Para actualizar esta maqueta, reemplaza los archivos del proyecto en GitHub.</p>`;
  if(id==="settings")return `<h2>⚙️ Configuración</h2><div class="cardgrid"><div class="card"><h3>${tr("language")}</h3><select onchange="changeLanguage(this.value)" style="width:100%;padding:9px;background:#151515;color:white;border:1px solid #555;border-radius:7px"><option value="es" ${lang==="es"?"selected":""}>Español</option><option value="en" ${lang==="en"?"selected":""}>English</option><option value="fr" ${lang==="fr"?"selected":""}>Français</option><option value="ru" ${lang==="ru"?"selected":""}>Русский</option></select></div><div class="card"><h3>${tr("wallpaper")}</h3><button class="soft" onclick="setWallpaper('red')">${tr("red")}</button> <button class="soft" onclick="setWallpaper('gold')">${tr("gold")}</button> <button class="soft" onclick="setWallpaper('dark')">${tr("dark")}</button></div><div class="card"><h3>Cuenta</h3><p>${esc(username)}</p><button class="soft" onclick="restartSession()">Cambiar usuario</button></div></div>`;
- if(id==="notifications")return `<h2>◉ Centro de notificaciones</h2><div class="rowitem"><div class="grow"><b>DAZ Linux V11</b><small>Sesión iniciada: ${esc(username)}</small></div>●</div><div class="rowitem"><div class="grow"><b>Update Center</b><small>${tr("none")}</small></div>⟳</div><p class="muted">${new Date().toLocaleString()}</p>`;
+ if(id==="notifications")return `<h2>◉ Centro de notificaciones</h2><div class="rowitem"><div class="grow"><b>DAZ Linux V11.1</b><small>Sesión iniciada: ${esc(username)}</small></div>●</div><div class="rowitem"><div class="grow"><b>Update Center</b><small>${tr("none")}</small></div>⟳</div><p class="muted">${new Date().toLocaleString()}</p>`;
  return "";
 }
 function saveNote(v){localStorage.setItem("daz_note",v);document.getElementById("noteStatus").textContent=tr("saved")}
@@ -285,12 +277,14 @@ function insideSearch(q){
  document.getElementById("insideResults").innerHTML=found.map(a=>`<div class="rowitem"><span>${a[2]}</span><div class="grow"><b>${a[1]}</b></div><button class="soft" onclick="openApp('${a[0]}')">${tr("open")}</button></div>`).join("");
 }
 function runCommand(){
- const input=document.getElementById("termcmd"),out=document.getElementById("termout");
- const cmd=input.value.trim();let result="";
+ const input=document.getElementById("termcmd");
+ const out=document.getElementById("termout");
+ const cmd=input.value.trim();
+ let result="";
  if(cmd==="help")result="Comandos: help, date, whoami, version, apps, clear";
  else if(cmd==="date")result=new Date().toString();
  else if(cmd==="whoami")result=username;
- else if(cmd==="version")result="DAZ Linux V11.0 Web Demo";
+ else if(cmd==="version")result="DAZ Linux V11.1 Web Demo";
  else if(cmd==="apps")result=APPS.map(a=>a[1]).join(" | ");
  else if(cmd==="clear"){out.innerHTML='<span>user@daz:~$ </span><input id="termcmd" onkeydown="if(event.key===\\'Enter\\')runCommand()">';return}
  else result="Comando desconocido. Escribe help.";
@@ -307,18 +301,18 @@ function calcKey(k){
    if(!/^[0-9+*/(). -]+$/.test(exp))throw Error();
    const n=Function('"use strict";return ('+exp+')')();
    d.value=Number.isFinite(n)?String(n):"Error";
-  }catch{d.value="Error"}return;
+  }catch{d.value="Error"}
+  return;
  }
  d.value=d.value==="0"?k:d.value+k;
 }
 function changeLanguage(v){
  lang=v;localStorage.setItem("daz_lang",v);
- toast("Language updated");
- const old=document.getElementById("win-settings");
- if(old){closeApp("settings");openApp("settings")}
  document.getElementById("startTitle").textContent=tr("start");
  document.getElementById("pinnedTitle").textContent=tr("pinned");
  document.getElementById("globalSearch").placeholder=tr("search");
+ toast("Language updated");
+ closeApp("settings");openApp("settings");
 }
 function setWallpaper(v,notify=true){
  const d=document.getElementById("desktop");
@@ -326,10 +320,15 @@ function setWallpaper(v,notify=true){
  localStorage.setItem("daz_wallpaper",v);
  if(notify)toast("Wallpaper changed");
 }
-function restartSession(){localStorage.removeItem("daz_user");location.reload()}
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function restartSession(){
+ localStorage.removeItem("daz_user");
+ location.reload();
+}
+function esc(s){
+ return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
 window.addEventListener("load",()=>{
- boot();
+ startSystem();
  window.addEventListener("click",e=>{
   if(!e.target.closest("#startmenu")&&!e.target.closest("#startbtn"))toggleStart(false);
  });

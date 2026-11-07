@@ -4,452 +4,807 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DAZ Linux V9 - Soviet Edition</title>
+<title>DAZ Linux V9</title>
 
 <style>
 :root {
-  --red:#b5121b;
-  --dark:#160b0b;
-  --panel:#291313;
-  --gold:#e8bd55;
-  --white:#f4eeee;
+  --bg:#171717;
+  --panel:#242424;
+  --panel2:#303030;
+  --red:#a71920;
+  --gold:#c5a45b;
+  --text:#eee;
+  --muted:#aaa;
 }
 
 * {box-sizing:border-box}
 
 body {
   margin:0;
-  background:var(--dark);
-  color:var(--white);
+  background:var(--bg);
+  color:var(--text);
   font-family:Arial,sans-serif;
+  overflow:hidden;
 }
 
-header {
-  background:#850d15;
-  border-bottom:3px solid var(--gold);
-  padding:20px;
-  text-align:center;
+button,select {
+  font:inherit;
 }
 
-header h1 {
-  margin:0;
-  letter-spacing:3px;
-}
-
-header p {color:#f3d8a0}
-
-nav {
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:10px;
-  padding:15px;
-  background:#241010;
-}
-
-button, select, input {
-  background:#850d15;
-  color:white;
-  border:1px solid var(--gold);
-  border-radius:5px;
-  padding:10px;
+button {
   cursor:pointer;
+  background:#333;
+  color:white;
+  border:1px solid #555;
+  padding:9px 13px;
 }
 
-button:hover {background:#b5121b}
+button:hover {background:var(--red)}
 
-main {
-  max-width:1100px;
-  margin:auto;
-  padding:20px;
-}
-
-.panel {
-  background:var(--panel);
-  border:1px solid #702329;
-  border-left:4px solid var(--red);
-  padding:20px;
-  margin-bottom:20px;
-  border-radius:8px;
-}
-
-h2 {color:var(--gold)}
-
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:15px;
-}
-
-.card {
-  background:#351818;
+#desktop {
+  height:calc(100vh - 42px);
   padding:18px;
-  border-radius:8px;
-  border:1px solid #713036;
+  background:
+    radial-gradient(ellipse at center,#292929 0%,#151515 80%);
+  display:grid;
+  grid-template-columns:repeat(auto-fill,90px);
+  grid-auto-rows:100px;
+  align-content:start;
+  gap:8px;
 }
 
-.card a {
-  display:inline-block;
-  margin-top:10px;
-  color:var(--gold);
+.desktop-icon {
+  width:85px;
+  min-height:90px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  text-align:center;
+  font-size:12px;
+  cursor:pointer;
+  border:1px solid transparent;
+  padding:5px;
+  border-radius:5px;
+  user-select:none;
+}
+
+.desktop-icon:hover {
+  background:#ffffff18;
+  border-color:#777;
+}
+
+.desktop-icon .symbol {
+  font-size:30px;
+}
+
+.desktop-icon span:last-child {
+  overflow-wrap:anywhere;
+}
+
+#taskbar {
+  position:fixed;
+  bottom:0;
+  height:42px;
+  width:100%;
+  background:#202020;
+  border-top:2px solid var(--red);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 8px;
+  z-index:20;
+}
+
+#startButton {
+  background:var(--red);
+  border:1px solid var(--gold);
+  font-weight:bold;
+}
+
+#taskLeft,#taskRight {
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
 #clock {
-  font-size:35px;
-  font-weight:bold;
-  text-align:center;
-}
-
-#gameTime {
-  font-size:40px;
-  text-align:center;
+  font-size:13px;
   color:var(--gold);
 }
 
-footer {
-  text-align:center;
-  padding:20px;
-  color:#aaa;
-  border-top:1px solid #713036;
+#startMenu {
+  position:fixed;
+  bottom:46px;
+  left:8px;
+  width:min(280px,90vw);
+  background:#222;
+  border:1px solid var(--gold);
+  border-top:3px solid var(--red);
+  padding:12px;
+  z-index:30;
+  display:none;
+  box-shadow:0 5px 20px #0009;
 }
 
-.hidden {display:none}
+#startMenu.open {display:block}
 
-.star {color:var(--gold)}
+.menu-title {
+  font-weight:bold;
+  padding:10px;
+  border-bottom:1px solid #555;
+  color:var(--gold);
+}
+
+.menu-item {
+  width:100%;
+  text-align:left;
+  margin-top:5px;
+  background:#303030;
+}
+
+#window {
+  display:none;
+  position:fixed;
+  z-index:10;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:min(750px,94vw);
+  height:min(540px,78vh);
+  background:#222;
+  border:1px solid var(--gold);
+  box-shadow:0 10px 35px #000b;
+}
+
+#window.show {display:flex;flex-direction:column}
+
+#windowHeader {
+  height:42px;
+  background:var(--red);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 12px;
+  font-weight:bold;
+}
+
+#windowContent {
+  padding:20px;
+  overflow:auto;
+  flex:1;
+}
+
+#windowContent iframe {
+  width:100%;
+  height:100%;
+  min-height:350px;
+  border:0;
+  background:white;
+}
+
+.window-close {
+  background:#222;
+  padding:4px 10px;
+}
+
+.panel {
+  background:#303030;
+  padding:16px;
+  margin-bottom:14px;
+  border-left:3px solid var(--red);
+}
+
+.big-time {
+  text-align:center;
+  font-size:38px;
+  color:var(--gold);
+  margin:20px;
+}
+
+.shortcut-list {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:10px;
+}
+
+.shortcut-list button {
+  text-align:left;
+}
+
+#languageScreen {
+  position:fixed;
+  inset:0;
+  background:#111;
+  z-index:100;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.language-box {
+  background:#242424;
+  border:1px solid var(--gold);
+  border-top:5px solid var(--red);
+  padding:30px;
+  width:min(400px,100%);
+  text-align:center;
+}
+
+.language-box select {
+  width:100%;
+  margin:15px 0;
+  padding:12px;
+}
+
+.language-box button {width:100%}
+
+.hidden {display:none!important}
+
+footer {
+  color:var(--muted);
+  font-size:11px;
+  text-align:center;
+  padding:8px;
+}
+
+@media(max-width:500px) {
+  #desktop {
+    grid-template-columns:repeat(3,1fr);
+    padding:10px;
+  }
+
+  .desktop-icon {width:100%}
+}
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>☭ DAZ LINUX V9</h1>
-  <p>SOVIET EDITION · GAMING SYSTEM</p>
-  <div id="clock">00:00:00</div>
-</header>
+<!-- LANGUAGE STARTUP -->
+<div id="languageScreen">
+  <div class="language-box">
+    <h1>☭ DAZ LINUX V9</h1>
+    <p id="languageTitle">Selecciona el idioma del sistema</p>
 
-<nav>
-  <button onclick="showSection('home')" data-i18n="home">Inicio</button>
-  <button onclick="showSection('gaming')" data-i18n="gaming">Gaming</button>
-  <button onclick="showSection('hub')" data-i18n="hub">Gaming Hub</button>
-  <button onclick="showSection('shortcuts')" data-i18n="shortcuts">Accesos rápidos</button>
-  <select id="language" onchange="changeLanguage(this.value)">
-    <option value="es">Español</option>
-    <option value="en">English</option>
-    <option value="fr">Français</option>
-    <option value="ru">Русский</option>
-  </select>
-</nav>
+    <select id="languageSelect">
+      <option value="es">Español</option>
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="ru">Русский</option>
+    </select>
 
-<main>
-
-<!-- HOME -->
-<section id="home">
-  <div class="panel">
-    <h2 data-i18n="welcome">Bienvenido al sistema</h2>
-    <p>DAZ Linux V9 Soviet Edition</p>
-    <p data-i18n="description">
-      Un sistema digital con herramientas de gaming y estilo soviético.
-    </p>
-    <h3>☭ <span data-i18n="motto">La tecnología al servicio del pueblo</span></h3>
-  </div>
-
-  <div class="grid">
-    <div class="card">
-      <h3 data-i18n="visits">Contador de visitas</h3>
-      <h1 id="visits">0</h1>
-      <small data-i18n="localVisits">Visitas en este navegador</small>
-    </div>
-
-    <div class="card">
-      <h3>Gaming Mode</h3>
-      <p id="gamingStatus">OFF</p>
-      <button onclick="toggleGaming()" data-i18n="activate">Activar</button>
-    </div>
-  </div>
-</section>
-
-<!-- GAMING -->
-<section id="gaming" class="hidden">
-  <div class="panel">
-    <h2>🎮 Game Time</h2>
-    <div id="gameTime">00:00:00</div>
-    <div style="text-align:center">
-      <button onclick="startTimer()" data-i18n="start">Iniciar</button>
-      <button onclick="pauseTimer()" data-i18n="pause">Pausar</button>
-      <button onclick="resetTimer()" data-i18n="reset">Reiniciar</button>
-    </div>
-  </div>
-
-  <div class="panel">
-    <h2>Gaming Mode</h2>
-    <p data-i18n="gamingDescription">
-      Activa una interfaz enfocada en tus juegos.
-    </p>
-    <button onclick="toggleGaming()" data-i18n="toggleGaming">
-      Cambiar modo
+    <button onclick="bootSystem()" id="bootButton">
+      Iniciar sistema
     </button>
-    <p id="gamingStatus2">OFF</p>
+    <footer>DAZ OPERATING SYSTEM</footer>
   </div>
-</section>
+</div>
 
-<!-- HUB -->
-<section id="hub" class="hidden">
-  <div class="panel">
-    <h2>🎮 DAZ Gaming Hub</h2>
-    <p data-i18n="hubDescription">
-      Centro de acceso a plataformas de videojuegos.
-    </p>
+<!-- DESKTOP -->
+<div id="desktop">
 
-    <div class="grid">
-      <div class="card">
-        <h3>Roblox</h3>
-        <a href="https://www.roblox.com/" target="_blank">Abrir Roblox ↗</a>
-      </div>
-
-      <div class="card">
-        <h3>Minecraft</h3>
-        <a href="https://www.minecraft.net/" target="_blank">Abrir Minecraft ↗</a>
-      </div>
-
-      <div class="card">
-        <h3>Steam</h3>
-        <a href="https://store.steampowered.com/" target="_blank">Abrir Steam ↗</a>
-      </div>
-
-      <div class="card">
-        <h3>itch.io</h3>
-        <a href="https://itch.io/" target="_blank">Abrir itch.io ↗</a>
-      </div>
-    </div>
+  <div class="desktop-icon" onclick="openPage('StudySync')">
+    <span class="symbol">📚</span>
+    <span>StudySync</span>
   </div>
-</section>
 
-<!-- SHORTCUTS -->
-<section id="shortcuts" class="hidden">
-  <div class="panel">
-    <h2 data-i18n="shortcutsTitle">Accesos rápidos</h2>
-
-    <div class="grid">
-      <div class="card">
-        <h3>Kiwi Links</h3>
-        <p data-i18n="kiwiDescription">Tus enlaces favoritos.</p>
-        <a href="https://www.google.com/" target="_blank">Enlace 1 ↗</a>
-        <br>
-        <a href="https://www.youtube.com/" target="_blank">Enlace 2 ↗</a>
-        <br>
-        <a href="https://github.com/" target="_blank">Enlace 3 ↗</a>
-        <br>
-        <a href="https://www.wikipedia.org/" target="_blank">Enlace 4 ↗</a>
-        <br>
-        <a href="https://www.mozilla.org/" target="_blank">Enlace 5 ↗</a>
-        <br>
-        <a href="https://www.reddit.com/" target="_blank">Enlace 6 ↗</a>
-      </div>
-
-      <div class="card">
-        <h3>Nettle Web</h3>
-        <p data-i18n="nettleDescription">Navegación web.</p>
-        <a href="https://duckduckgo.com/" target="_blank">
-          Abrir Nettle Web ↗
-        </a>
-      </div>
-    </div>
+  <div class="desktop-icon" onclick="openPage('Classwork Cloud')">
+    <span class="symbol">☁️</span>
+    <span>Classwork Cloud</span>
   </div>
-</section>
 
-</main>
+  <div class="desktop-icon" onclick="openPage('Kiwi')">
+    <span class="symbol">🥝</span>
+    <span>Kiwi</span>
+  </div>
 
-<footer>
-  <p>☭ DAZ LINUX V9 · SOVIET EDITION</p>
-  <p>Made for the community.</p>
-</footer>
+  <div class="desktop-icon" onclick="openPage('Classwork US')">
+    <span class="symbol">📖</span>
+    <span>Classwork US</span>
+  </div>
+
+  <div class="desktop-icon" onclick="openPage('Learning')">
+    <span class="symbol">🎓</span>
+    <span>Learning</span>
+  </div>
+
+  <div class="desktop-icon" onclick="openPage('Biology')">
+    <span class="symbol">🧬</span>
+    <span>Biology</span>
+  </div>
+
+  <div class="desktop-icon" onclick="openPage('Nettle Web')">
+    <span class="symbol">🌐</span>
+    <span>Nettle Web</span>
+  </div>
+
+  <div class="desktop-icon" onclick="openTool('gametime')">
+    <span class="symbol">⏱️</span>
+    <span>Game Time</span>
+  </div>
+
+  <div class="desktop-icon" onclick="openTool('gaming')">
+    <span class="symbol">🎮</span>
+    <span>Gaming Mode</span>
+  </div>
+
+  <div class="desktop-icon" onclick="openTool('visits')">
+    <span class="symbol">📊</span>
+    <span>Visit Counter</span>
+  </div>
+
+</div>
+
+<!-- START MENU -->
+<div id="startMenu">
+  <div class="menu-title">☭ DAZ LINUX V9</div>
+
+  <button class="menu-item" onclick="openTool('gametime')">
+    ⏱️ Game Time
+  </button>
+
+  <button class="menu-item" onclick="openTool('gaming')">
+    🎮 Gaming Mode
+  </button>
+
+  <button class="menu-item" onclick="openTool('visits')">
+    📊 Visit Counter
+  </button>
+
+  <button class="menu-item" onclick="openTool('pages')">
+    🌐 Páginas instaladas
+  </button>
+
+  <button class="menu-item" onclick="openTool('settings')">
+    ⚙️ Settings
+  </button>
+</div>
+
+<!-- WINDOW -->
+<div id="window">
+  <div id="windowHeader">
+    <span id="windowTitle">DAZ Linux</span>
+    <button class="window-close" onclick="closeWindow()">✕</button>
+  </div>
+  <div id="windowContent"></div>
+</div>
+
+<!-- TASKBAR -->
+<div id="taskbar">
+  <div id="taskLeft">
+    <button id="startButton" onclick="toggleStart()">
+      ☭ START
+    </button>
+    <span>DAZ Linux V9</span>
+  </div>
+
+  <div id="taskRight">
+    <span id="modeIndicator">● NORMAL</span>
+    <span id="clock">00:00</span>
+  </div>
+</div>
 
 <script>
-// LANGUAGE SYSTEM
+
+// PAGES: ONLY USER-PROVIDED WEBSITES
+
+const pages = {
+  "StudySync":"https://studysync.co.uk/",
+  "Classwork Cloud":"https://classwork.cloud/",
+  "Kiwi":"https://kiwi.at.it/",
+  "Classwork US":"https://classwork.us.com/",
+  "Learning":"https://learning.com.de/",
+  "Biology":"https://biology.us.com/",
+  "Nettle Web":"https://nettleweb.pages.dev/"
+};
+
+// TRANSLATIONS
 
 const translations = {
 es:{
-home:"Inicio",gaming:"Gaming",hub:"Gaming Hub",
-shortcuts:"Accesos rápidos",
-welcome:"Bienvenido al sistema",
-description:"Un sistema digital con herramientas de gaming y estilo soviético.",
-motto:"La tecnología al servicio del pueblo",
+languageTitle:"Selecciona el idioma del sistema",
+boot:"Iniciar sistema",
+start:"Inicio",
+normal:"NORMAL",
+gaming:"MODO GAMING",
+pages:"Páginas instaladas",
+settings:"Configuración",
+gameTime:"Tiempo de juego",
+startTimer:"Iniciar",
+pause:"Pausar",
+reset:"Reiniciar",
+gamingTitle:"Gaming Mode",
+gamingDescription:"Activa o desactiva el modo Gaming.",
+enable:"Activar",
+disable:"Desactivar",
 visits:"Contador de visitas",
-localVisits:"Visitas en este navegador",
-activate:"Activar",start:"Iniciar",pause:"Pausar",
-reset:"Reiniciar",gamingDescription:"Activa una interfaz enfocada en tus juegos.",
-toggleGaming:"Cambiar modo",
-hubDescription:"Centro de acceso a plataformas de videojuegos.",
-shortcutsTitle:"Accesos rápidos",
-kiwiDescription:"Tus enlaces favoritos.",
-nettleDescription:"Navegación web."
+local:"Visitas registradas en este navegador",
+language:"Idioma",
+save:"Guardar",
+openPage:"Abrir página",
+system:"Sistema"
 },
 en:{
-home:"Home",gaming:"Gaming",hub:"Gaming Hub",
-shortcuts:"Quick Access",
-welcome:"Welcome to the system",
-description:"A digital system with gaming tools and a Soviet style.",
-motto:"Technology in service of the people",
+languageTitle:"Select your system language",
+boot:"Start system",
+start:"Start",
+normal:"NORMAL",
+gaming:"GAMING MODE",
+pages:"Installed pages",
+settings:"Settings",
+gameTime:"Game Time",
+startTimer:"Start",
+pause:"Pause",
+reset:"Reset",
+gamingTitle:"Gaming Mode",
+gamingDescription:"Enable or disable Gaming Mode.",
+enable:"Enable",
+disable:"Disable",
 visits:"Visit Counter",
-localVisits:"Visits in this browser",
-activate:"Activate",start:"Start",pause:"Pause",
-reset:"Reset",gamingDescription:"Activate an interface focused on your games.",
-toggleGaming:"Toggle Mode",
-hubDescription:"Access center for gaming platforms.",
-shortcutsTitle:"Quick Access",
-kiwiDescription:"Your favorite links.",
-nettleDescription:"Web browsing."
+local:"Visits recorded in this browser",
+language:"Language",
+save:"Save",
+openPage:"Open page",
+system:"System"
 },
 fr:{
-home:"Accueil",gaming:"Jeux",hub:"Centre de jeux",
-shortcuts:"Accès rapide",
-welcome:"Bienvenue dans le système",
-description:"Un système numérique avec des outils de jeu et un style soviétique.",
-motto:"La technologie au service du peuple",
+languageTitle:"Sélectionnez la langue du système",
+boot:"Démarrer le système",
+start:"Accueil",
+normal:"NORMAL",
+gaming:"MODE GAMING",
+pages:"Pages installées",
+settings:"Paramètres",
+gameTime:"Temps de jeu",
+startTimer:"Démarrer",
+pause:"Pause",
+reset:"Réinitialiser",
+gamingTitle:"Mode Gaming",
+gamingDescription:"Activer ou désactiver le mode Gaming.",
+enable:"Activer",
+disable:"Désactiver",
 visits:"Compteur de visites",
-localVisits:"Visites dans ce navigateur",
-activate:"Activer",start:"Démarrer",pause:"Pause",
-reset:"Réinitialiser",gamingDescription:"Active une interface dédiée aux jeux.",
-toggleGaming:"Changer de mode",
-hubDescription:"Centre d'accès aux plateformes de jeux.",
-shortcutsTitle:"Accès rapide",
-kiwiDescription:"Vos liens favoris.",
-nettleDescription:"Navigation web."
+local:"Visites enregistrées dans ce navigateur",
+language:"Langue",
+save:"Enregistrer",
+openPage:"Ouvrir la page",
+system:"Système"
 },
 ru:{
-home:"Главная",gaming:"Игры",hub:"Игровой центр",
-shortcuts:"Быстрый доступ",
-welcome:"Добро пожаловать в систему",
-description:"Цифровая система с игровыми инструментами и советским стилем.",
-motto:"Технологии на службе народа",
+languageTitle:"Выберите язык системы",
+boot:"Запустить систему",
+start:"Пуск",
+normal:"ОБЫЧНЫЙ",
+gaming:"ИГРОВОЙ РЕЖИМ",
+pages:"Установленные страницы",
+settings:"Настройки",
+gameTime:"Игровое время",
+startTimer:"Старт",
+pause:"Пауза",
+reset:"Сброс",
+gamingTitle:"Игровой режим",
+gamingDescription:"Включить или выключить игровой режим.",
+enable:"Включить",
+disable:"Выключить",
 visits:"Счётчик посещений",
-localVisits:"Посещения в этом браузере",
-activate:"Включить",start:"Старт",pause:"Пауза",
-reset:"Сбросить",gamingDescription:"Включить интерфейс для игр.",
-toggleGaming:"Переключить режим",
-hubDescription:"Центр доступа к игровым платформам.",
-shortcutsTitle:"Быстрый доступ",
-kiwiDescription:"Ваши любимые ссылки.",
-nettleDescription:"Веб-навигация."
+local:"Посещения в этом браузере",
+language:"Язык",
+save:"Сохранить",
+openPage:"Открыть страницу",
+system:"Система"
 }
 };
 
-function changeLanguage(lang){
-  const dict=translations[lang] || translations.es;
-  document.documentElement.lang=lang;
+let lang="es";
 
-  document.querySelectorAll("[data-i18n]").forEach(el=>{
-    const key=el.dataset.i18n;
-    if(dict[key]) el.textContent=dict[key];
-  });
-
-  localStorage.setItem("dazLanguage",lang);
+function t(key){
+  return translations[lang][key] || key;
 }
 
-const savedLanguage=localStorage.getItem("dazLanguage");
-const browserLanguage=navigator.language.slice(0,2);
-const initialLanguage=savedLanguage ||
-  (translations[browserLanguage] ? browserLanguage : "es");
+// STORAGE: INDEXEDDB + LOCALSTORAGE
 
-document.getElementById("language").value=initialLanguage;
-changeLanguage(initialLanguage);
+let db;
 
-// SECTION NAVIGATION
+function initDB(){
+  return new Promise((resolve)=>{
+    if(!window.indexedDB){
+      resolve(null);
+      return;
+    }
 
-function showSection(id){
-  document.querySelectorAll("main section").forEach(section=>{
-    section.classList.add("hidden");
+    const request=indexedDB.open("DAZLinuxV9",1);
+
+    request.onupgradeneeded=()=>{
+      const database=request.result;
+      if(!database.objectStoreNames.contains("settings")){
+        database.createObjectStore("settings");
+      }
+    };
+
+    request.onsuccess=()=>{
+      db=request.result;
+      resolve(db);
+    };
+
+    request.onerror=()=>resolve(null);
   });
-  document.getElementById(id).classList.remove("hidden");
+}
+
+function saveDB(key,value){
+  try{
+    if(db){
+      const tx=db.transaction("settings","readwrite");
+      tx.objectStore("settings").put(value,key);
+    }
+  }catch(e){}
+}
+
+function getDB(key){
+  return new Promise(resolve=>{
+    if(!db){
+      resolve(null);
+      return;
+    }
+
+    try{
+      const request=db.transaction("settings")
+        .objectStore("settings").get(key);
+
+      request.onsuccess=()=>resolve(request.result ?? null);
+      request.onerror=()=>resolve(null);
+    }catch(e){
+      resolve(null);
+    }
+  });
+}
+
+// BOOT SYSTEM
+
+async function bootSystem(){
+  lang=document.getElementById("languageSelect").value;
+
+  localStorage.setItem("dazLanguage",lang);
+  saveDB("language",lang);
+
+  document.getElementById("languageScreen").classList.add("hidden");
+  updateClock();
+  await registerVisit();
+  renderMode();
+
+  localStorage.setItem("dazBooted","true");
+}
+
+async function initialize(){
+  await initDB();
+
+  let saved=localStorage.getItem("dazLanguage");
+  if(!saved) saved=await getDB("language");
+
+  if(["es","en","fr","ru"].includes(saved)){
+    document.getElementById("languageSelect").value=saved;
+    lang=saved;
+  }
+
+  document.getElementById("languageTitle").textContent=t("languageTitle");
+  document.getElementById("bootButton").textContent=t("boot");
+
+  document.getElementById("languageScreen").classList.remove("hidden");
 }
 
 // CLOCK
 
 function updateClock(){
+  const now=new Date();
+
   document.getElementById("clock").textContent=
-    new Date().toLocaleTimeString();
+    now.toLocaleTimeString([],{
+      hour:"2-digit",
+      minute:"2-digit"
+    });
 }
+
 setInterval(updateClock,1000);
-updateClock();
 
-// VISIT COUNTER
-// Local counter: this browser only.
+// START MENU
 
-let visits=Number(localStorage.getItem("dazVisits") || 0);
-visits++;
-localStorage.setItem("dazVisits",visits);
-document.getElementById("visits").textContent=visits;
-
-// GAMING MODE
-
-let gamingMode=false;
-
-function toggleGaming(){
-  gamingMode=!gamingMode;
-
-  document.getElementById("gamingStatus").textContent=
-    gamingMode?"ON":"OFF";
-
-  document.getElementById("gamingStatus2").textContent=
-    gamingMode?"ON":"OFF";
-
-  document.body.style.background=
-    gamingMode?"#080808":"var(--dark)";
-
-  document.getElementById("gamingStatus").style.color=
-    gamingMode?"#55dd77":"#ff5555";
+function toggleStart(){
+  document.getElementById("startMenu").classList.toggle("open");
 }
 
-// GAME TIME STOPWATCH
+// WINDOWS
+
+function showWindow(title,content){
+  document.getElementById("windowTitle").textContent=title;
+  document.getElementById("windowContent").innerHTML=content;
+  document.getElementById("window").classList.add("show");
+  document.getElementById("startMenu").classList.remove("open");
+}
+
+function closeWindow(){
+  document.getElementById("window").classList.remove("show");
+}
+
+function openPage(name){
+  const url=pages[name];
+  if(!url)return;
+
+  // Open in a new browser tab to avoid sites blocking iframes.
+  window.open(url,"_blank","noopener");
+}
+
+// PAGE LIST
+
+function openTool(tool){
+  if(tool==="pages"){
+    let html="<h2>"+t("pages")+"</h2><div class='shortcut-list'>";
+
+    Object.entries(pages).forEach(([name,url])=>{
+      html+=`<button onclick="window.open('${url}','_blank','noopener')">
+      🌐 ${name}</button>`;
+    });
+
+    html+="</div>";
+    showWindow(t("pages"),html);
+  }
+
+  if(tool==="gametime")openGameTime();
+  if(tool==="gaming")openGaming();
+  if(tool==="visits")openVisits();
+  if(tool==="settings")openSettings();
+}
+
+// GAME TIME
 
 let elapsed=0;
-let timerInterval=null;
-let startedAt=0;
+let timer=null;
+let lastTick=0;
 
-function formatTime(seconds){
-  let h=Math.floor(seconds/3600);
-  let m=Math.floor((seconds%3600)/60);
-  let s=seconds%60;
+function timeString(value){
+  const h=Math.floor(value/3600);
+  const m=Math.floor(value%3600/60);
+  const s=value%60;
 
-  return [h,m,s].map(v=>String(v).padStart(2,"0")).join(":");
+  return [h,m,s].map(x=>String(x).padStart(2,"0")).join(":");
 }
 
-function renderTimer(){
-  document.getElementById("gameTime").textContent=
-    formatTime(elapsed);
+function openGameTime(){
+  showWindow("Game Time",`
+    <div class="panel">
+      <h2>${t("gameTime")}</h2>
+      <div class="big-time" id="timerDisplay">${timeString(elapsed)}</div>
+      <button onclick="startTimer()">${t("startTimer")}</button>
+      <button onclick="pauseTimer()">${t("pause")}</button>
+      <button onclick="resetTimer()">${t("reset")}</button>
+    </div>
+  `);
+}
+
+function updateTimer(){
+  elapsed+=Math.floor((Date.now()-lastTick)/1000);
+  lastTick=Date.now();
+
+  const display=document.getElementById("timerDisplay");
+  if(display)display.textContent=timeString(elapsed);
 }
 
 function startTimer(){
-  if(timerInterval!==null)return;
+  if(timer!==null)return;
+  lastTick=Date.now();
 
-  startedAt=Date.now();
-
-  timerInterval=setInterval(()=>{
-    elapsed=Math.floor((Date.now()-startedAt)/1000)+
-      elapsed;
-    startedAt=Date.now();
-    renderTimer();
-  },1000);
+  timer=setInterval(updateTimer,1000);
 }
 
 function pauseTimer(){
-  if(timerInterval===null)return;
-
-  clearInterval(timerInterval);
-  timerInterval=null;
+  if(timer===null)return;
+  updateTimer();
+  clearInterval(timer);
+  timer=null;
 }
 
 function resetTimer(){
   pauseTimer();
   elapsed=0;
-  renderTimer();
+
+  const display=document.getElementById("timerDisplay");
+  if(display)display.textContent=timeString(elapsed);
 }
 
-renderTimer();
+// GAMING MODE
 
-// INITIAL PAGE
+let gamingEnabled=false;
 
-showSection("home");
+function openGaming(){
+  showWindow(t("gamingTitle"),`
+    <div class="panel">
+      <h2>${t("gamingTitle")}</h2>
+      <p>${t("gamingDescription")}</p>
+      <button onclick="toggleGaming()">
+        ${gamingEnabled?t("disable"):t("enable")}
+      </button>
+      <p id="gamingText">${gamingEnabled?t("gaming"):t("normal")}</p>
+    </div>
+  `);
+}
+
+function toggleGaming(){
+  gamingEnabled=!gamingEnabled;
+  renderMode();
+  openGaming();
+}
+
+function renderMode(){
+  document.body.style.setProperty(
+    "--bg",gamingEnabled?"#101010":"#171717"
+  );
+
+  document.getElementById("modeIndicator").textContent=
+    gamingEnabled?"● "+t("gaming"):"● "+t("normal");
+}
+
+// VISIT COUNTER
+
+async function registerVisit(){
+  let visits=Number(localStorage.getItem("dazVisits")||0);
+  visits++;
+
+  localStorage.setItem("dazVisits",visits);
+  saveDB("visits",visits);
+}
+
+function openVisits(){
+  const visits=localStorage.getItem("dazVisits")||0;
+
+  showWindow(t("visits"),`
+    <div class="panel">
+      <h2>${t("visits")}</h2>
+      <div class="big-time">${visits}</div>
+      <p>${t("local")}</p>
+    </div>
+  `);
+}
+
+// SETTINGS
+
+function openSettings(){
+  showWindow(t("settings"),`
+    <div class="panel">
+      <h2>${t("settings")}</h2>
+      <p>${t("language")}</p>
+      <select id="settingsLanguage">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="ru">Русский</option>
+      </select>
+      <button onclick="changeSystemLanguage()">${t("save")}</button>
+    </div>
+  `);
+
+  document.getElementById("settingsLanguage").value=lang;
+}
+
+function changeSystemLanguage(){
+  const value=document.getElementById("settingsLanguage").value;
+
+  if(!translations[value])return;
+
+  lang=value;
+  localStorage.setItem("dazLanguage",lang);
+  saveDB("language",lang);
+
+  document.getElementById("languageTitle").textContent=t("languageTitle");
+  document.getElementById("bootButton").textContent=t("boot");
+
+  renderMode();
+  closeWindow();
+}
+
+// START
+
+initialize();
 
 </script>
 </body>
